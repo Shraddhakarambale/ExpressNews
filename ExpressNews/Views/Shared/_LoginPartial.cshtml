@@ -16,11 +16,50 @@
 }
 else
 {
-    <li class="nav-item p-2">
-            <a class="button-18" role="button" asp-area="Identity" asp-page="/Account/Register">Subscription</a>
+    <li class="nav-item" >
+            <a class="button-sub" role="button" asp-area="" asp-page="">Subscription</a>
     </li>
-    <li class="nav-item p-2">
-            <a class="button-19" role="button" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
+        <li class="nav-item">
+            <a class="button-log" role="button" asp-area="Identity" asp-page="/Account/Login">
+                <i class="fas fa-user"></i>
+            </a>
+        </li>
 }
 </ul>
+
+<style>
+    /* Custom button styles */
+    .button-sub {
+        background-color: #f8e417;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1rem;
+        margin: 0.2rem;
+        border-radius: 0.25rem;
+    }
+
+        .button-sub:hover {
+            background-color: #fbe718bf;
+        }
+
+    .button-log {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1rem;
+        margin: 0.2rem;
+        border-radius: 0.25rem;
+    }
+
+        .button-log:hover {
+            background-color: #0069d9;
+        }
+</style>
