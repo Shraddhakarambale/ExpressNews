@@ -3,27 +3,63 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ExpressNews</title>
+    <title>@ViewData["Title"] - Express News</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/searchbutton.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/ExpressNews.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ExpressNews</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <div class="container-fluid bg-black">
+            <div class="row">
+                <div class=" col-md-2"></div>
+                <div class="col-md-5">
+                    <a class="nav-link align-content-center" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/image/l1.png" width="35%" height="35%" /> </a>
+                   
+                </div>
+                <div class="col-md-3">
+
+                    <a class="weatherwidget-io" href="https://forecast7.com/en/58d4115d62/linkoping/" data-label_1="LINKÖPING" data-icons="Climacons Animated" data-mode="Current" data-theme="dark">LINKÖPING</a>
+                    <script>
+                        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+                    </script>
+                </div>
+                <div class="col-md-2 ">
+                    @* <iframe src="https://free.timeanddate.com/clock/i9de2w21/n1377/tlse/fn5/fcfff/tc000/pc000/ftb/pl2/pr2/pt2/pb2/tt0/tw0/tm1/ts1/tb4" frameborder="0" width="99" height="36"></iframe> *@
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-danger border-bottom box-shadow mb-2">
+            <div class="container">
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link  text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Start</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link  text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Privacy">Local</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">World</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Privacy">Sport</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Culture</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Privacy">Tip</a>
+                        </li>
+                        <li>
+
+                            <form class="d-flex">
+                                <input class="form-control m-2" type="search" placeholder="Search">
+                                <button class="btn btn-sm " type="submit">Search</button>
+                            </form>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -31,17 +67,19 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container ">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - ExpressNews - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+    <footer class="border-top footer bg-black border-bottom box-shadow mb-3 border-bottom">
+        <div class="container text-white text-center">
+            &copy; 2024 - Express News - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
