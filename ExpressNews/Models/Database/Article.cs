@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpressNews.Models.Database
 {
@@ -20,7 +21,7 @@ namespace ExpressNews.Models.Database
 
         [StringLength(500)]
         public string ContentSummary { get; set; }
-       
+
         [Required]
         public string Content { get; set; }
 
@@ -33,7 +34,7 @@ namespace ExpressNews.Models.Database
 
         [Required]
         public int StatusId { get; set; }
-        
+
         [Required]
         public bool IsBreaking { get; set; }
 
@@ -41,8 +42,17 @@ namespace ExpressNews.Models.Database
         public bool IsSubsription { get; set; }
 
         public ICollection<ArticleCategoryLink> ArticleCategoryLinks { get; set; }
-    
-         public virtual Status Status { get; set; }
+
+        public virtual Status Status { get; set; }
+
+
+
+        public int UserId { get; set; }
+
+        [NotMapped]
+        public List<IFormFile> FormImages { get; set; } = new List<IFormFile>();
+
+        public virtual ICollection<ImageLink> Images { get; set; } = new List<ImageLink>();
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ExpressNews.Models;
+using ExpressNews.Models.Database;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,5 +12,8 @@ namespace ExpressNews.Data
         {
         }
         DbSet<User> Users {  get; set; }
+
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<ImageLink> ImageLinks { get; set; }
     }
 }
