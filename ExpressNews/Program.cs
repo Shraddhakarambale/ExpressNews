@@ -1,5 +1,6 @@
 using ExpressNews.Data;
 using ExpressNews.Models;
+using ExpressNews.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,10 @@ namespace ExpressNews
             builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+
+
+            builder.Services.AddScoped<IArticleService, ArticleService>();
+
 
             var app = builder.Build();
 

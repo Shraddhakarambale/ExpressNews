@@ -21,17 +21,17 @@ namespace ExpressNews.Services
 
         public void AddArticle(Article newArticle, List<IFormFile> formImages)
         {
-            // Save the article first to generate the Id
+            
             _db.Articles.Add(newArticle);
             _db.SaveChanges();
 
-            // Process and save each image
+            
             foreach (var formImage in formImages)
             {
                 var imageLink = new ImageLink
                 {
                     ArticleId = newArticle.Id,
-                    Link = SaveImageAndGetLink(formImage) // Assume this method saves the image and returns the link
+                    Link = SaveImageAndGetLink(formImage)  
                 };
                 _db.ImageLinks.Add(imageLink);
             }
@@ -40,24 +40,24 @@ namespace ExpressNews.Services
 
         private string SaveImageAndGetLink(IFormFile formImage)
         {
-            // Ensure the Images directory exists
-            var imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images");
+            
+            var imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Image");
             if (!Directory.Exists(imagesPath))
             {
                 Directory.CreateDirectory(imagesPath);
             }
 
-            // Generate a unique filename for the image
+            
             var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(formImage.FileName);
             var filePath = Path.Combine(imagesPath, uniqueFileName);
 
-            // Save the image to the server
+            
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 formImage.CopyTo(stream);
             }
 
-            // Return the URL or path to the saved image
+            
             return "/Images/" + uniqueFileName;
         }
 
