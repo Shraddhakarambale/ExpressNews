@@ -73,7 +73,12 @@ namespace ExpressNews.Services
             throw new NotImplementedException();
         }
 
-       
+       //public Status GetStatus(int id)
+       // {
+            
+       //     return _db.Status.FirstOrDefault(a => a.Id == id);
+
+       // }
     }
     
 }

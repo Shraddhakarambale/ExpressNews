@@ -10,5 +10,8 @@ namespace ExpressNews.Services
         //void AddImageLink(ImageLink imageLink);
 
         Article UploadFilesToContainer(Article newArticle);
+
+        //Status GetStatus(int id);
+
     }
 }
