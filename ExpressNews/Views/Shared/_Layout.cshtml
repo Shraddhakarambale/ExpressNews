@@ -26,7 +26,7 @@
 </head>
 <body>
     <header>
-        <div class="container-fluid bg-black py-2">
+        @* <div class="container-fluid bg-black py-2">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-1 text-left"></div>
                 <div class="col-md-5 text-left">
@@ -52,14 +52,18 @@
                 </div>
                 <div class="col-md-1 text-left"></div>
              </div>
-        </div>
+        </div> *@
 
 
 
 
         <nav class="navbar navbar-expand-lg navbar-light bg-danger border-bottom box-shadow mb-2">
             <div class="container">
-               @*  <a class="navbar-brand text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/image/l1.png" width="50%" /></a> *@
+                <div class="col-md-5 text-left">
+                    <a class="nav-link" href="/">
+                        <img src="~/image/l1.png" class="img-fluid" width="40%" />
+                    </a>
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
