@@ -20,6 +20,11 @@ namespace ExpressNews.Controllers
             return View(_articleService.GetArticles());
         }
 
+        public IActionResult SingleArticle()
+        {
+
+            return View();
+        }
         public IActionResult AddArticle()
         {
             return View();
