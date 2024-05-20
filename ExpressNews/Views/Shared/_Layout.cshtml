@@ -26,37 +26,9 @@
     </style>
 </head>
 <body>
+    
+
     <header>
-        @* <div class="container-fluid bg-black py-2">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-md-1 text-left"></div>
-                <div class="col-md-5 text-left">
-                    <a class="nav-link" href="/">
-                        <img src="~/image/l1.png" class="img-fluid" width="40%"  />
-                    </a>
-                </div>
-                <div class="col-md-5 text-right">
-                    <a class="weatherwidget-io" href="https://forecast7.com/en/58d4115d62/linkoping/" data-label_1="LINKÖPING" data-icons="Climacons Animated" data-mode="Current" data-theme="dark">
-                        LINKÖPING
-                    </a>
-                    <script>
-                        !function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (!d.getElementById(id)) {
-                                js = d.createElement(s);
-                                js.id = id;
-                                js.src = 'https://weatherwidget.io/js/widget.min.js';
-                                fjs.parentNode.insertBefore(js, fjs);
-                            }
-                        }(document, 'script', 'weatherwidget-io-js');
-                    </script>
-                </div>
-                <div class="col-md-1 text-left"></div>
-             </div>
-        </div> *@
-
-
-
 
         <nav class="navbar navbar-expand-lg navbar-light bg-black border-bottom box-shadow mb-2 menu-height">
             <div class="container">
@@ -111,15 +83,61 @@
         </main>
     </div>
 
-    <footer class="border-top footer bg-black border-bottom box-shadow mb-3">
-        <div class="container text-white text-center">
-            &copy; 2024 - Express News - <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+            <footer class="bg-dark text-center text-white">
+                <!-- Grid container -->
+                <div class="container p-4 pb-0">
+                    <!-- Section: Social media -->
+                    <section class="mb-4">
+                        <!-- Facebook -->
+                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <!-- Twitter -->
+                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+
+                        <!-- Google -->
+                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                            <i class="fab fa-google"></i>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <!-- Linkedin -->
+                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+
+                        <!-- Github -->
+                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </section>
+                    <!-- Section: Social media -->
+                </div>
+                <!-- Grid container -->
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">About Us | </a>
+            <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Contact Us |</a>
+            <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> <br />
+                    © 2024 Copyright:
+            <a class="text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">ExpressNews.com</a>
+                    
+                </div>
+                <!-- Copyright -->
+            </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    
 </body>
+
 </html>
