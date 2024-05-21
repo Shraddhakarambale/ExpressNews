@@ -1,11 +1,13 @@
-﻿@{
+﻿@model ExpressNews.Models.ViewModel.ArticleVM;
+@{
     ViewData["Title"] = "Index";
 }
 
 <div clalss="Container ">
     <div class=" row">
         <div class="col-md-9">
-            <partial name="_ArticlePartial" />
+            @* <partial name="_ArticlePartial" /> *@
+            @Html.Partial("_ArticlePartial", Model.ArticleObj)
         </div>
         <div class="col-md-3">
             <div class="row">

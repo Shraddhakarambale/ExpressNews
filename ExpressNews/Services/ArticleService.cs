@@ -64,7 +64,7 @@ namespace ExpressNews.Services
 
         public List<Article> GetArticles()
         {
-            return _db.Articles.Include(a => a.Images).ToList();
+            return _db.Articles.Include(a => a.Content).ToList();
             
         }
 
@@ -82,8 +82,8 @@ namespace ExpressNews.Services
 
         public Article GetArticleById(int id) 
         {
-            Article article = new Article();
-            article = _db.Articles.FirstOrDefault(a => a.Id == id);
+
+            var article = _db.Articles.FirstOrDefault(a => a.Id == id);
             return article;
         }
 
