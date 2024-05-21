@@ -58,7 +58,7 @@
                             <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Culture</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Privacy">Tip</a>
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Tip">Tip</a>
                         </li>
                         <li class="nav-item">
                             <div class="input-group">
@@ -77,7 +77,7 @@
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container" style="margin-bottom:250px ">
         <main role="main" class="pb-3 m-2">
             @RenderBody()
         </main>
@@ -115,58 +115,58 @@
         }
     </script>
 
-    <footer class="border-top footer-01 border-bottom  bg-dark text-center text-white">
-                <!-- Grid container -->
-                <div class="container p-2 p-0">
-                    <!-- Section: Social media -->
-                    <section class="mb-1">
-                        <!-- Facebook -->
+    <footer class="footer border-top border-bottom bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-2 p-0">
+            <!-- Section: Social media -->
+            <section class="mb-1">
+                <!-- Facebook -->
                 <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/" role="button">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
+                    <i class="fab fa-facebook-f"></i>
+                </a>
 
-                        <!-- Twitter -->
+                <!-- Twitter -->
                 <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://x.com/?lang=en" role="button">
-                            <i class="fab fa-twitter"></i>
-                        </a>
+                    <i class="fab fa-twitter"></i>
+                </a>
 
-                        <!-- Google -->
+                <!-- Google -->
                 <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://www.google.com/" role="button">
-                            <i class="fab fa-google"></i>
-                        </a>
+                    <i class="fab fa-google"></i>
+                </a>
 
-                        <!-- Instagram -->
+                <!-- Instagram -->
                 <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/" role="button">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                    <i class="fab fa-instagram"></i>
+                </a>
 
-                        <!-- Linkedin -->
+                <!-- Linkedin -->
                 <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/" role="button">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
 
-                        <!-- Github -->
+                <!-- Github -->
                 <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://github.com/" role="button">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </section>
-                    <!-- Section: Social media -->
+                    <i class="fab fa-github"></i>
+                </a>
+            </section>
+            <!-- Section: Social media -->
 
 
-                </div>
-                <!-- Grid container -->
+        </div>
+        <!-- Grid container -->
+        <!-- Copyright -->
+        <div class="text-center p-1 " style="background-color: rgba(0, 0, 0, 0.2);">
+            <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">About Us | </a>
+            <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Contact Us |</a>
+            <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> 
+            © 2024 Copyright:
+            <a class="text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">ExpressNews.com</a>
 
-                <!-- Copyright -->
-                <div class="text-center p-1 " style="background-color: rgba(0, 0, 0, 0.2);">
-                <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">About Us | </a>
-                <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Contact Us |</a>
-                <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> <br />
-                    © 2024 Copyright:
-                <a class="text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">ExpressNews.com</a>
-                    
-                </div>
-                <!-- Copyright -->
-            </footer>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
