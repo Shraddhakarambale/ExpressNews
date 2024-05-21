@@ -73,12 +73,34 @@ namespace ExpressNews.Services
             throw new NotImplementedException();
         }
 
-       //public Status GetStatus(int id)
-       // {
-            
-       //     return _db.Status.FirstOrDefault(a => a.Id == id);
+        //public Status GetStatus(int id)
+        // {
 
-       // }
+        //     return _db.Status.FirstOrDefault(a => a.Id == id);
+
+        // }
+
+        public Article GetArticleById(int id) 
+        {
+            Article article = new Article();
+            article = _db.Articles.FirstOrDefault(a => a.Id == id);
+            return article;
+        }
+
+        public Article GetBreakingNews( )
+        {
+            Article article = new Article();
+            article = _db.Articles.FirstOrDefault(a => a.IsBreaking==true) ;
+            return article;
+        }
+        public Article GetArticleForFrontPage()
+        {
+            Article article = new Article();
+            article = _db.Articles.FirstOrDefault(a => a.IsBreaking == false);
+            return article;
+        }
+
     }
+
     
 }
