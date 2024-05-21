@@ -1,26 +1,41 @@
-﻿<div class="w-100 p-3 border bg-white">
-    <a href="#">
-        <h1 id="#" style="color:black">
-            Putin to meet Xi in China as Russia advances in Ukraine
-        </h1>
-    </a>
-    <img src="https://media.cnn.com/api/v1/images/stellar/prod/01-gettyimages-1730512638.jpg?c=16x9&q=h_653,w_1160,c_fill/f_webp" alt="Chinese leader Xi Jinping and Russian President Vladimir Putin attend the opening ceremony of the Belt and Road Forum at the Great Hall of the People in Beijing last October.
-                    Pedro Pardo/AFP/Getty Images" width="70%" height="70%" /><br />
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis risus sit amet ipsum eleifend consectetur. Nullam suscipit eget lectus non varius. Donec interdum vestibulum turpis, eu sagittis lorem consequat non. .</p>
-    @if (1==2)
-    {
-        <button onclick="readMoreSubcription()" style="color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
-            <i class="fa-solid fa-plus"></i> Read More
-        </button>
+﻿@model IEnumerable<ExpressNews.Models.Database.Article>
 
-    }else
+
+
+@foreach (var row in Model)
+{
+    @if (!row.IsBreaking)
     {
-        <button onclick="readMore()" style="color: black; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
-             Read More
-        </button>
+        <div class="w-100 p-3 border bg-white">
+            <a href="#">
+                <h1 id="#" style="color:black">
+                    @Html.DisplayFor(item => row.HeadLine)
+                </h1>
+            </a>
+            <img src="@Html.DisplayFor(item => row.ImageLink)" alt="Article Image" width="70%" height="70%" /> <br /> <br />
+            <p>@Html.DisplayFor(item => row.ContentSummary)</p>
+
+
+            @if (row.IsSubsription)
+            {
+                <button onclick="readMoreSubcription()" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
+                    <i class="fa-solid fa-plus"></i> Read More
+                </button>
+
+            }
+            else
+            {
+                <button onclick="readMore()" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
+                    Read More
+                </button>
+            }
+
+        </div>
     }
-    
-</div>
+ 
+}
+
+
 <script>
     function readMore() {
         window.location.href = '@Url.Action("SingleArticle", "Article")';

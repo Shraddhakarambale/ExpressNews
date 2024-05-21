@@ -1,4 +1,6 @@
 using ExpressNews.Models;
+using ExpressNews.Models.ViewModel;
+using ExpressNews.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,19 +8,28 @@ namespace ExpressNews.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IArticleService _articleService;
+        
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IArticleService articleService)
         {
+            _articleService = articleService;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            ArticleVM model = new ArticleVM();
+            model.ArticleList = _articleService.GetArticles();
+            return View(model);
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult Tip()
         {
             return View();
         }
