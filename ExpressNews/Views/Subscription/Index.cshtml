@@ -6,53 +6,65 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 bg-black text-center">
-            <img src="~/images/logo.png" />
-            <h1 style="color:white">Upgrade yourself and get access to the entire Aftonbladet.</h1>
+           
+            <h1 style="color:white">Upgrade your subscription and get access to the entire<br />Express News</h1>
             <p style="color:white">You get access to all articles, all live sports, advantageous offers and much more. With the Super package you get access to even more news and services.</p>
         </div>
     </div>
+    <br />
     <div class="row">
-        <div class="col-md-12 text-center">
-            Already a Plus customer?<br />
-            <a href="">Log in here</a>
+        <div class="fw-bolder col-md-12 text-center">
+            <h3>Already a Plus customer?</h3> <br />
+            <a class="fw-bolder; button-log" role="button" asp-area="Identity" asp-page="/Account/Login">Log in here</a><br />
         </div>
     </div>
+    <br />
     <div class="row text-center" >
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    Aftonbladet Plus
+            <div class="card h-100">
+                <div class="card-header fw-bolder h2">
+                    Express News Plus
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">All content on Aftonbladet</h5>
+                <div class="card-body ">
+                    <h5 class="card-title">All content on Express News</h5>
                     <ul class="text-left">
-                        <li><i class="fa fa-solid fa-check"></i> New in-depth articles every day in eg news, sports, health and tests</li>
+                       
                         <li><i class="fa fa-solid fa-check"></i> New in-depth articles every day in eg news, sports, health and tests</li>
                         <li><i class="fa fa-solid fa-check"></i> Audiobook of the month</li>
                         <li><i class="fa fa-solid fa-check"></i> Live sports & podcasts</li>
+                        <li><a class="button-sub fw-bolder" role="button" asp-controller="Subscription" asp-action="Index">2 Month - 150 kr</a> </li>
                     </ul>
-                    <div style="margin-bottom: 5px"><button type="button" class="btn btn-warning btn-sm">2 Month- 150 kr</button></div>
-                    <div><button type="button" class="btn btn-warning btn-sm">1 Year- 1800 kr</button></div>
+                    <div >
+                        
+
+
+                        <button type="button" class="fw-bolder btn btn-warning btn-sm">2 Month - 150 kr</button><br />
+
+                        <button type="button" class="fw-bolder btn btn-warning btn-sm">1 Year - 1000 kr</button>
+                    </div>
                 </div>
             </div>
             <div> <i> Renewed afterwards for SEK 139/month, terminated when you want. </i></div>
         </div>
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    The super package
+            <div class="card h-100">
+                <div class="card-header fw-bolder h2">
+                    The Super Package
                 </div>
-                <div class="card-body">
-                    <p class="card-text">News and podcasts at a super price!</p>
+                <div class="card-body ">
+                    <h5 class="card-text">News and podcasts at a super price!</h5>
                     <ul class="text-left">
-                        <li><i class="fa fa-solid fa-check"></i> Aftonbladet Plus</li>
+                        <li><i class="fa fa-solid fa-check"></i> Express News Plus</li>
                         <li><i class="fa fa-solid fa-check"></i> SvD & SvD Business</li>
                         <li><i class="fa fa-solid fa-check"></i> Omni More & Economy</li>
                         <li><i class="fa fa-solid fa-check"></i> Premium podcasts from Podme</li>
                         <li><i class="fa fa-solid fa-check"></i> Share with a friend</li>
                     </ul>
-                    <div style="margin-bottom: 5px"><button type="button" class="btn btn-warning btn-sm">1 Year- 1800 kr</button></div>
-                    <p><i>Read more about everything that is included</i></p>
+                    <div style="margin-bottom: 5px">
+                        <button type="button" class="fw-bolder btn btn-warning btn-sm">1 Year - 1800 kr</button>
+                        <p><i>Read more about everything that is included</i></p>
+                    </div>
+                   
                 </div>
             </div>
             <div> <i> Renewed thereafter with SEK 299/month. Save 58% - value SEK 715. </i></div>
