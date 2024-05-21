@@ -78,56 +78,91 @@
     </header>
 
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 m-2">
             @RenderBody()
         </main>
     </div>
+    <button type="button"
+            class="btn btn-danger btn-floating btn-lg"
+            id="btn-back-to-top">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+    <script>
+        /Get the button
+        let mybutton = document.getElementById("btn-back-to-top");
 
-            <footer class="bg-dark text-center text-white">
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (
+                document.body.scrollTop > 20 ||
+                document.documentElement.scrollTop > 20
+            ) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        // When the user clicks on the button, scroll to the top of the document
+        mybutton.addEventListener("click", backToTop);
+
+        function backToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+
+    <footer class="border-top footer-01 border-bottom  bg-dark text-center text-white">
                 <!-- Grid container -->
-                <div class="container p-4 pb-0">
+                <div class="container p-2 p-0">
                     <!-- Section: Social media -->
-                    <section class="mb-4">
+                    <section class="mb-1">
                         <!-- Facebook -->
-                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/" role="button">
                             <i class="fab fa-facebook-f"></i>
                         </a>
 
                         <!-- Twitter -->
-                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://x.com/?lang=en" role="button">
                             <i class="fab fa-twitter"></i>
                         </a>
 
                         <!-- Google -->
-                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://www.google.com/" role="button">
                             <i class="fab fa-google"></i>
                         </a>
 
                         <!-- Instagram -->
-                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/" role="button">
                             <i class="fab fa-instagram"></i>
                         </a>
 
                         <!-- Linkedin -->
-                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/" role="button">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
 
                         <!-- Github -->
-                        <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <a data-mdb-ripple-init class="btn btn-outline-light btn-floating m-1" href="https://github.com/" role="button">
                             <i class="fab fa-github"></i>
                         </a>
                     </section>
                     <!-- Section: Social media -->
+
+
                 </div>
                 <!-- Grid container -->
+
                 <!-- Copyright -->
-                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">About Us | </a>
-            <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Contact Us |</a>
-            <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> <br />
+                <div class="text-center p-1 " style="background-color: rgba(0, 0, 0, 0.2);">
+                <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">About Us | </a>
+                <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Contact Us |</a>
+                <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> <br />
                     © 2024 Copyright:
-            <a class="text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">ExpressNews.com</a>
+                <a class="text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">ExpressNews.com</a>
                     
                 </div>
                 <!-- Copyright -->

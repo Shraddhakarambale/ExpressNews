@@ -12,6 +12,8 @@ namespace ExpressNews.Services
         Article UploadFilesToContainer(Article newArticle);
 
         //Status GetStatus(int id);
-
+        Article GetArticleById(int id);
+        Article GetBreakingNews();
+        Article GetArticleForFrontPage();
     }
 }
