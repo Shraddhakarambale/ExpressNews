@@ -1,4 +1,5 @@
 ﻿using ExpressNews.Models.Database;
+using ExpressNews.Models.ViewModel;
 using ExpressNews.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,10 +21,12 @@ namespace ExpressNews.Controllers
             return View(_articleService.GetArticles());
         }
 
-        public IActionResult SingleArticle()
+        public IActionResult SingleArticle(int id)
         {
+            ArticleVM obj = new ArticleVM();
+            obj.ArticleObj = _articleService.GetArticleById(1);
 
-            return View();
+            return View(obj);
         }
         public IActionResult AddArticle()
         {

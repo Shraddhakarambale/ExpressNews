@@ -41,18 +41,12 @@ namespace ExpressNews.Models.Database
         [Required]
         public bool IsSubsription { get; set; }
 
-        public ICollection<ArticleCategoryLink> ArticleCategoryLinks { get; set; }
-
-        public virtual Status Status { get; set; }
-
-
 
         public int UserId { get; set; }
 
         [NotMapped]
         public List<IFormFile> FormImages { get; set; } = new List<IFormFile>();
 
-        public virtual ICollection<ImageLink> Images { get; set; } = new List<ImageLink>();
 
     }
 }

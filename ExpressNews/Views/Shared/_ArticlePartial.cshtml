@@ -1,35 +1,31 @@
-﻿<article>
-<div class="w-100 p-3 border bg-white">
-    <h1 style="color:black">
-        Putin to meet Xi in China as Russia advances in Ukraine
-    </h1>
-    <img class="img" src="https://media.cnn.com/api/v1/images/stellar/prod/01-gettyimages-1730512638.jpg?c=16x9&q=h_653,w_1160,c_fill/f_webp" alt="Chinese leader Xi Jinping and Russian President Vladimir Putin attend the opening ceremony of the Belt and Road Forum at the Great Hall of the People in Beijing last October.
-                    Pedro Pardo/AFP/Getty Images" width="60%" height="60%"   />  <br />
+﻿@model ExpressNews.Models.Database.Article
+<article>
+    <div class="w-100 p-3 border bg-white">
+        <h1 style="color:black">
+            @Model.HeadLine
+        </h1>
+        <img class="img" src="@Model.ImageLink" alt="Chinese leader Xi Jinping and Russian President Vladimir Putin attend the opening ceremony of the Belt and Road Forum at the Great Hall of the People in Beijing last October.
+                    Pedro Pardo/AFP/Getty Images" width="60%" height="60%" />  <br />
         <span>
-            <i style="font-size:small">Russia's President Vladimir Putin, left, and China's President Xi Jinping exchange documents during a signing ceremony following their talks in Beijing on May 16. Sergei Bobylyov/AFP/Getty Images</i>
+            <i style="font-size:small">@Model.ContentSummary</i>
         </span>
-  
-    <div> <img src="https://images.aftonbladet-cdn.se/v2/images/author/602ef119-32a3-4a6a-b86e-0ebfdb56a147?fit=crop&format=auto&h=200&q=50&w=200&s=bf448d3ea14d0c2c6bab84ccd5df48bc6416913f" width="50" height="60" /> <b>Emil Forsberg</b> </div>
-        <span><i class="font-size: small"> Updated 09.00 | Published 2024-05-16 23.10 </i></span>
+
+        <div> <img src="https://images.aftonbladet-cdn.se/v2/images/author/602ef119-32a3-4a6a-b86e-0ebfdb56a147?fit=crop&format=auto&h=200&q=50&w=200&s=bf448d3ea14d0c2c6bab84ccd5df48bc6416913f" width="50" height="60" /> <b>Emil Forsberg</b> </div>
+        <span><i class="font-size: small"> Updated 09.00 | Published @Model.DateStamp </i></span>
         <div class="buttons-container justify-content-end">
-            <button id="like-button" class="like-button">Like <span id="like-count">0</span></button>
+            <button id="like-button" class="like-button">Like <span id="like-count">@Model.Likes</span></button>
             <button id="dislike-button" class="dislike-button">Dislike <span id="dislike-count">0</span></button>
+            <@* button id="View-button" *@ @* class="View-button"> *@Views <span id="views-count">3views</span>@* </button> *@
         </div>
-        
+
         <hr>
         <p class="font-size: 18px">
-            Russian President Vladimir Putin said he and Chinese leader Xi Jinping will discuss the war in Ukraine in informal talks later Thursday evening.
-
-            The talks are expected to include Russia’s newly appointed Defense Minister Andrey Belousov and his predecessor Sergei Shoigu, now secretary of Russia’s Security Council.
-
-            Putin replaced close ally Shoigu as defense minister with Belousov in a major reshuffle of military leadership earlier this week.
-
-            The shake-up comes off the back of significant advances by Russian troops in Ukraine's east. With defense spending soaring, Belousov’s appointment suggests Russia’s strategy will continue to focus on outgunning Ukraine.
-
+            @Model.Content
 
         </p>
-</div>
-    </article>
+    </div>
+</article>
+<script src="script.js"></script>
 <style>
     /* Styles for better presentation (optional) */
     body {
@@ -57,7 +53,7 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-        border:solid;
+        border: solid;
     }
 
     .buttons-container {
@@ -92,9 +88,11 @@
         const dislikeButton = document.getElementById("dislike-button");
         const likeCount = document.getElementById("like-count");
         const dislikeCount = document.getElementById("dislike-count");
+        const viewCount = document.getElementById("view-count");
 
         let likes = 0;
         let dislikes = 0;
+        let views = 0;
 
         likeButton.addEventListener("click", () => {
             likes++;
@@ -105,5 +103,17 @@
             dislikes++;
             dislikeCount.textContent = dislikes;
         });
+
+        // Fetch initial counts from the server
+        fetch('/counts')
+            .then(response => response.json())
+            .then(data => {
+                likeCount.textContent = data.likes;
+                dislikeCount.textContent = data.dislikes;
+                viewCount.textContent = data.views;
+            });
+
     });
+    
 </script>
+
