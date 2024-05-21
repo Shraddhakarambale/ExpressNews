@@ -12,7 +12,7 @@ namespace ExpressNews.Models.Database
         public DateTime DateStamp { get; set; }
 
         [Required]
-        [StringLength(500)]
+        [StringLength(1000)]
         public string LinkText { get; set; }
 
         [Required]
@@ -25,15 +25,22 @@ namespace ExpressNews.Models.Database
         [Required]
         public string Content { get; set; }
 
-        public int Views { get; set; }
+        public int? Views { get; set; }
 
-        public int Likes { get; set; }
+        public int? Likes { get; set; }
+
+        public int? DisLikes { get; set; }
 
         [StringLength(200)]
         public string ImageLink { get; set; }
+        [Required]
+        public string Category1 { get; set; }
+
+        public string? Category2 { get; set; }
+        public string? Category3 { get; set; }
 
         [Required]
-        public int StatusId { get; set; }
+        public string Status { get; set; }
 
         [Required]
         public bool IsBreaking { get; set; }

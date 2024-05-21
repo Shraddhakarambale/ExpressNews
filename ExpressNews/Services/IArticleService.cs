@@ -15,5 +15,6 @@ namespace ExpressNews.Services
         Article GetArticleById(int id);
         Article GetBreakingNews();
         Article GetArticleForFrontPage();
+        void UpdateArticle(Article article);
     }
 }

@@ -21,21 +21,17 @@ namespace ExpressNews.Services
 
         public void AddArticle(Article newArticle, List<IFormFile> formImages)
         {
-            
+            newArticle.DateStamp = DateTime.Now;
+            newArticle.Category1 = "World";
+            newArticle.Status = "Draft";
+            newArticle.UserId = 1;
+            newArticle.ImageLink = "https://ichef.bbci.co.uk/news/800/cpsprodpb/0536/live/715d8880-175c-11ef-8a11-6d604e5f7bb3.jpg.webp";
+
+
             _db.Articles.Add(newArticle);
             _db.SaveChanges();
 
             
-            foreach (var formImage in formImages)
-            {
-                var imageLink = new ImageLink
-                {
-                    ArticleId = newArticle.Id,
-                    Link = SaveImageAndGetLink(formImage)  
-                };
-                _db.ImageLinks.Add(imageLink);
-            }
-            _db.SaveChanges();
         }
 
         private string SaveImageAndGetLink(IFormFile formImage)
@@ -64,7 +60,7 @@ namespace ExpressNews.Services
 
         public List<Article> GetArticles()
         {
-            return _db.Articles.Include(a => a.Content).ToList();
+            return _db.Articles.OrderByDescending(a => a.DateStamp).ToList();
             
         }
 
@@ -73,12 +69,17 @@ namespace ExpressNews.Services
             throw new NotImplementedException();
         }
 
-        //public Status GetStatus(int id)
-        // {
+        public void UpdateArticle(Article article)
+        {
+            article.DateStamp = DateTime.Now;
+            article.Category1 = "World";
+            article.Status = "Draft";
+            article.UserId = 1;
+            article.ImageLink = "https://ichef.bbci.co.uk/news/800/cpsprodpb/0536/live/715d8880-175c-11ef-8a11-6d604e5f7bb3.jpg.webp";
 
-        //     return _db.Status.FirstOrDefault(a => a.Id == id);
-
-        // }
+            _db.Update(article);
+            _db.SaveChanges();
+        }
 
         public Article GetArticleById(int id) 
         {
