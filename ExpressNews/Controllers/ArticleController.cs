@@ -24,7 +24,7 @@ namespace ExpressNews.Controllers
         public IActionResult SingleArticle(int id)
         {
             ArticleVM obj = new ArticleVM();
-            obj.ArticleObj = _articleService.GetArticleById(2);
+            obj.ArticleObj = _articleService.GetArticleById(id);
 
             return View(obj);
         }
