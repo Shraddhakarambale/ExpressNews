@@ -82,5 +82,19 @@ namespace ExpressNews.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult Submit(int id)
+        {
+            var article = _articleService.GetArticleById(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            article.Status = "Submitted";
+            _articleService.UpdateArticle(article);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
