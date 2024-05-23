@@ -15,18 +15,21 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using ExpressNews.Data.Migrations;
 
 namespace ExpressNews.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManagement;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger, UserManager<User> userManagement)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManagement = userManagement;
         }
 
         /// <summary>
@@ -113,8 +116,20 @@ namespace ExpressNews.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                
                 if (result.Succeeded)
                 {
+                    var user = await _userManagement.FindByEmailAsync(Input.Email);
+                    if (user != null)
+                    {
+                        HttpContext.Session.SetString("UserId", user.Id);
+                        if(user.FirstName != null) HttpContext.Session.SetString("UserFirstName", user.FirstName);
+                        if (user.LastName != null) HttpContext.Session.SetString("UserLastName", user.LastName);
+                        /// _logger.LogInformation("User logged in with ID: {UserId}", userId);
+                        // You can now use the userId for further processing as needed
+                    }
+
+
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
