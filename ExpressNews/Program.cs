@@ -24,14 +24,16 @@ namespace ExpressNews
 
 
             builder.Services.AddScoped<IArticleService, ArticleService>();
-            builder.Services.AddSession();//Session
+
+            builder.Services.AddSession ();
+            //builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(60));
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseMigrationsEndPoint();
+                app.UseMigrationsEndPoint();      
             }
             else
             {
@@ -44,6 +46,7 @@ namespace ExpressNews
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
             app.UseSession();//Session
