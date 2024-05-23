@@ -11,6 +11,7 @@
                 <h1 id="#" style="color:black">
                     @Html.DisplayFor(item => row.HeadLine)
                 </h1>
+                
             </a>
             <img src="@Html.DisplayFor(item => row.ImageLink)" alt="Article Image" width="70%" height="70%" /> <br /> <br />
             <p>@Html.DisplayFor(item => row.ContentSummary)</p>
@@ -18,14 +19,14 @@
 
             @if (row.IsSubsription)
             {
-                <button onclick="readMoreSubcription()" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
+                <button onclick="readMore(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
                     <i class="fa-solid fa-plus"></i> Read More
                 </button>
 
             }
             else
             {
-                <button onclick="readMore()" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
+                <button onclick="readMore(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
                     Read More
                 </button>
             }
@@ -37,12 +38,17 @@
 
 
 <script>
-    function readMore() {
-        window.location.href = '@Url.Action("SingleArticle", "Article")';
+    function readMore(id) {
+   
+            var paramID = id;
+        window.location.href = '@Url.Action("SingleArticle", "Article", new { id = "__ID_PLACEHOLDER__" })'.replace("__ID_PLACEHOLDER__", paramID);
     }
 
-    function readMoreSubscription() {
-        window.location.href = '@Url.Action("Index", "Subscription")';
+    function readMoreSubscription(id) {
+        // window.location.href = '@Url.Action("Index", "Subscription")';
+        var paramID = id;
+        window.location.href = '@Url.Action("SingleArticle", "Article", new { id = "__ID_PLACEHOLDER__" })'.replace("__ID_PLACEHOLDER__", paramID);
+
     }
 </script>
 
