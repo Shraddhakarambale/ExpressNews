@@ -68,13 +68,35 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
-                    <td>
+                    @* <td>
                         <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
                         <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </td> *@
+                    <td>
+                        <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning mb-2 edit-btn">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info mb-2 details-btn">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 delete-btn">Delete</a>
+                        <form asp-action="Submit" asp-route-id="@item.Id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-success mb-2 submit-btn" onclick="disableButtons(this)">Submit</button>
+                        </form>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+<script>
+    function disableButtons(button) {
+        // Find the parent row
+        var row = button.closest('tr');
+
+        // Disable the Edit and Delete buttons in the same row
+        var editButton = row.querySelector('.edit-btn');
+        var deleteButton = row.querySelector('.delete-btn');
+
+        if (editButton) editButton.disabled = true;
+        if (deleteButton) deleteButton.disabled = true;
+    }
+</script>
