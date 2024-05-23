@@ -24,7 +24,7 @@ namespace ExpressNews
 
 
             builder.Services.AddScoped<IArticleService, ArticleService>();
-
+            builder.Services.AddSession();//Session
 
             var app = builder.Build();
 
@@ -46,7 +46,7 @@ namespace ExpressNews
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();//Session
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
