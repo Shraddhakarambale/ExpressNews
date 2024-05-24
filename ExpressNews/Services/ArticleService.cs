@@ -3,6 +3,7 @@ using ExpressNews.Models.Database;
 using Microsoft.Identity.Client;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing;
 
 namespace ExpressNews.Services
 {
@@ -54,7 +55,7 @@ namespace ExpressNews.Services
             }
 
             
-            return "/Images/" + uniqueFileName;
+            return "/Image/" + uniqueFileName;
         }
 
 
@@ -73,7 +74,7 @@ namespace ExpressNews.Services
         {
             article.DateStamp = DateTime.Now;
             article.Category1 = "World";
-            article.Status = "Draft";
+            //article.Status = "Draft";
             article.UserId = 1;
             article.ImageLink = "";
 
@@ -99,6 +100,35 @@ namespace ExpressNews.Services
             Article article = new Article();
             article = _db.Articles.FirstOrDefault(a => a.IsBreaking == false);
             return article;
+        }
+
+       
+
+        public Article GetArticleDetails(int id)
+        {
+            var article = _db.Articles
+                        .FirstOrDefault(a => a.Id == id);
+
+            if (article == null)
+            {
+                throw new Exception("Article not found");
+            }
+
+            return article;
+        }
+
+        public void DeleteArticle(int id)
+        {
+            var article = _db.Articles.Find(id);
+            if (article != null)
+            {
+                _db.Articles.Remove(article);
+                _db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Article not found");
+            }
         }
 
     }

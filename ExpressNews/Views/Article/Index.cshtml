@@ -4,12 +4,70 @@
     ViewData["Title"] = "Index";
 }
 
-
 <p>
-    <a asp-action="ArticleAdd" class="btn btn-primary">Create New</a>
+    <a asp-action="ArticleAdd" class="btn btn-outline-warning">Add New Article </a>
 </p>
 
 <div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.DateStamp)</th>
+                <th>@Html.DisplayNameFor(model => model.HeadLine)</th>
+                <th>@Html.DisplayNameFor(model => model.Views)</th>
+                <th>@Html.DisplayNameFor(model => model.Likes)</th>
+                <th>@Html.DisplayNameFor(model => model.ImageLink)</th>
+                <th>@Html.DisplayNameFor(model => model.IsBreaking)</th>
+                <th>@Html.DisplayNameFor(model => model.IsSubsription)</th>
+                <th>@Html.DisplayNameFor(model => model.Status)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.DateStamp)</td>
+                    <td>@Html.DisplayFor(modelItem => item.HeadLine)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Views)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Likes)</td>
+                    <td><img src="@item.ImageLink" class="img-fluid" style="width: 40%;" alt="Article Image" /></td>
+                    <td>@Html.DisplayFor(modelItem => item.IsBreaking)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IsSubsription)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+
+                    <td class="article-row">
+                        <div class="btn-group-vertical d-inline-block">
+                            <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning mb-2 edit-btn">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 delete-btn">Delete</a>
+                        </div>
+                        <div class="btn-group-vertical d-inline-block">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info mb-2 details-btn">Details</a>
+                            <form asp-action="Submit" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-sm btn-success mb-2 submit-btn">Submit</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".submit-btn").click(function (event) {
+            var $row = $(this).closest('.article-row');
+            $row.find('.edit-btn, .delete-btn, .details-btn').prop('disabled', true).addClass('disabled');
+            return true;
+        });
+    });
+</script>
+
+
+
+@* <div class="table-responsive">
     <table class="table table-striped table-hover table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -68,13 +126,53 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
-                    <td>
+                    @* <td>
                         <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
                         <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
+                    </td> *@
+                   @*  <td>
+                        <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning mb-2 edit-btn">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info mb-2 details-btn">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 delete-btn">Delete</a>
+                        <form asp-action="Submit" asp-route-id="@item.Id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-success mb-2 submit-btn" onclick="disableButtons(this)">Submit</button>
+                        </form>
+                    </td>   
                 </tr>
             }
         </tbody>
     </table>
-</div>
+</div> 
+
+@* <script>
+    function disableButtons(button) {
+        // Find the parent row
+        var row = button.closest('tr');
+
+        // Disable the Edit and Delete buttons in the same row
+        var editButton = row.querySelector('.edit-btn');
+        var deleteButton = row.querySelector('.delete-btn');
+
+        if (editButton) editButton.disabled = true;
+        if (deleteButton) deleteButton.disabled = true;
+    }
+</script> *@
+
+
+
+
+    @* <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script>
+    $(document).ready(function () {
+        $('.submit-btn').click(function (event) {
+            var $row = $(this).closest('.article-row');
+
+            // Disable the Edit, Delete, and Details buttons
+            $row.find('.edit-btn, .delete-btn, .details-btn').prop('disabled', true).addClass('disabled');
+
+            // Allow form submission to proceed
+            return true;
+        });
+    });
+</script> *@

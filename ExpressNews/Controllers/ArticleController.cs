@@ -17,7 +17,7 @@ namespace ExpressNews.Controllers
         }
         public IActionResult Index()
         {
-            
+
             return View(_articleService.GetArticles());
         }
 
@@ -44,7 +44,7 @@ namespace ExpressNews.Controllers
         //    }
         //    return View(newArticle);
 
-            
+
         //}
 
         public IActionResult ArticleAdd()
@@ -81,6 +81,63 @@ namespace ExpressNews.Controllers
             _articleService.UpdateArticle(article);
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Submit(int id)
+        {
+            var article = _articleService.GetArticleById(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            article.Status = "Submitted";
+            _articleService.UpdateArticle(article);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+        public IActionResult Details(int id)
+        {
+            try
+            {
+                var article = _articleService.GetArticleDetails(id);
+                return View(article);
+            }
+            catch (Exception ex)
+            {  
+                return NotFound();
+            }
+        }
+
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var article = _articleService.GetArticleDetails(id);
+                return View(article);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                _articleService.DeleteArticle(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            { 
+                return BadRequest();
+            }
         }
     }
 }
