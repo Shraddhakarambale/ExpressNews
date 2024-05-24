@@ -76,7 +76,7 @@ namespace ExpressNews.Services
             article.Category1 = "World";
             //article.Status = "Draft";
             article.UserId = 1;
-            article.ImageLink = "https://ichef.bbci.co.uk/news/800/cpsprodpb/0536/live/715d8880-175c-11ef-8a11-6d604e5f7bb3.jpg.webp";
+            article.ImageLink = "";
 
             _db.Update(article);
             _db.SaveChanges();

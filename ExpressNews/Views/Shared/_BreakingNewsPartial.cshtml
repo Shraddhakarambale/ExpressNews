@@ -7,7 +7,7 @@
         {
         <div class="w-100 p-3 border bg-white">
             <a href="#">
-                <h1 id="#" style="color:black">
+                <h1 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id))" style="color:black">
                     <strong style="color:red">JUST NOW: </strong>@Html.DisplayFor(item => row.HeadLine)
                 </h1>
             </a>
