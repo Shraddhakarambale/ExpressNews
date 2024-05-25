@@ -7,11 +7,12 @@
 { 
         var user = await UserManager.GetUserAsync(User);
         var username = user.Email;
+        var firstname = user.FirstName;
 
         <div class="login-icon" id"loginIcon">
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                <i class='fas fa-user-circle' style='font-size:30px'></i>
+                <i class='fas fa-user-edit' style='font-size:24px;color:red'></i>@firstname
                 <span class="email-tooltip">@username </span>
             </a>
 
@@ -79,7 +80,7 @@ else
         }
 
     .login-icon {
-        width: 90px;
+        width:120px;
         height: 30px;
         cursor: pointer;
     }
