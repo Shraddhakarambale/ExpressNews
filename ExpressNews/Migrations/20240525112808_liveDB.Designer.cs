@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ExpressNews.Data.Migrations
+namespace ExpressNews.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240521062227_test02")]
-    partial class test02
+    [Migration("20240525112808_liveDB")]
+    partial class liveDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,29 +25,6 @@ namespace ExpressNews.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ExpressNews.Models.ArticleCategoryLink", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("ArticleCategoryLink");
-                });
-
             modelBuilder.Entity("ExpressNews.Models.Database.Article", b =>
                 {
                     b.Property<int>("Id")
@@ -55,6 +32,16 @@ namespace ExpressNews.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Category1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Category2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Category3")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -67,6 +54,9 @@ namespace ExpressNews.Data.Migrations
 
                     b.Property<DateTime>("DateStamp")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("DisLikes")
+                        .HasColumnType("int");
 
                     b.Property<string>("HeadLine")
                         .IsRequired()
@@ -84,87 +74,29 @@ namespace ExpressNews.Data.Migrations
                     b.Property<bool>("IsSubsription")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Likes")
+                    b.Property<int?>("Likes")
                         .HasColumnType("int");
 
                     b.Property<string>("LinkText")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
-                    b.Property<int>("StatusId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Views")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StatusId")
-                        .IsUnique();
-
-                    b.ToTable("Articles");
-                });
-
-            modelBuilder.Entity("ExpressNews.Models.Database.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("ExpressNews.Models.Database.ImageLink", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Link")
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.HasIndex("ArticleId");
-
-                    b.ToTable("ImageLinks");
-                });
-
-            modelBuilder.Entity("ExpressNews.Models.Database.Status", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int?>("Views")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("StausName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Status");
+                    b.ToTable("Articles");
                 });
 
             modelBuilder.Entity("ExpressNews.Models.User", b =>
@@ -377,47 +309,6 @@ namespace ExpressNews.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ExpressNews.Models.ArticleCategoryLink", b =>
-                {
-                    b.HasOne("ExpressNews.Models.Database.Article", "Article")
-                        .WithMany("ArticleCategoryLinks")
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ExpressNews.Models.Database.Category", "Category")
-                        .WithMany("ArticleCategorys")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Article");
-
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("ExpressNews.Models.Database.Article", b =>
-                {
-                    b.HasOne("ExpressNews.Models.Database.Status", "Status")
-                        .WithOne("Article")
-                        .HasForeignKey("ExpressNews.Models.Database.Article", "StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Status");
-                });
-
-            modelBuilder.Entity("ExpressNews.Models.Database.ImageLink", b =>
-                {
-                    b.HasOne("ExpressNews.Models.Database.Article", "Article")
-                        .WithMany("Images")
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Article");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -466,24 +357,6 @@ namespace ExpressNews.Data.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ExpressNews.Models.Database.Article", b =>
-                {
-                    b.Navigation("ArticleCategoryLinks");
-
-                    b.Navigation("Images");
-                });
-
-            modelBuilder.Entity("ExpressNews.Models.Database.Category", b =>
-                {
-                    b.Navigation("ArticleCategorys");
-                });
-
-            modelBuilder.Entity("ExpressNews.Models.Database.Status", b =>
-                {
-                    b.Navigation("Article")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
