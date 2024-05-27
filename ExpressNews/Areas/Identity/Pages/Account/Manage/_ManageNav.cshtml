@@ -2,6 +2,7 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
+<div>
 <ul class="sidebar " display="flex">
     <li class="nav-item li"><a class="fw-bolder  @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
     <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Article" id="articles" asp-action="Index">Articles</a></li>
