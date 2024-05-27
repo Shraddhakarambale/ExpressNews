@@ -3,6 +3,9 @@ using ExpressNews.Models.Database;
 using Microsoft.Identity.Client;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing;
+using ExpressNews.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ExpressNews.Services
 {
@@ -10,11 +13,15 @@ namespace ExpressNews.Services
     {
         private readonly ApplicationDbContext _db;
         private readonly IConfiguration _configuration;
+        private readonly UserManager<User> _userManagement;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ArticleService(ApplicationDbContext db, IConfiguration configuration)
+        public ArticleService(ApplicationDbContext db, IConfiguration configuration, UserManager<User> userManagement, IHttpContextAccessor httpContextAccessor)
         {
             _db = db;
             _configuration = configuration;
+            _userManagement = userManagement;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         
@@ -22,10 +29,12 @@ namespace ExpressNews.Services
         public void AddArticle(Article newArticle, List<IFormFile> formImages)
         {
             newArticle.DateStamp = DateTime.Now;
-            newArticle.Category1 = "World";
+            string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
+            string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
             newArticle.Status = "Draft";
-            newArticle.UserId = 1;
-            newArticle.ImageLink = "https://ichef.bbci.co.uk/news/800/cpsprodpb/0536/live/715d8880-175c-11ef-8a11-6d604e5f7bb3.jpg.webp";
+            newArticle.UserName = userFirstName + " " + userLastName;
+
+            newArticle.ImageLink = "https://dummyimage.com/600x400/000/fff";
 
 
             _db.Articles.Add(newArticle);
@@ -54,7 +63,7 @@ namespace ExpressNews.Services
             }
 
             
-            return "/Images/" + uniqueFileName;
+            return "/Image/" + uniqueFileName;
         }
 
 
@@ -72,10 +81,13 @@ namespace ExpressNews.Services
         public void UpdateArticle(Article article)
         {
             article.DateStamp = DateTime.Now;
-            article.Category1 = "World";
+            article.DateStamp = DateTime.Now;
+            string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
+            string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
             article.Status = "Draft";
-            article.UserId = 1;
-            article.ImageLink = "";
+            article.UserName = userFirstName + " " + userLastName;
+
+            article.ImageLink = "https://dummyimage.com/600x400/000/fff";
 
             _db.Update(article);
             _db.SaveChanges();
@@ -99,6 +111,35 @@ namespace ExpressNews.Services
             Article article = new Article();
             article = _db.Articles.FirstOrDefault(a => a.IsBreaking == false);
             return article;
+        }
+
+       
+
+        public Article GetArticleDetails(int id)
+        {
+            var article = _db.Articles
+                        .FirstOrDefault(a => a.Id == id);
+
+            if (article == null)
+            {
+                throw new Exception("Article not found");
+            }
+
+            return article;
+        }
+
+        public void DeleteArticle(int id)
+        {
+            var article = _db.Articles.Find(id);
+            if (article != null)
+            {
+                _db.Articles.Remove(article);
+                _db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Article not found");
+            }
         }
 
     }

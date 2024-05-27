@@ -49,8 +49,9 @@ namespace ExpressNews.Models.Database
         public bool IsSubsription { get; set; }
 
 
-        public int UserId { get; set; }
-
+        [StringLength(500)]
+        public string UserName { get; set; }
+        
         [NotMapped]
         public List<IFormFile> FormImages { get; set; } = new List<IFormFile>();
 
