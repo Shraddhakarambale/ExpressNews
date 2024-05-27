@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace ExpressNews.Data.Migrations
+namespace ExpressNews.Migrations
 {
     /// <inheritdoc />
-    public partial class initital : Migration
+    public partial class liveDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
