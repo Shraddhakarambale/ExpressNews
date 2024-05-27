@@ -93,7 +93,7 @@ namespace ExpressNews.Controllers
             }
 
             article.Status = "Submitted";
-            _articleService.UpdateArticle(article);
+            _articleService.SubmitArticle(article);
             return RedirectToAction(nameof(Index));
         }
 

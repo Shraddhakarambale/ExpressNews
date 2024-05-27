@@ -102,7 +102,20 @@ namespace ExpressNews.Services
             return article;
         }
 
-       
+
+
+        public void SubmitArticle(Article article)
+        {
+            article.DateStamp = DateTime.Now;
+            
+            string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
+            string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
+            article.UserName = userFirstName + " " + userLastName;
+
+            article.ImageLink = "https://dummyimage.com/600x400/000/fff";
+            _db.Update(article);
+            _db.SaveChanges();
+        }
 
         public Article GetArticleDetails(int id)
         {
