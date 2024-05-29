@@ -35,53 +35,81 @@
                     <td>@Html.DisplayFor(modelItem => item.IsBreaking)</td>
                     <td>@Html.DisplayFor(modelItem => item.IsSubsription)</td>
                     <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                    
+                      
                     <td>
-                        <div class="container mt-5">
-                            <div class="row">
-                                <div class="col-6 d-flex">
+                        @if (item.Status == "Submitted")
+                        {
+                         <table>
+                           <tr>
+                           <td><a asp-action="" asp-route-id="@item.Id" class="btn btn-sm btn-success mb-2 ">Approve</a></td>
+                           <td><a asp-action="" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 ">Reject</a></td>
+                           </tr>
+                         </table>
+                        }
+                        else if (item.Status == "Draft" || item.Status == "Rejected")
+                        {
+                            <table class="article-row">
+                                <tr>
+                                    <td class="article-row">
+                                        <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning mb-2 edit-btn">Edit</a>
+                                    </td>
+                                    <td class="article-row"><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 delete-btn">Delete</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="article-row"><a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info mb-2 details-btn">Details</a></td>
+                                    <td>
+                                        <form asp-action="Submit" asp-route-id="@item.Id" method="post" ;">
+                                            <button type="submit" class="btn btn-sm btn-success mb-2 submit-btn">Submit</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a asp-action="" asp-route-id="@item.Id" class="btn btn-sm btn-success mb-2 ">Approve</a></td>
+                                    <td><a asp-action="" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 ">Reject</a></td>
+                                </tr>
+                            </table>
+                        }
+                        
+                        else if (item.Status == "Approved")
+                        {
+                        <td class="article-row">
+                            <a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info mb-2 details-btn">Details</a></td>
+                        }
+                        else
+                        {
+                        <table class="article-row">
+                            <tr>
+                                <td class="article-row">
                                     <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning mb-2 edit-btn">Edit</a>
-                                </div>
-                                <div class="col-6 d-flex">
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 delete-btn">Delete</a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 d-flex">
-                                    <a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info mb-2 details-btn">Details</a>
-                                </div>
-                                <div class="col-6 d-flex">
+                                </td>
+                                <td class="article-row"><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 delete-btn">Delete</a></td>
+                            </tr>
+                            <tr>
+                                <td class="article-row"><a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info mb-2 details-btn">Details</a></td>
+                                <td>
                                     <form asp-action="Submit" asp-route-id="@item.Id" method="post" ;">
                                         <button type="submit" class="btn btn-sm btn-success mb-2 submit-btn">Submit</button>
                                     </form>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 d-flex">
-                                    <a asp-action="" asp-route-id="@item.Id" class="btn btn-sm btn-success mb-2 ">Approve</a>
-                                </div>
-                                <div class="col-6 d-flex">
-                                    <a asp-action="" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 ">Reject</a>
-                                </div>
-                            </div>
-                        </div>
-                        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-                        @* <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> *@
-                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-                    </td>
-
-
-                    @* <td>
-                        <table>
-                            <tr>
-                                <td>
-                                 <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning mb-2 edit-btn">Edit</a>
                                 </td>
-                                <td><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 delete-btn">Delete</a></td>
                             </tr>
                             <tr>
-                                <td><a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info mb-2 details-btn">Details</a></td>
+                                <td><a asp-action="" asp-route-id="@item.Id" class="btn btn-sm btn-success mb-2 ">Approve</a></td>
+                                <td><a asp-action="" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 ">Reject</a></td>
+                            </tr>
+                        </table>
+                        }
+                    </td>
+
+                    @* <td>
+                        <table class="article-row">
+                            <tr>
+                                <td class="article-row">
+                                 <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning mb-2 edit-btn">Edit</a>
+                                </td>
+                                <td class="article-row"><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-2 delete-btn">Delete</a></td>
+                            </tr>
+                            <tr>
+                                <td class="article-row"><a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info mb-2 details-btn">Details</a></td>
                                 <td>
                                     <form asp-action="Submit" asp-route-id="@item.Id" method="post" ;">
                                         <button type="submit" class="btn btn-sm btn-success mb-2 submit-btn">Submit</button>
@@ -116,7 +144,11 @@
     </table>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+   
+
+@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
         $(".submit-btn").click(function (event) {
@@ -125,7 +157,7 @@
             return true;
         });
     });
-</script>
+</script> *@
 
 
 
