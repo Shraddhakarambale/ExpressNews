@@ -112,7 +112,38 @@ namespace ExpressNews.Controllers
             article.Views = currentCount + viewCount;
             var newArticle = _articleService.UpdateArticleValues(article);
 
-            HttpContext.Session.SetInt32("ViewCount", Convert.ToInt32(newArticle.Views));
+            //HttpContext.Session.SetInt32("ViewCount", Convert.ToInt32(newArticle.Views));
+
+            return Json(new { success = true });
+        }
+
+        public IActionResult UpdateLikeDislineCount(int id, int count, string type)
+        {
+            var article = _articleService.GetArticleById(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+            int currentCount = 0;
+            if (type == "Like")
+            {
+                if (article.Likes != null)
+                    currentCount = Convert.ToInt32(article.Likes);
+
+                article.Likes = currentCount + count;
+            }
+            else
+            {
+                if (article.DisLikes != null)
+                    currentCount = Convert.ToInt32(article.DisLikes);
+
+                article.DisLikes = currentCount + count;
+            }
+            
+
+            var newArticle = _articleService.UpdateArticleValues(article);
+
+            //HttpContext.Session.SetInt32("ViewCount", Convert.ToInt32(newArticle.Views));
 
             return Json(new { success = true });
         }

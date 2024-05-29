@@ -158,12 +158,13 @@
         const dislikeCount = document.getElementById("dislike-count");
         const viewCount = document.getElementById("view-count");
 
-        let likes = 0;
-        let dislikes = 0;
+        let likes = likeCount.textContent;
+        let dislikes = dislikeCount.textContent;
         let views = 0;
 
         likeButton.addEventListener("click", () => {
             likes++;
+
             likeCount.textContent = likes;
         });
 
@@ -173,13 +174,13 @@
         });
 
         // Fetch initial counts from the server
-        fetch('/counts')
-            .then(response => response.json())
-            .then(data => {
-                likeCount.textContent = data.likes;
-                dislikeCount.textContent = data.dislikes;
-                viewCount.textContent = data.views;
-            });
+        // fetch('/counts')
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         likeCount.textContent = data.likes;
+        //         dislikeCount.textContent = data.dislikes;
+        //         viewCount.textContent = data.views;
+        //     });
 
     });
     
