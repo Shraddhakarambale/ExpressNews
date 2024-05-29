@@ -124,20 +124,14 @@ namespace ExpressNews.Controllers
             {
                 return NotFound();
             }
-            int currentCount = 0;
+
             if (type == "Like")
             {
-                if (article.Likes != null)
-                    currentCount = Convert.ToInt32(article.Likes);
-
-                article.Likes = currentCount + count;
+               article.Likes = count;
             }
             else
             {
-                if (article.DisLikes != null)
-                    currentCount = Convert.ToInt32(article.DisLikes);
-
-                article.DisLikes = currentCount + count;
+                article.DisLikes = count;
             }
             
 
