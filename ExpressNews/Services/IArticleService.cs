@@ -16,9 +16,11 @@ namespace ExpressNews.Services
         Article GetBreakingNews();
         Article GetArticleForFrontPage();
         void UpdateArticle(Article article);
-
+        void SubmitArticle(Article article);
         Article GetArticleDetails(int id);
 
         void DeleteArticle(int id);
+
+        Article UpdateArticleValues(Article article);
     }
 }
