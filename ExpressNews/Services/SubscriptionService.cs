@@ -1,6 +1,7 @@
 ﻿using ExpressNews.Data;
 using ExpressNews.Models;
 using ExpressNews.Models.Database;
+using ExpressNews.Models.ViewModel;
 using Microsoft.AspNetCore.Identity;
 
 namespace ExpressNews.Services
@@ -20,6 +21,12 @@ namespace ExpressNews.Services
         {
             var subscription = _db.Subscriptions.OrderByDescending(a => a.Id == id).ToList();
             return subscription;
+        }
+        public SubscriptionTypeVM GetSubscriptionType()
+        {
+            SubscriptionTypeVM model = new SubscriptionTypeVM();
+            model.SubTypeList = _db.SubscriptionTypes.OrderByDescending(a => a.Id ).ToList();
+            return model;
         }
     }
 }
