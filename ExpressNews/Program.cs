@@ -8,7 +8,7 @@ namespace ExpressNews
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +21,7 @@ namespace ExpressNews
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
@@ -56,6 +57,40 @@ namespace ExpressNews
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
+
+            using(var scope = app.Services.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var roles = new[] { "Admin", "Editor", "Journalist", "Member" };
+
+                foreach (var role in roles)
+                {
+                    if (!await roleManager.RoleExistsAsync(role))
+                        await roleManager.CreateAsync(new IdentityRole(role));
+                }
+
+            }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var userManager = 
+                    scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+                var roles = new[] { "Admin", "Editor", "Journalist", "Member" };
+
+                string email = "admin@admin.com";
+                string password = "Test1234,";
+
+                if(await userManager.FindByEmailAsync(email) == null)
+                {
+                    var user = new User();
+                    user.UserName = email;
+                    user.Email = email;
+
+
+                    await userManager.CreateAsync(user, password);
+                    userManager.AddToRoleAsync(user, "Admin");
+                }
+            }
 
             app.Run();
         }
