@@ -155,6 +155,20 @@ namespace ExpressNews.Services
             }
         }
 
+        public List<Article> GetLatestArticles(int count)
+        {
+            var LatestArticles = _db.Articles.OrderByDescending(a => a.DateStamp).Take(count).ToList();
+            return LatestArticles;
+
+        }
+
+        public List<Article> GetArticleByCategory(string category)
+        {
+
+            var article = _db.Articles.OrderByDescending(a => a.Category1 == "Local").ToList();
+            return article;
+        }
+
     }
 
     
