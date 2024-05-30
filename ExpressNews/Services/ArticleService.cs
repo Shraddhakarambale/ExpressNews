@@ -152,7 +152,7 @@ namespace ExpressNews.Services
             article.ImageLink = "https://dummyimage.com/600x400/000/fff";
             _db.Update(article);
             _db.SaveChanges();
-
+        }
         public Article UpdateArticleValues(Article article)
         {
             _db.Update(article);
