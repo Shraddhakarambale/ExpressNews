@@ -1,4 +1,4 @@
-﻿@* @model ExpressNews.Models.Db.Customer *@
+﻿@model ExpressNews.Models.ViewModel.SubscriptionTypeVM
 @{
     ViewData["Title"] = "Subscrition";
 }
@@ -20,8 +20,20 @@
     </div>
     <br />
     <div class="row text-center" >
-        <div class="col-md-6">
-            <div class="card h-100">
+        <div class="col-md-6" id="idbasic">
+            @* <pre>
+            @foreach(var row in Model.SubTypeList)
+            {
+                @if(row.Id == 1)
+                    @Html.DisplayFor(item => row.Description)
+
+            }
+           </pre> *@
+
+
+           
+               
+            @* <div class="card h-100">
                 <div class="card-header fw-bolder h2">
                     Express News Plus
                 </div>
@@ -43,10 +55,16 @@
                     </div>
                 </div>
             </div>
-            <div> <i> Renewed afterwards for SEK 139/month, terminated when you want. </i></div>
+            <div> <i> Renewed afterwards for SEK 139/month, terminated when you want. </i></div> *@
         </div>
         <div class="col-md-6">
-            <div class="card h-100">
+            @foreach (var row in Model.SubTypeList)
+            {
+                @if (row.Id != 1)
+                    @Html.DisplayFor(item => row.Description)
+
+            }
+            @* <div class="card h-100">
                 <div class="card-header fw-bolder h2">
                     Premium
                 </div>
@@ -66,10 +84,26 @@
                    
                 </div>
             </div>
-            <div> <i> Renewed thereafter with SEK 299/month. Save 58% - value SEK 715. </i></div>
+            <div> <i> Renewed thereafter with SEK 299/month. Save 58% - value SEK 715. </i></div> *@
         </div>
     </div>
 </div>
+@* @{
+    var htmlText = "";
+    foreach (var row in Model.SubTypeList)
+    {
+        if (row.Id == 1)
+        {
+            htmlText = Html.DisplayFor(item => row.Description).ToString();
+        }
+    }
+}
+<script>
+    var element = document.getElementById("idbasic");
+    element.innerHTML = htmlText;
+</script> *@
+
+
 
 <style>
     body {

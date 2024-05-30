@@ -15,7 +15,7 @@ namespace ExpressNews.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_subscriptionService.GetSubscriptionType());
         }
 
         public IActionResult UserSubscription() 
@@ -23,5 +23,6 @@ namespace ExpressNews.Controllers
             
             return View(_subscriptionService.GetSubscriptionByUserId(1));
         }
+        
     }
 }
