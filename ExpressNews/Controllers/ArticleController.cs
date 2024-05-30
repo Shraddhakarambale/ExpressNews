@@ -1,6 +1,7 @@
 ﻿using ExpressNews.Models.Database;
 using ExpressNews.Models.ViewModel;
 using ExpressNews.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpressNews.Controllers
@@ -97,7 +98,49 @@ namespace ExpressNews.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult UpdateViewCount(int id, int viewCount)
+        {
+            var article = _articleService.GetArticleById(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+            int currentCount = 0;
+            if (article.Views != null)
+                currentCount = Convert.ToInt32(article.Views);
 
+            article.Views = currentCount + viewCount;
+            var newArticle = _articleService.UpdateArticleValues(article);
+
+            //HttpContext.Session.SetInt32("ViewCount", Convert.ToInt32(newArticle.Views));
+
+            return Json(new { success = true });
+        }
+
+        public IActionResult UpdateLikeDislineCount(int id, int count, string type)
+        {
+            var article = _articleService.GetArticleById(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            if (type == "Like")
+            {
+               article.Likes = count;
+            }
+            else
+            {
+                article.DisLikes = count;
+            }
+            
+
+            var newArticle = _articleService.UpdateArticleValues(article);
+
+            //HttpContext.Session.SetInt32("ViewCount", Convert.ToInt32(newArticle.Views));
+
+            return Json(new { success = true });
+        }
 
 
         public IActionResult Approve(int id)

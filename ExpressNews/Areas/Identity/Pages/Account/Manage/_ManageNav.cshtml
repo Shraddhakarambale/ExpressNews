@@ -2,20 +2,21 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
-
 <div>
 <ul class="sidebar">
     <li ><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
     <li ><a class="nav-link" asp-area="" asp-controller="Article" id="articles" asp-action="Index">Articles</a></li>
     <li ><a class="nav-ink @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
     <li><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
+        <li><a class="nav-link" asp-area="" asp-controller="Subscription" id=" " asp-action="UserSubscription"> Subscription</a></li>
+        
 
     @if (hasExternalLogins)
     {
         <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
     }
-   @*  <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li> *@
-    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
+    @*  <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li> *@
+    <li class="nav-item li"><a class="fw-bolder  @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
 </ul>
 </div>
 <style>
@@ -23,24 +24,27 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
-        width: 200px;
+        font: 800;
+        width: 220px;
         background-color: #f1f1f1;
+        color: black;
     }
 
-    li a {
+    .li a {
         display: block;
         color: #000;
-        padding: 8px 16px;
+        height: 65px;
+        padding: 20px 16px;
         text-decoration: none;
     }
 
-        li a.active {
-            background-color:black;
+        .li a.active {
+            background-color: black;
             color: white;
         }
 
-        li a:hover:not(.active) {
-            background-color: #555;
+        .li a:hover:not(.active) {
+            background-color: black;
             color: white;
         }
 </style>

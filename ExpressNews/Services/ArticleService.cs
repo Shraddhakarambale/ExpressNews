@@ -128,7 +128,6 @@ namespace ExpressNews.Services
             _db.SaveChanges();
         }
 
-
         public void ApproveArticle(Article article)
         {
             article.DateStamp = DateTime.Now;
@@ -153,6 +152,14 @@ namespace ExpressNews.Services
             article.ImageLink = "https://dummyimage.com/600x400/000/fff";
             _db.Update(article);
             _db.SaveChanges();
+
+        public Article UpdateArticleValues(Article article)
+        {
+            _db.Update(article);
+            _db.SaveChanges();
+             
+            return article;
+
         }
 
         public Article GetArticleDetails(int id)
@@ -180,6 +187,20 @@ namespace ExpressNews.Services
             {
                 throw new Exception("Article not found");
             }
+        }
+
+        public List<Article> GetLatestArticles(int count)
+        {
+            var LatestArticles = _db.Articles.OrderByDescending(a => a.DateStamp).Take(count).ToList();
+            return LatestArticles;
+
+        }
+
+        public List<Article> GetArticleByCategory(string category)
+        {
+
+            var article = _db.Articles.OrderByDescending(a => a.Category1 == "Local").ToList();
+            return article;
         }
 
     }

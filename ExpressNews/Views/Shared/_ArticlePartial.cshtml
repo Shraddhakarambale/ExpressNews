@@ -1,4 +1,6 @@
 ﻿@model ExpressNews.Models.Database.Article
+@if (Model == null)
+    return;
 @if (Model != null)
 {
 <article>
@@ -134,6 +136,21 @@
     
 </style>
 <script>
+    var myStorage = window.localStorage, pageCount;
+    window.addEventListener('load', function () {
+        $.ajax({
+            url: '@Url.Action("UpdateViewCount", "Article")', // Endpoint URL
+            type: 'POST',
+            data: { id: @Model.Id, viewCount: 1 }, // Data to be sent to the server
+            success: function (response) {
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error updating item count');
+            }
+        });
+    });
+
     document.addEventListener("DOMContentLoaded", () => {
         const likeButton = document.getElementById("like-button");
         const dislikeButton = document.getElementById("dislike-button");
@@ -141,28 +158,57 @@
         const dislikeCount = document.getElementById("dislike-count");
         const viewCount = document.getElementById("view-count");
 
-        let likes = 0;
-        let dislikes = 0;
+        let likes = likeCount.textContent;
+        let dislikes = dislikeCount.textContent;
         let views = 0;
 
         likeButton.addEventListener("click", () => {
             likes++;
+            $.ajax({
+                url: '@Url.Action("UpdateLikeDislineCount", "Article")', // Endpoint URL
+                type: 'POST',
+                data: { id: @Model.Id, count: likes, type: "Like" }, // Data to be sent to the server
+                success: function (response) {
+
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error updating item count');
+                }
+            });
+
             likeCount.textContent = likes;
+            likeButton.disabled = true;
+            dislikeButton.disabled = true;
         });
 
         dislikeButton.addEventListener("click", () => {
             dislikes++;
+
+            $.ajax({
+                url: '@Url.Action("UpdateLikeDislineCount", "Article")', // Endpoint URL
+                type: 'POST',
+                data: { id: @Model.Id, count: dislikes, type: "DisLike" }, // Data to be sent to the server
+                success: function (response) {
+
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error updating item count');
+                }
+            });
+
             dislikeCount.textContent = dislikes;
+            likeButton.disabled = true;
+            dislikeButton.disabled = true;
         });
 
         // Fetch initial counts from the server
-        fetch('/counts')
-            .then(response => response.json())
-            .then(data => {
-                likeCount.textContent = data.likes;
-                dislikeCount.textContent = data.dislikes;
-                viewCount.textContent = data.views;
-            });
+        // fetch('/counts')
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         likeCount.textContent = data.likes;
+        //         dislikeCount.textContent = data.dislikes;
+        //         viewCount.textContent = data.views;
+        //     });
 
     });
     
