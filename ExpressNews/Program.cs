@@ -26,7 +26,8 @@ namespace ExpressNews
 
 
             builder.Services.AddScoped<IArticleService, ArticleService>();
-
+            builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
+            builder.Services.AddTransient<IArticleService, ArticleService>();
             builder.Services.AddSession ();
             //builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(60));
 

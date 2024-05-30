@@ -21,6 +21,12 @@ namespace ExpressNews.Services
 
         void DeleteArticle(int id);
 
+        List<Article> GetLatestArticles(int count);
+
+        public List<Article> GetArticleByCategory(string category);
+
+
         Article UpdateArticleValues(Article article);
+
     }
 }
