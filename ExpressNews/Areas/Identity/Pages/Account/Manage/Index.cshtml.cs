@@ -32,6 +32,10 @@ namespace ExpressNews.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public string Username { get; set; }
 
+        public string Firstname { get; set; }
+
+        public string Lastname { get; set; }
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -65,6 +69,11 @@ namespace ExpressNews.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+
+            var userProf = await _userManager.FindByEmailAsync(userName);
+
+            Firstname = userProf.FirstName;
+            Lastname = userProf.LastName;
 
             Username = userName;
 

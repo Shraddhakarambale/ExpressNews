@@ -11,9 +11,9 @@
 
         <div class="login-icon" id"loginIcon">
         <li class="nav-item">
-            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                <i class='fas fa-user-edit' style='font-size:24px;color:red'></i>@firstname
-                <span class="email-tooltip">@username </span>
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="My Page">
+                <i class='fas fa-user-edit' style='font-size:24px;color:red'></i>&nbsp;&nbsp;@firstname
+                @* <span class="email-tooltip">@username </span> *@
             </a>
 
         </li>
@@ -85,7 +85,7 @@ else
         cursor: pointer;
     }
 
-    .email-tooltip {
+    /* .email-tooltip {
         visibility: hidden;
         width: 200px;
         background-color: black;
@@ -98,10 +98,10 @@ else
         margin-left: -60px;
         opacity: 0;
         transition: opacity 0.3s;
-    }
+    } */
 
-    .login-icon:hover .email-tooltip {
+   /*  .login-icon:hover .email-tooltip {
         visibility: visible;
         opacity: 1;
-    }
+    } */
 </style>

@@ -128,6 +128,14 @@ namespace ExpressNews.Services
             _db.SaveChanges();
         }
 
+        public Article UpdateArticleValues(Article article)
+        {
+            _db.Update(article);
+            _db.SaveChanges();
+             
+            return article;
+        }
+
         public Article GetArticleDetails(int id)
         {
             var article = _db.Articles
