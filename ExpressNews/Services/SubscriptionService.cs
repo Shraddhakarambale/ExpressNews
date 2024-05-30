@@ -2,6 +2,7 @@
 using ExpressNews.Models;
 using ExpressNews.Models.Database;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExpressNews.Services
 {
@@ -21,5 +22,13 @@ namespace ExpressNews.Services
             var subscription = _db.Subscriptions.OrderByDescending(a => a.Id == id).ToList();
             return subscription;
         }
+
+        public void AddSubscriptionType(SubscriptionType subscriptionType)
+        {
+            _db.SubscriptionTypes.Add(subscriptionType);
+             _db.SaveChanges();
+            
+        }
+
     }
 }
