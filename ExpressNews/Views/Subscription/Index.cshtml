@@ -57,13 +57,13 @@
             </div>
             <div> <i> Renewed afterwards for SEK 139/month, terminated when you want. </i></div> *@
         </div>
-        <div class="col-md-6">
-            @foreach (var row in Model.SubTypeList)
+        <div class="col-md-6" id="idPrim">
+            @* @foreach (var row in Model.SubTypeList)
             {
                 @if (row.Id != 1)
                     @Html.DisplayFor(item => row.Description)
 
-            }
+            } *@
             @* <div class="card h-100">
                 <div class="card-header fw-bolder h2">
                     Premium
@@ -88,20 +88,26 @@
         </div>
     </div>
 </div>
-@* @{
-    var htmlText = "";
-    foreach (var row in Model.SubTypeList)
-    {
-        if (row.Id == 1)
-        {
-            htmlText = Html.DisplayFor(item => row.Description).ToString();
-        }
-    }
+@{
+    string htmlText = Model.SubTypeList.FirstOrDefault(row => row.Id == 1)?.Description ?? "";
+    string htmlText2 = Model.SubTypeList.FirstOrDefault(row => row.Id != 1)?.Description ?? "";
 }
+
 <script>
-    var element = document.getElementById("idbasic");
-    element.innerHTML = htmlText;
-</script> *@
+    window.addEventListener('DOMContentLoaded', function () {
+        var htmlText = `@Html.Raw(htmlText)`;
+        var element = document.getElementById("idbasic");
+        if (element) {
+            element.innerHTML = htmlText;
+        }
+
+        var htmlText2 = `@Html.Raw(htmlText2)`;
+        var element = document.getElementById("idPrim");
+        if (element) {
+            element.innerHTML = htmlText2;
+        }
+    });
+</script>
 
 
 
