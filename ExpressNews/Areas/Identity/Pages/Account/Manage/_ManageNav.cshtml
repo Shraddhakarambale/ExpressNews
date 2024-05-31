@@ -2,45 +2,51 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
-<div>
-<ul class="sidebar " display="flex">
-    <li class="nav-item li"><a class="fw-bolder  @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
-    <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Article" id="articles" asp-action="Index">Articles</a></li>
-    <li class="nav-item li"><a class="fw-bolder   @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
-    <li class="nav-item li"><a class="fw-bolder   @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
-    @if (hasExternalLogins)
-    {
-        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
-    }
-    @*  <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li> *@
-    <li class="nav-item li"><a class="fw-bolder  @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
-</ul>
+<div class="container">
+    <div class="row">
+        <nav class="col-md-4 col-lg-2 d-md-block bg-light sidebar collapse" id="sidebarMenu">
+            <div class="position-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Article" id="articles" asp-action="Index">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Subscription" id="subscription" asp-action="UserSubscription">Subscription</a>
+                    </li>
+                    @if (hasExternalLogins)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" id="external-login" asp-page="./ExternalLogins">External logins</a>
+                        </li>
+                    }
+                   @*  <li class="nav-item">
+                        <a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext) fw-bolder" id="personal-data" asp-page="./PersonalData">Personal data</a>
+                    </li> *@
+                </ul>
+            </div>
+        </nav>
+    </div>
 </div>
-<style>
-    .sidebar {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        font: 800;
-        width: 220px;
-        background-color: #f1f1f1;
-        color: black;
-    }
 
-    .li a {
-        display: block;
+<style>
+    .sidebar .nav-link {
+        font-weight: 800;
         color: #000;
-        height: 65px;
         padding: 20px 16px;
         text-decoration: none;
     }
 
-        .li a.active {
-            background-color: black;
-            color: white;
-        }
-
-        .li a:hover:not(.active) {
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
             background-color: black;
             color: white;
         }

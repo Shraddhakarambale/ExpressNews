@@ -1,13 +1,28 @@
 using ExpressNews.Models;
 using ExpressNews.Models.ViewModel;
 using ExpressNews.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace ExpressNews.Controllers
 {
+   
     public class HomeController : Controller
     {
+        //public readonly UserManager<IdentityUser> _userManager;
+        //public readonly RoleManager<IdentityRole> _roleManager;
+        //public HomeController(
+        
+        //UserManager<IdentityUser> userManager,
+        //RoleManager<IdentityRole> roleManager
+        //)
+        //{
+        //    _userManager = userManager;
+        //    _roleManager = roleManager;
+        //}
+
         private readonly IArticleService _articleService;
         
         private readonly ILogger<HomeController> _logger;
@@ -39,5 +54,13 @@ namespace ExpressNews.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult ArticleByCategory(string category)
+        {
+            ArticleVM model = new ArticleVM();
+            model.ArticleList = _articleService.GetArticleByCategory(category);
+            return View(model);
+        }
     }
+
 }

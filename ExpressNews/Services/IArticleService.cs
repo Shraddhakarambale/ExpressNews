@@ -19,8 +19,17 @@ namespace ExpressNews.Services
         void SubmitArticle(Article article);
         Article GetArticleDetails(int id);
 
+        void ApproveArticle(Article article);
+
+        void RejectArticle(Article article);
         void DeleteArticle(int id);
 
+        List<Article> GetLatestArticles(int count);
+
+        public List<Article> GetArticleByCategory(string category);
+
+
         Article UpdateArticleValues(Article article);
+
     }
 }

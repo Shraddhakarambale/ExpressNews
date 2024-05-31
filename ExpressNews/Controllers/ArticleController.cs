@@ -147,6 +147,35 @@ namespace ExpressNews.Controllers
             return Json(new { success = true });
         }
 
+
+        public IActionResult Approve(int id)
+        {
+            var article = _articleService.GetArticleById(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            article.Status = "Approved";
+            _articleService.ApproveArticle(article);
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        public IActionResult Reject(int id)
+        {
+            var article = _articleService.GetArticleById(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            article.Status = "Rejected";
+            _articleService.RejectArticle(article);
+            return RedirectToAction(nameof(Index));
+
+        }
+
         public IActionResult Details(int id)
         {
             try
@@ -155,7 +184,7 @@ namespace ExpressNews.Controllers
                 return View(article);
             }
             catch (Exception ex)
-            {  
+            {
                 return NotFound();
             }
         }
