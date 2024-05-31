@@ -1,0 +1,73 @@
+﻿ @Model ExpressNews.Models.Db.User
+
+<h1>UserAssignRole</h1>
+
+
+<style>
+    .table-container {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container">
+    <form method="post" action="/RoleAssignment/AssignRole">
+     
+        <div class="form-group">
+            <select class="form-control" id="roleName" name="roleName">
+                <option value="Admin">Admin</option>
+                <option value="Editor">Editor</option>
+                <option value="Journalist">Journalist</option>
+                <option value="Member">Member</option>
+            </select>
+        </div>
+        
+            <div class="container table-container">
+                <h2>User List</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col"><input type="checkbox" id="selectAll"></th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var row in Model) ;
+                    <tr>
+                            <td><input type="checkbox" class="select-row"></td>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>john.doe@example.com</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="select-row"></td>
+                            <td>Jane</td>
+                            <td>Smith</td>
+                            <td>jane.smith@example.com</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="select-row"></td>
+                            <td>Mike</td>
+                            <td>Johnson</td>
+                            <td>mike.johnson@example.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+         
+          
+        <button type="submit" class="btn btn-primary">Assign Role</button>
+    </form>
+</div>
+
+<script>
+    // Select/Deselect all checkboxes
+    document.getElementById('selectAll').onclick = function () {
+        var checkboxes = document.querySelectorAll('.select-row');
+        for (var checkbox of checkboxes) {
+            checkbox.checked = this.checked;
+        }
+    }
+</script>
