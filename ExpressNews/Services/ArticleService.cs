@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
 using ExpressNews.Models;
 using Microsoft.AspNetCore.Identity;
+using Azure.Storage.Blobs;
+using Microsoft.Extensions.Azure;
 
 namespace ExpressNews.Services
 {
@@ -28,15 +30,17 @@ namespace ExpressNews.Services
 
         public void AddArticle(Article newArticle, List<IFormFile> formImages)
         {
-            newArticle.DateStamp = DateTime.Now;
-            string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
-            string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
-            newArticle.Status = "Draft";
-            newArticle.UserName = userFirstName + " " + userLastName;
+            
+                newArticle.DateStamp = DateTime.Now;
+                string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
+                string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
+                newArticle.Status = "Draft";
+                newArticle.UserName = userFirstName + " " + userLastName;
+                
 
-            newArticle.ImageLink = "https://dummyimage.com/600x400/000/fff";
+                //newArticle.ImageLink = "https://dummyimage.com/600x400/000/fff";
 
-
+            
             _db.Articles.Add(newArticle);
             _db.SaveChanges();
 
@@ -73,9 +77,22 @@ namespace ExpressNews.Services
 
         }
 
-        public Article UploadFilesToContainer(Article newArticle)
+        public Article UploadFilesToContainer(Article article)
         {
-            throw new NotImplementedException();
+            BlobContainerClient blobServiceClient = new BlobServiceClient(
+                                   _configuration["AzureWebJobsStorage"]).GetBlobContainerClient("newscontainer");
+            foreach (var file in article.FormImages)
+            {
+                BlobClient blobClient = blobServiceClient.GetBlobClient(file.FileName);
+                using (var stream = file.OpenReadStream())
+                {
+                    blobClient.Upload(stream);
+                }
+                article.ImageLink = blobClient.Uri.AbsoluteUri;
+            }
+            return article;
+
+
         }
 
         public void UpdateArticle(Article article)
