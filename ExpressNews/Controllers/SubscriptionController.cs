@@ -1,4 +1,4 @@
-﻿using ExpressNews.Models.Database;
+using ExpressNews.Models.Database;
 using ExpressNews.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +17,7 @@ namespace ExpressNews.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_subscriptionService.GetSubscriptionType());
         }
 
         public IActionResult UserSubscription() 
@@ -25,6 +25,7 @@ namespace ExpressNews.Controllers
             
             return View(_subscriptionService.GetSubscriptionByUserId(1));
         }
+
 
         public IActionResult Create()
         {
@@ -41,5 +42,6 @@ namespace ExpressNews.Controllers
             }
             return View(subscriptionType);
         }
+
     }
 }

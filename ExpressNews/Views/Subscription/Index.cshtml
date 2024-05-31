@@ -1,4 +1,4 @@
-﻿@* @model ExpressNews.Models.Db.Customer *@
+﻿@model ExpressNews.Models.ViewModel.SubscriptionTypeVM
 @{
     ViewData["Title"] = "Subscrition";
 }
@@ -20,10 +20,22 @@
     </div>
     <br />
     <div class="row text-center" >
-        <div class="col-md-6">
-            <div class="card h-100">
+        <div class="col-md-6" id="idbasic">
+            @* <pre>
+            @foreach(var row in Model.SubTypeList)
+            {
+                @if(row.Id == 1)
+                    @Html.DisplayFor(item => row.Description)
+
+            }
+           </pre> *@
+
+
+           
+               
+            @* <div class="card h-100">
                 <div class="card-header fw-bolder h2">
-                    Express News Plus
+                    BASIC
                 </div>
                 <div class="card-body ">
                     <h5 class="card-title">All content on Express News</h5>
@@ -43,10 +55,16 @@
                     </div>
                 </div>
             </div>
-            <div> <i> Renewed afterwards for SEK 139/month, terminated when you want. </i></div>
+            <div> <i> Renewed afterwards for SEK 139/month, terminated when you want. </i></div> *@
         </div>
-        <div class="col-md-6">
-            <div class="card h-100">
+        <div class="col-md-6" id="idPrim">
+            @* @foreach (var row in Model.SubTypeList)
+            {
+                @if (row.Id != 1)
+                    @Html.DisplayFor(item => row.Description)
+
+            } *@
+            @* <div class="card h-100">
                 <div class="card-header fw-bolder h2">
                     Premium
                 </div>
@@ -66,10 +84,32 @@
                    
                 </div>
             </div>
-            <div> <i> Renewed thereafter with SEK 299/month. Save 58% - value SEK 715. </i></div>
+            <div> <i> Renewed thereafter with SEK 299/month. Save 58% - value SEK 715. </i></div> *@
         </div>
     </div>
 </div>
+@{
+    string htmlText = Model.SubTypeList.FirstOrDefault(row => row.Id == 1)?.Description ?? "";
+    string htmlText2 = Model.SubTypeList.FirstOrDefault(row => row.Id != 1)?.Description ?? "";
+}
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        var htmlText = `@Html.Raw(htmlText)`;
+        var element2 = document.getElementById("idbasic");
+        if (element2) {
+            element2.innerHTML = htmlText;
+        }
+
+        var htmlText2 = `@Html.Raw(htmlText2)`;
+        var element = document.getElementById("idPrim");
+        if (element) {
+            element.innerHTML = htmlText2;
+        }
+    });
+</script>
+
+
 
 <style>
     body {
