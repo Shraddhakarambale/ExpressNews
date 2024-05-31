@@ -54,5 +54,13 @@ namespace ExpressNews.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult ArticleByCategory(string category)
+        {
+            ArticleVM model = new ArticleVM();
+            model.ArticleList = _articleService.GetArticleByCategory(category);
+            return View(model);
+        }
     }
+
 }

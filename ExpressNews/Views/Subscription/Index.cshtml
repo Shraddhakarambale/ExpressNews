@@ -1,70 +1,122 @@
-﻿@* @model ExpressNews.Models.Db.Customer *@
+﻿@model ExpressNews.Models.ViewModel.SubscriptionTypeVM
 @{
-    ViewData["Title"] = "Subscription";
+    ViewData["Title"] = "Subscrition";
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="container-fluid">
     <div class="row">
-        <div class="card bg-warning text-center">
-            <h1 style="color:black">Upgrade your subscription and get access to the entirety of<br />Express News</h1>
-            <p style="color:black">You get access to all articles and podcasts, all live sports and much more.<br /> With the Super Package you get access to even more news and services.</p>
+        <div class="col-md-12  text-center" style="background-color:black">
+           
+            <h1 style="color:white">Upgrade your subscription and get access to the entire<br />Express News</h1>
+            <p style="color:white">You get access to all articles, all live sports, advantageous offers and much more. With the Super package you get access to even more news and services.</p>
         </div>
     </div>
     <br />
     <div class="row">
         <div class="fw-bolder col-md-12 text-center">
-            <h5>Already a Plus customer?</h5>
+            <h3>Already a Plus customer?</h3> <br />
             <a class="fw-bolder; button-log" role="button" asp-area="Identity" asp-page="/Account/Login">Log in here</a><br />
         </div>
     </div>
     <br />
     <div class="row text-center" >
-        <div class="col-md-6">
-            <div class="card h-90">
+        <div class="col-md-6" id="idbasic">
+            @* <pre>
+            @foreach(var row in Model.SubTypeList)
+            {
+                @if(row.Id == 1)
+                    @Html.DisplayFor(item => row.Description)
+
+            }
+           </pre> *@
+
+
+           
+               
+            @* <div class="card h-100">
                 <div class="card-header fw-bolder h2">
-                    Express News Plus
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">All content on Express News</h5>
-                    <ul class="text-left">     
-                        <li><i class="fa fa-solid fa-check"></i> New in-depth articles every day in eg news, sports and health </li>
-                        <li><i class="fa fa-solid fa-check"></i> Audiobook of the month</li>
-                        <li><i class="fa fa-solid fa-check"></i> Live sports & podcasts <br /><br /></li>
-                        <li><a class="button-sub fw-bolder" role="button" asp-controller="Subscription" asp-action="Index">2 Month - 150 kr</a> </li>
-                        <li><a class="button-sub fw-bolder" role="button" asp-controller="Subscription" asp-action="Index">1 Year - 1000 kr</a> </li>
-                    </ul>
-                </div>
-            </div>
-            <div> <i> Renewed afterwards for SEK 139/month, terminated whenever you want. </i></div>
-        </div>
-        <div class="col-md-6">
-            <div class="card h-90">
-                <div class="card-header fw-bolder h2">
-                    The Super Package
+                    BASIC
                 </div>
                 <div class="card-body ">
-                    <h5 class="card-title">News and podcasts at a super price!</h5>
+                    <h5 class="card-title">All content on Express News</h5>
                     <ul class="text-left">
-                        <li><i class="fa fa-solid fa-check"></i> Express News Plus</li>
-                        <li><i class="fa fa-solid fa-check"></i> Even more stuff! </li>
-                        <li><i class="fa fa-solid fa-check"></i> Premium podcasts</li>
-                        <li><i class="fa fa-solid fa-check"></i> Share with a friend<br /><br /></li>
-                        <li><a class="button-sub fw-bolder" role="button" asp-controller="Subscription" asp-action="Index">1 Year - 1800 kr</a> </li>
+                       
+                        <li><i class="fa fa-solid fa-check"></i> New in-depth articles every day in eg news, sports, health and tests</li>
+                        <li><i class="fa fa-solid fa-check"></i> Audiobook of the month</li>
+                        <li><i class="fa fa-solid fa-check"></i> Live sports & podcasts</li>
                     </ul>
+                    <div >
+                        
+
+
+                        <button type="button" class="fw-bolder btn btn-warning btn-sm">2 Month - 150 kr</button><br /><br />
+
+                        <button type="button" class="fw-bolder btn btn-warning btn-sm">1 Year - 1000 kr</button>
+                    </div>
                 </div>
             </div>
-            <div> <i> Renewed thereafter with SEK 299/month. Save 58% - value SEK 715. </i></div>
+            <div> <i> Renewed afterwards for SEK 139/month, terminated when you want. </i></div> *@
+        </div>
+        <div class="col-md-6" id="idPrim">
+            @* @foreach (var row in Model.SubTypeList)
+            {
+                @if (row.Id != 1)
+                    @Html.DisplayFor(item => row.Description)
+
+            } *@
+            @* <div class="card h-100">
+                <div class="card-header fw-bolder h2">
+                    Premium
+                </div>
+                <div class="card-body ">
+                    <h5 class="card-text">News and podcasts at a super price!</h5>
+                    <ul class="text-left">
+                        <li><i class="fa fa-solid fa-check"></i> Express News Plus</li>
+                        <li><i class="fa fa-solid fa-check"></i> SvD & SvD Business</li>
+                        <li><i class="fa fa-solid fa-check"></i> Omni More & Economy</li>
+                        <li><i class="fa fa-solid fa-check"></i> Premium podcasts from Podme</li>
+                        <li><i class="fa fa-solid fa-check"></i> Share with a friend</li>
+                    </ul>
+                    <div style="margin-bottom: 5px">
+                        <button type="button" class="fw-bolder btn btn-warning btn-sm">1 Year - 1800 kr</button>
+                        <p><i>Read more about everything that is included</i></p>
+                    </div>
+                   
+                </div>
+            </div>
+            <div> <i> Renewed thereafter with SEK 299/month. Save 58% - value SEK 715. </i></div> *@
         </div>
     </div>
 </div>
+@{
+    string htmlText = Model.SubTypeList.FirstOrDefault(row => row.Id == 1)?.Description ?? "";
+    string htmlText2 = Model.SubTypeList.FirstOrDefault(row => row.Id != 1)?.Description ?? "";
+}
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        var htmlText = `@Html.Raw(htmlText)`;
+        var element2 = document.getElementById("idbasic");
+        if (element2) {
+            element2.innerHTML = htmlText;
+        }
+
+        var htmlText2 = `@Html.Raw(htmlText2)`;
+        var element = document.getElementById("idPrim");
+        if (element) {
+            element.innerHTML = htmlText2;
+        }
+    });
+</script>
+
+
 
 <style>
     body {
         background-color:lightgrey;
     }
     .card {
-        margin-bottom: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        margin-bottom: 20px;
     }
 
     .card-header {
@@ -80,13 +132,4 @@
         ul li {
             padding-bottom: 5px;
         }
-
-    .button-sub:hover {
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-        transition-duration: 0.4s;
-    }
-    .button-log:hover {
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-        transition-duration: 0.4s;
-    }
 </style>

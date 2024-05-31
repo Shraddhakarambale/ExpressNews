@@ -46,16 +46,16 @@
                             <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Start</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Privacy">Local</a>
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="Local">Local</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">World</a>
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="World">World</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Privacy">Sport</a>
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="Sport">Sport</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Culture</a>
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="Culture">Culture</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Tip">Tip</a>
@@ -88,7 +88,7 @@
         <i class="fa fa-arrow-up"></i>
     </button>
     <script>
-        /Get the button
+        //Get the button
         let mybutton = document.getElementById("btn-back-to-top");
 
         // When the user scrolls down 20px from the top of the document, show the button
