@@ -6,38 +6,38 @@
 
 
 
-<h4>SubscriptionType</h4>
+<h4>Subscription Type</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group mb-3">
-                <label asp-for="TypeName" class="control-label mb-2"></label>
+                <label asp-for="TypeName" class="control-label mb-2 fw-bolder fst-italic"></label>
                 <input asp-for="TypeName" class="form-control" />
                 <span asp-validation-for="TypeName" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="Description" class="control-label mb-2"></label>
-                <input asp-for="Description" class="form-control" />
+                <label asp-for="Description" class="control-label mb-2 fw-bolder fst-italic"></label>
+                <textarea asp-for="Description" class="form-control" rows="10" placeholder="Enter Description"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="Price" class="control-label mb-2"></label>
+                <label asp-for="Price" class="control-label mb-2 fw-bolder fst-italic"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            <br />
-            <div class="form-group mb-3">
-                <input type="submit" value="Continue" class="btn btn-primary" />
+            <div class="d-grid gap-2 mb-3">
+                <input type="submit" value="Save" class="btn btn-success align-content-md-center mx-2" />
             </div>
+            
         </form>
     </div>
 </div>
 
-<div>
+@* <div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div> *@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
