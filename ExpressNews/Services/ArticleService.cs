@@ -104,7 +104,7 @@ namespace ExpressNews.Services
             article.Status = "Draft";
             article.UserName = userFirstName + " " + userLastName;
 
-            article.ImageLink = "https://dummyimage.com/600x400/000/fff";
+            article.ImageLink = article.ImageLink;
 
             _db.Update(article);
             _db.SaveChanges();

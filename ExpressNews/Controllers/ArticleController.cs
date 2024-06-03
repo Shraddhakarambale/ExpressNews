@@ -84,6 +84,11 @@ namespace ExpressNews.Controllers
                 return NotFound();
             }
 
+            if (article.FormImages.Count > 0)
+            {
+                _articleService.UploadFilesToContainer(article);
+            }
+
             _articleService.UpdateArticle(article);
 
             return RedirectToAction("Index");

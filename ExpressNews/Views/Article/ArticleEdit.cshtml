@@ -30,34 +30,68 @@
                 <textarea asp-for="ContentSummary" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="ContentSummary" class="text-danger"></span>
             </div>
-
+            <!-- Content -->
+            <!-- Include Content -->
+            <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
             <div class="form-group mb-3">
+                <label asp-for="Content" class="control-label mb-2 fw-bold fst-italic"></label>
+                <textarea asp-for="Content" id="editor" class="form-control" rows="10" placeholder="Enter full content"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <script>
+                ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .then(editor => {
+                        console.log(editor);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            </script>
+            @* <div class="form-group mb-3">
                 <label asp-for="Content" class="control-label fw-bold fst-italic mb-2"></label>
                 <textarea asp-for="Content" class="form-control" rows="10"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
+            </div> *@
 
             <div class="form-group mb-3">
-                <label asp-for="Category1" class="control-label fw-bold fst-italic mb-2"></label>
-                <input asp-for="Category1" class="form-control" />
+                <label asp-for="Category1" class="control-label mb-2 fw-bold fst-italic"></label>
+                <select asp-for="Category1" class="form-control">
+                    <option value="Local">Local</option>
+                    <option value="World">World</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Culture">Culture</option>
+                </select>
                 <span asp-validation-for="Category1" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="Category2" class="control-label fw-bold fst-italic mb-2"></label>
-                <input asp-for="Category2" class="form-control" />
+                <label asp-for="Category2" class="control-label mb-2 fw-bold fst-italic"></label>
+                <select asp-for="Category2" class="form-control">
+                    <option value="N/A">N/A</option>
+                    <option value="Local">Local</option>
+                    <option value="World">World</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Culture">Culture</option>
+                </select>
                 <span asp-validation-for="Category2" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="Category3" class="control-label fw-bold fst-italic mb-2"></label>
-                <input asp-for="Category3" class="form-control" />
+                <label asp-for="Category3" class="control-label mb-2 fw-bold fst-italic"></label>
+                <select asp-for="Category3" class="form-control">
+                    <option value="N/A">N/A</option>
+                    <option value="Local">Local</option>
+                    <option value="World">World</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Culture">Culture</option>
+                </select>
                 <span asp-validation-for="Category3" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
                 <label class="control-label fw-bold fst-italic mb-2">Select Image File:</label>
-                <input asp-for="FormImages" class="form-control-file" type="file" multiple />
+                <input asp-for="FormImages" class="form-control-file" type="file" multiple value="@Model.ImageLink" />
                 <span asp-validation-for="FormImages" class="text-danger"></span>
             </div>
 
