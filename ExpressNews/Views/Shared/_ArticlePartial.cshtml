@@ -45,6 +45,7 @@
                 <span id="dislike-count"> @Model.DisLikes</span>
             </button>
 
+
             <button id="views-count" class="dislike-button fa fa-eye fa-lg">
                 <span >  @Model.Views</span>
             </button>
@@ -55,14 +56,27 @@
     </div>
     <hr>
 
-
-
-    <p class="content">
-        @Model.Content
-    </p>
-
+            <Div id="idContent" class="content" >
+                
+            </Div>
+  
 
 }
+@{
+    string htmlText = Model.Content ?? "";
+
+}
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        var htmlText = `@Html.Raw(htmlText)`;
+        var element2 = document.getElementById("idContent");
+        if (element2) {
+            element2.innerHTML = htmlText;
+        }
+
+    });
+</script>
 <script src="script.js"></script>
 <style>
     /* Styles for better presentation (optional) */

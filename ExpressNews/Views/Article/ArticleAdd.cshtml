@@ -33,12 +33,24 @@
                 <span asp-validation-for="ContentSummary" class="text-danger"></span>
             </div>
 
-            <!-- Content -->
+        <!-- Content -->
+            <!-- Include Content -->
+            <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
             <div class="form-group mb-3">
                 <label asp-for="Content" class="control-label mb-2 fw-bold fst-italic"></label>
-                <textarea asp-for="Content" class="form-control" rows="10" placeholder="Enter full content"></textarea>
+                <textarea asp-for="Content" id="editor" class="form-control" rows="10" placeholder="Enter full content"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
+            </div>  
+            <script>
+                ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .then(editor => {
+                        console.log(editor);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            </script>
 
             <!-- Categories -->
             <div class="form-group mb-3">
