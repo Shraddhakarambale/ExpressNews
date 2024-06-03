@@ -1,38 +1,67 @@
 ﻿@model ExpressNews.Models.Database.Article
+<link href="~/css/siteribbon.css" rel="stylesheet" />
 @if (Model == null)
     return;
 @if (Model != null)
 {
-<article>
-    <div class="w-100 p-3 border bg-white">
-        <h1 style="color:black">
+
+    <div class="text-center w-100 p-3 bg-white m-2">
+        <h1 style="color:black; align-items: center">
             @Model.HeadLine
         </h1>
-        <img class="img" src="@Model.ImageLink" alt="Chinese leader Xi Jinping and Russian President Vladimir Putin attend the opening ceremony of the Belt and Road Forum at the Great Hall of the People in Beijing last October.
-                    Pedro Pardo/AFP/Getty Images" width="80%" height="80%" />  <br />
+        <div class="justify-content-center">
+            <img src="@Model.ImageLink" alt="" width="80%" height="80%" /><br />
             <span style="font-size:smaller; align-items: center">
-                <i >@Model.ContentSummary</i>
-        </span>
+                @*  <i >@Model.ContentSummary</i> image descriprtion *@
+            </span>
+        </div>
 
-        <div> <img src="https://images.aftonbladet-cdn.se/v2/images/author/602ef119-32a3-4a6a-b86e-0ebfdb56a147?fit=crop&format=auto&h=200&q=50&w=200&s=bf448d3ea14d0c2c6bab84ccd5df48bc6416913f" width="50" height="60" /> 
-           <b>@Model.UserName</b> </div>
-        <span><i class="font-size: small"> Published @Model.DateStamp </i></span>
-            <div class="">
-                <button id="like-button" class="like-button">
-                    Like <span id="like-count">@Model.Likes</span>
-                </button>
-                <button id="dislike-button" class="dislike-button">
-                    Dislike <span id="dislike-count">@Model.DisLikes</span>
-                </button>
-                <span id="views-count">@Model.Views Views</span>
-            </div>
-
-        <hr>
-            <p class="content">
-                @Model.Content
-            </p>
     </div>
-</article>
+
+
+    <div>
+        <img src="https://images.aftonbladet-cdn.se/v2/images/author/602ef119-32a3-4a6a-b86e-0ebfdb56a147?fit=crop&format=auto&h=200&q=50&w=200&s=bf448d3ea14d0c2c6bab84ccd5df48bc6416913f" width="50" height="60" />
+        <br /><b>@Model.UserName</b><br />
+        <span><i class="font-size: small"> Published @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DateStamp))  </i></span>
+    </div>
+   
+
+    <div class="row">
+        <div class="col-9">
+            <div>
+                <span class="badge rounded-pill bg-primary">@Model.Category1</span>
+                <span class="badge rounded-pill bg-danger">@Model.Category2</span>
+                <span class="badge rounded-pill bg-warning text-dark">@Model.Category3</span>
+            </div>
+        </div>
+        <div class="col-3">
+
+
+            <button id="like-button" class="like-button fa fa-thumbs-up fa-lg">
+                <span id="like-count"> @Model.Likes</span>
+            </button>
+
+            <button id="dislike-button" class="dislike-button fa fa-thumbs-down fa-lg">
+                <span id="dislike-count"> @Model.DisLikes</span>
+            </button>
+
+            <button id="views-count" class="dislike-button fa fa-eye fa-lg">
+                <span >  @Model.Views</span>
+            </button>
+             
+
+            <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+        </div>
+    </div>
+    <hr>
+
+
+
+    <p class="content">
+        @Model.Content
+    </p>
+
+
 }
 <script src="script.js"></script>
 <style>
@@ -81,12 +110,13 @@
         background-color: black;
         font-size: 12px; /* Font size for views count */
         color: white; /* Dark grey text color */
-        
     }
+
     .content {
         font-size: 18px;
         text-align: justify;
     }
+
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -133,7 +163,6 @@
             background-color: #e0e0e0;
         }
 
-    
 </style>
 <script>
     var myStorage = window.localStorage, pageCount;
@@ -211,6 +240,6 @@
         //     });
 
     });
-    
+
 </script>
 
