@@ -216,7 +216,7 @@ namespace ExpressNews.Services
         public List<Article> GetArticleByCategory(string category)
         {
 
-            var article = _db.Articles.Where(a => a.Category1 == category || a.Category2 == category|| a.Category2 == category).OrderByDescending(a => a.DateStamp).ToList();
+            var article = _db.Articles.Where(a => a.Category1 == category || a.Category2 == category|| a.Category3 == category).OrderByDescending(a => a.DateStamp).ToList();
             return article;
         }
 
