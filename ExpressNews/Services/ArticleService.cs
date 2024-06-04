@@ -140,7 +140,7 @@ namespace ExpressNews.Services
             string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
             article.UserName = userFirstName + " " + userLastName;
 
-            article.ImageLink = "https://dummyimage.com/600x400/000/fff";
+            //article.ImageLink = "https://dummyimage.com/600x400/000/fff";
             _db.Update(article);
             _db.SaveChanges();
         }
@@ -153,7 +153,7 @@ namespace ExpressNews.Services
             string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
             article.UserName = userFirstName + " " + userLastName;
 
-            article.ImageLink = "https://dummyimage.com/600x400/000/fff";
+            //article.ImageLink = "https://dummyimage.com/600x400/000/fff";
             _db.Update(article);
             _db.SaveChanges();
         }
@@ -166,7 +166,7 @@ namespace ExpressNews.Services
             string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
             article.UserName = userFirstName + " " + userLastName;
 
-            article.ImageLink = "https://dummyimage.com/600x400/000/fff";
+           // article.ImageLink = "https://dummyimage.com/600x400/000/fff";
             _db.Update(article);
             _db.SaveChanges();
         }
