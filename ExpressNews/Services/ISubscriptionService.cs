@@ -11,5 +11,10 @@ namespace ExpressNews.Services
 
         SubscriptionTypeVM GetSubscriptionType();
 
+        SubscriptionType GetSubscriptionTypeById(int id);
+        void UpdateSubscriptionType(SubscriptionType subscriptionType);
+
+        void DeleteSubscriptionType(int id);
+
     }
 }

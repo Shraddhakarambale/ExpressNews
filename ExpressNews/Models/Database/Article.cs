@@ -55,6 +55,6 @@ namespace ExpressNews.Models.Database
         [NotMapped]
         public List<IFormFile> FormImages { get; set; } = new List<IFormFile>();
 
-
+        
     }
 }

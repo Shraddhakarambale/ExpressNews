@@ -1,22 +1,25 @@
 ﻿@model ExpressNews.Models.Database.SubscriptionType
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "EditSubscriptionType";
 }
 
+<h1>EditSubscriptionType</h1>
 
-
-<h4>Subscription Type</h4>
+<h4>SubscriptionType</h4>
 <hr />
 <div class="row">
-    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        <form asp-action="Create">
+    <div class="col-md-4">
+        <form asp-action="EditSubscriptionType">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group mb-3">
-                <label asp-for="TypeName" class="control-label mb-2 fw-bolder fst-italic"></label>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="TypeName" class="control-label"></label>
                 <input asp-for="TypeName" class="form-control" />
                 <span asp-validation-for="TypeName" class="text-danger"></span>
             </div>
+
+
             <script src="
                 https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
             <div class="form-group mb-3">
@@ -34,23 +37,29 @@
                         console.error(error);
                     });
             </script>
-            <div class="form-group mb-3">
-                <label asp-for="Price" class="control-label mb-2 fw-bolder fst-italic"></label>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            <div class="d-grid gap-2 mb-3">
-                <input type="submit" value="Save" class="btn btn-success align-content-md-center mx-2" />
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                </label>
             </div>
-            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
         </form>
     </div>
 </div>
 
-@* <div>
+<div>
     <a asp-action="Index">Back to List</a>
-</div> *@
+</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
