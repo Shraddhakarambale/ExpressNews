@@ -59,6 +59,8 @@ namespace ExpressNews.Controllers
         {
             ArticleVM model = new ArticleVM();
             model.ArticleList = _articleService.GetArticleByCategory(category);
+            model.ArticleObj = _articleService.GetArticleById(2);
+
             return View(model);
         }
     }
