@@ -1,4 +1,5 @@
-﻿using ExpressNews.Models.Database;
+﻿using Azure.Storage.Blobs.Models;
+using ExpressNews.Models.Database;
 using ExpressNews.Models.ViewModel;
 using ExpressNews.Services;
 using Microsoft.AspNetCore.Http;
@@ -57,6 +58,10 @@ namespace ExpressNews.Controllers
         [HttpPost]
         public IActionResult ArticleAdd(Article newArticle)
         {
+            if (newArticle.FormImages.Count > 0)
+            {
+                _articleService.UploadFilesToContainer(newArticle);
+            }
             _articleService.AddArticle(newArticle, newArticle.FormImages);
 
             return RedirectToAction("Index");
@@ -77,6 +82,11 @@ namespace ExpressNews.Controllers
             if (id != article.Id)
             {
                 return NotFound();
+            }
+
+            if (article.FormImages.Count > 0)
+            {
+                _articleService.UploadFilesToContainer(article);
             }
 
             _articleService.UpdateArticle(article);
@@ -210,6 +220,10 @@ namespace ExpressNews.Controllers
             { 
                 return BadRequest();
             }
+            
+
         }
+       
+
     }
 }

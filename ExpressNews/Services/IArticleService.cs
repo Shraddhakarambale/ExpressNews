@@ -9,7 +9,7 @@ namespace ExpressNews.Services
 
         //void AddImageLink(ImageLink imageLink);
 
-        Article UploadFilesToContainer(Article newArticle);
+        Article UploadFilesToContainer(Article article);
 
         //Status GetStatus(int id);
         Article GetArticleById(int id);
