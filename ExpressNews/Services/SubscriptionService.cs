@@ -36,8 +36,30 @@ namespace ExpressNews.Services
         public SubscriptionTypeVM GetSubscriptionType()
         {
             SubscriptionTypeVM model = new SubscriptionTypeVM();
-            model.SubTypeList = _db.SubscriptionTypes.OrderByDescending(a => a.Id ).ToList();
+            model.SubTypeList = _db.SubscriptionTypes.Where(a => a.IsDeleted != true).OrderByDescending(a => a.Id).ToList();
             return model;
+        }
+
+        public SubscriptionType GetSubscriptionTypeById(int id)
+        {
+            return _db.SubscriptionTypes.FirstOrDefault(st => st.Id == id && !st.IsDeleted);
+        }
+
+        public void UpdateSubscriptionType(SubscriptionType subscriptionType)
+        {
+            _db.SubscriptionTypes.Update(subscriptionType);
+            _db.SaveChanges();
+        }
+
+        public void DeleteSubscriptionType(int id)
+        {
+            var subscriptionType = _db.SubscriptionTypes.Find(id);
+            if (subscriptionType != null)
+            {
+                subscriptionType.IsDeleted = true;
+                _db.SubscriptionTypes.Update(subscriptionType);
+                _db.SaveChanges();
+            }
         }
 
     }
