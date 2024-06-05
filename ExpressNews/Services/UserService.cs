@@ -2,7 +2,9 @@
 using ExpressNews.Data;
 using ExpressNews.Models;
 using ExpressNews.Models.Database;
+using ExpressNews.Models.ViewModel;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace ExpressNews.Services
 {
@@ -22,9 +24,22 @@ namespace ExpressNews.Services
         }
 
 
-        public List<User> GetUsers()
+        public List<UserVM> GetUsers()
         {
-            return _db.Users.OrderByDescending(a => a.Id).ToList();
+            List<UserVM> userVMs = new List<UserVM>();
+            var allUsers = _userManagement.Users.OrderByDescending(u => u.Id).ToList();
+            foreach (var user in allUsers)
+            {
+                userVMs.Add(new UserVM
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    FirstName = user.FirstName, 
+                    LastName = user.LastName
+               });
+            }
+
+            return userVMs;
 
         }
 

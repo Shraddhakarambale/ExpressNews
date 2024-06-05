@@ -27,6 +27,9 @@ namespace ExpressNews
 
 
             builder.Services.AddScoped<IArticleService, ArticleService>();
+
+            builder.Services.AddScoped<IUserInterface, UserService>();
+
             builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
             builder.Services.AddTransient<IArticleService, ArticleService>();
             builder.Services.AddSession ();
