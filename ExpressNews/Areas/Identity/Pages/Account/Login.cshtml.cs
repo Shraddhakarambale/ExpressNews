@@ -122,7 +122,8 @@ namespace ExpressNews.Areas.Identity.Pages.Account
                     if (user != null)
                     {
                         HttpContext.Session.SetString("UserId", user.Id);
-                        if(user.FirstName != null) HttpContext.Session.SetString("UserFirstName", user.FirstName);
+                        HttpContext.Session.SetString("Role", user.Role);
+                        if (user.FirstName != null) HttpContext.Session.SetString("UserFirstName", user.FirstName);
                         if (user.LastName != null) HttpContext.Session.SetString("UserLastName", user.LastName);
                         /// _logger.LogInformation("User logged in with ID: {UserId}", userId);
                         // You can now use the userId for further processing as needed

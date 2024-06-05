@@ -13,14 +13,16 @@ namespace ExpressNews.Services
         private readonly ApplicationDbContext _db;
         private readonly IConfiguration _configuration;
         private readonly UserManager<User> _userManagement;
+        private readonly RoleManager<User> _roleManagement;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(ApplicationDbContext db, IConfiguration configuration, UserManager<User> userManagement, IHttpContextAccessor httpContextAccessor)
+        public UserService(RoleManager<User> roleManagement, ApplicationDbContext db, IConfiguration configuration, UserManager<User> userManagement, IHttpContextAccessor httpContextAccessor)
         {
             _db = db;
             _configuration = configuration;
             _userManagement = userManagement;
             _httpContextAccessor = httpContextAccessor;
+            _roleManagement = roleManagement;
         }
 
 
@@ -35,12 +37,33 @@ namespace ExpressNews.Services
                     Id = user.Id,
                     Email = user.Email,
                     FirstName = user.FirstName, 
-                    LastName = user.LastName
-               });
+                    LastName = user.LastName,
+                    Role = user.Role,
+                   // IsEmployee = user.IsEmployee,
+                    //IsDeleted = user.IsDeleted
+                });
             }
 
             return userVMs;
 
+        }
+
+        public void SaveUserRole(UserVM user)
+        {
+            // Your logic to save the user's role to the database
+            var dbUser = _db.Users.Find(user.Id);
+            //var dbRole = _db.Roles.Find(user.Role);
+            if (dbUser != null)
+            {
+                dbUser.Role = user.Role;
+
+                //if (dbRole != null)
+                //{
+                    
+                //}
+
+                _db.SaveChanges();
+            }
         }
 
     }

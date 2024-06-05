@@ -2,24 +2,13 @@
 
 
 <div class="container">
-    <form method="post" action="/RoleAssignment/AssignRole">
-        @* <h5>User role:</h5>
-        <div class="form-group" >
-            <select class="form-control" id="roleName" name="roleName" style="width:40%">
-                <option value="">--Select the user role--</option>
-                <option value="Admin">Admin</option>
-                <option value="Editor">Editor</option>
-                <option value="Journalist">Journalist</option>
-                <option value="Member">Member</option>
-            </select>
-        </div>
-        <br /> *@
-        <div class="container table-container">
+    <form method="post" action="/UserAssignRoles/Index" id="userRoleForm">
+       <div class="container table-container">
             <h5>Employee List with Role</h5>
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        @* <th scope="col"></th> *@
+                        <th scope="col">Id</th>
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Email Address</th>
@@ -30,18 +19,44 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        @* <td><input type="checkbox" id="@item.Id" class="select-row"></td> *@
+                            <td id="@item.Id">@item.Id</td>
                         <td>@item.FirstName</td>
                         <td>@item.LastName</td>
                         <td>@item.Email</td>
                             <td>
-                                <select class="form-control" id="roleName" name="roleName" style="width:40%">
-                                    <option value="">--Select the user role--</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Editor">Editor</option>
-                                    <option value="Journalist">Journalist</option>
-                                    <option value="Member">Member</option>
-                                </select>
+                                <select class="form-control" id="@item.Id" name="@item.Id" style="width:40%">
+                                <option value="">--Select the user role--</option>
+                                    @if (item.Role == "Admin")
+                                    {
+                                        <option value="Admin"selected>Admin</option>
+                                        <option value="Editor">Editor</option>
+                                        <option value="Journalist">Journalist</option>
+                                        <option value="Member">Member</option>
+                                    }
+                                    else if (item.Role == "Editor")
+                                    {
+                                        <option value="Admin">Admin</option>
+                                        <option value="Editor" selected>Editor</option>
+                                        <option value="Journalist">Journalist</option>
+                                        <option value="Member">Member</option>
+                                    }
+                                    else if (item.Role == "Journalist")
+                                    {
+                                        <option value="Admin" >Admin</option>
+                                        <option value="Editor">Editor</option>
+                                        <option value="Journalist" selected>Journalist</option>
+                                        <option value="Member">Member</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Admin" >Admin</option>
+                                        <option value="Editor">Editor</option>
+                                        <option value="Journalist">Journalist</option>
+                                        <option value="Member">Member</option>
+                                    }
+
+                                
+                            </select>
                             </td>
                     </tr>
                 }
@@ -52,13 +67,39 @@
         <button type="submit" class="btn btn-primary">Assign Role</button>
     </form>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    // Select/Deselect all checkboxes
-    document.getElementById('selectAll').onclick = function () {
-        var checkboxes = document.querySelectorAll('.select-row');
-        for (var checkbox of checkboxes) {
-            checkbox.checked = this.checked;
-        }
-    }
+    $(document).ready(function () {
+        $('#userRoleForm').on('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            var users = [];
+            $('#userRoleForm tbody tr').each(function () {
+                var userId = $(this).find('td:first').text();
+                var user = {
+                    Id: userId,
+                    Role: $(this).find('select').val()
+                };
+                users.push(user);
+            });
+
+            $.ajax({
+                url: '/UserAssignRoles/Index', // The URL to send the data to
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(users),
+                success: function (response) {
+                    // Handle the response from the server
+                    alert('Roles assigned successfully!');
+                },
+                error: function (xhr, status, error) {
+                    // Handle any errors
+                    alert('An error occurred: ' + error);
+                }
+            });
+        });
+    });
 </script>
+
+
