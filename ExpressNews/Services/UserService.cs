@@ -13,16 +13,14 @@ namespace ExpressNews.Services
         private readonly ApplicationDbContext _db;
         private readonly IConfiguration _configuration;
         private readonly UserManager<User> _userManagement;
-        private readonly RoleManager<User> _roleManagement;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(RoleManager<User> roleManagement, ApplicationDbContext db, IConfiguration configuration, UserManager<User> userManagement, IHttpContextAccessor httpContextAccessor)
+        public UserService(ApplicationDbContext db, IConfiguration configuration, UserManager<User> userManagement, IHttpContextAccessor httpContextAccessor)
         {
             _db = db;
             _configuration = configuration;
             _userManagement = userManagement;
             _httpContextAccessor = httpContextAccessor;
-            _roleManagement = roleManagement;
         }
 
 

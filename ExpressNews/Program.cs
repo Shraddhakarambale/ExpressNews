@@ -34,7 +34,7 @@ namespace ExpressNews
             builder.Services.AddTransient<IArticleService, ArticleService>();
             builder.Services.AddSession ();
             //builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(60));
-
+            builder.Services.AddHttpContextAccessor();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
