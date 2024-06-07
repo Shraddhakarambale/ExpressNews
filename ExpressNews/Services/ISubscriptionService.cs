@@ -5,7 +5,7 @@ namespace ExpressNews.Services
 {
     public interface ISubscriptionService
     {
-        List<Subscription> GetSubscriptionByUserId (int id);
+        List<Subscription> GetSubscriptionByUserId ();
 
         void AddSubscriptionType(SubscriptionType subscriptionType);
 

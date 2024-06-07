@@ -23,7 +23,7 @@ namespace ExpressNews.Controllers
         public IActionResult UserSubscription() 
         {
             
-            return View(_subscriptionService.GetSubscriptionByUserId(1));
+            return View(_subscriptionService.GetSubscriptionByUserId());
         }
 
 

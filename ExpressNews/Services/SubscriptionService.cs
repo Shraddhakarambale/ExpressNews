@@ -11,16 +11,20 @@ namespace ExpressNews.Services
     {
         private readonly ApplicationDbContext _db;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<User> _userManagement;
         public SubscriptionService(ApplicationDbContext db, IConfiguration configuration, UserManager<User> userManagement, IHttpContextAccessor httpContextAccessor)
         {
             _db = db;
             _configuration = configuration;
-            
+            _userManagement = userManagement;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        public List<Subscription> GetSubscriptionByUserId(int id)
+        public List<Subscription> GetSubscriptionByUserId()
         {
-            var subscription = _db.Subscriptions.OrderByDescending(a => a.Id == id).ToList();
+            var userName = _httpContextAccessor.HttpContext.Session.GetString("UserName");
+            var subscription = _db.Subscriptions.Where(a => a.UserName == userName).ToList();
             return subscription;
         }
 

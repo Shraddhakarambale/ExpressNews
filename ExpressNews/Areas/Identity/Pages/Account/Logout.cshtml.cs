@@ -17,15 +17,18 @@ namespace ExpressNews.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public LogoutModel(SignInManager<User> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<User> signInManager, ILogger<LogoutModel> logger, IHttpContextAccessor httpContextAccessor)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
+            _httpContextAccessor.HttpContext.Session.Clear();
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)

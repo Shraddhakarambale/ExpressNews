@@ -27,7 +27,7 @@ namespace ExpressNews.Services
         public List<UserVM> GetUsers()
         {
             List<UserVM> userVMs = new List<UserVM>();
-            var allUsers = _userManagement.Users.OrderByDescending(u => u.Id).ToList();
+            var allUsers = _userManagement.Users.Where(u=>u.IsEmployee==true).OrderByDescending(u => u.Id).ToList();
             foreach (var user in allUsers)
             {
                 userVMs.Add(new UserVM
