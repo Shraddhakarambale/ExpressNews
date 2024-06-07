@@ -128,7 +128,10 @@ namespace ExpressNews.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 if (role == "Admin")
+                {
                     user.IsEmployee = true;
+                    user.Role = "Member";
+                }
                 else
                 {
                     user.IsEmployee = false;
