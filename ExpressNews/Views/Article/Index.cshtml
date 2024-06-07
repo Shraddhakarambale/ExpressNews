@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<ExpressNews.Models.Database.Article>
 
+@inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Index";
+
+    var session = HttpContextAccessor.HttpContext.Session;
 }
 
 <p>
@@ -39,35 +42,41 @@
                     <td>
                         @if (item.Status == "Submitted")
                         {
-                         <table>
-                           <tr>
-                                    <td><a asp-action="Approve" asp-route-id="@item.Id" class="btn btn-sm btn-success col-12 mb-2 ">Approve</a></td>
-                                    <td><a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 ">Reject</a></td>
-                           </tr>
-                         </table>
+                            @if (session.GetString("Role") == "Editor" || session.GetString("Role") == "Admin")
+                            {
+                             <table>
+                               <tr>
+                                        <td><a asp-action="Approve" asp-route-id="@item.Id" class="btn btn-sm btn-success col-12 mb-2 ">Approve</a></td>
+                                        <td><a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 ">Reject</a></td>
+                               </tr>
+                             </table>
+                            }
                         }
                         else if (item.Status == "Draft" || item.Status == "Rejected")
                         {
-                            <table class="article-row">
-                                <tr>
-                                    <td class="article-row">
-                                        <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning col-12 mb-2 edit-btn">Edit</a>
-                                    </td>
-                                    <td class="article-row"><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 delete-btn">Delete</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="article-row"><a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info col-12 mb-2 details-btn">Details</a></td>
-                                    <td>
-                                        <form asp-action="Submit" asp-route-id="@item.Id" method="post" ;">
-                                            <button type="submit" class="btn btn-sm btn-success col-12 mb-2 submit-btn">Submit</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a asp-action="Approve" asp-route-id="@item.Id" class="btn btn-sm btn-success col-12 mb-2 ">Approve</a></td>
-                                    <td><a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 ">Reject</a></td>
-                                </tr>
-                            </table>
+                            @if (session.GetString("Role") != "Editor")
+                            {
+                                <table class="article-row">
+                                    <tr>
+                                        <td class="article-row">
+                                            <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning col-12 mb-2 edit-btn">Edit</a>
+                                        </td>
+                                        <td class="article-row"><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 delete-btn">Delete</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="article-row"><a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info col-12 mb-2 details-btn">Details</a></td>
+                                        <td>
+                                            <form asp-action="Submit" asp-route-id="@item.Id" method="post" ;">
+                                                <button type="submit" class="btn btn-sm btn-success col-12 mb-2 submit-btn">Submit</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @* <tr>
+                                        <td><a asp-action="Approve" asp-route-id="@item.Id" class="btn btn-sm btn-success col-12 mb-2 ">Approve</a></td>
+                                        <td><a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 ">Reject</a></td>
+                                    </tr> *@
+                                </table>
+                            }
                         }
                         
                         else if (item.Status == "Approved")
@@ -82,27 +91,29 @@
                         }
                         else
                         {
-                            
-                        <table>
-                            <tr>
-                                <td class="article-row">
-                                    <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning col-12 mb-2 edit-btn">Edit</a>
-                                </td>
-                                <td class="article-row"><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 delete-btn">Delete</a></td>
-                            </tr>
-                            <tr>
-                                <td class="article-row"><a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info col-12 mb-2 details-btn">Details</a></td>
-                                <td>
-                                    <form asp-action="Submit" asp-route-id="@item.Id" method="post" ;">
-                                        <button type="submit" class="btn btn-sm btn-success col-12 mb-2 submit-btn">Submit</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                    <td><a asp-action="Approve" asp-route-id="@item.Id" class="btn btn-sm btn-success col-12 mb-2 ">Approve</a></td>
-                                    <td><a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 ">Reject</a></td>
-                            </tr>
-                        </table>
+                            @if (session.GetString("Role") != "Editor")
+                            {
+                                <table>
+                                    <tr>
+                                        <td class="article-row">
+                                            <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning col-12 mb-2 edit-btn">Edit</a>
+                                        </td>
+                                        <td class="article-row"><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 delete-btn">Delete</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="article-row"><a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info col-12 mb-2 details-btn">Details</a></td>
+                                        <td>
+                                            <form asp-action="Submit" asp-route-id="@item.Id" method="post" ;">
+                                                <button type="submit" class="btn btn-sm btn-success col-12 mb-2 submit-btn">Submit</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @* <tr>
+                                        <td><a asp-action="Approve" asp-route-id="@item.Id" class="btn btn-sm btn-success col-12 mb-2 ">Approve</a></td>
+                                        <td><a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 ">Reject</a></td>
+                                    </tr> *@
+                                </table>
+                            }
                         }
                     </td>
 

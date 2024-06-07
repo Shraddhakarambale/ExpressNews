@@ -30,8 +30,13 @@
         <div class="col-9">
             <div>
                 <span class="badge rounded-pill bg-primary">@Model.Category1</span>
-                <span class="badge rounded-pill bg-danger">@Model.Category2</span>
-                <span class="badge rounded-pill bg-warning text-dark">@Model.Category3</span>
+                @if (@Model.Category2 != "N/A"){
+                    <span class="badge rounded-pill bg-danger">@Model.Category2</span>
+                }
+                @if (@Model.Category3 != "N/A")
+                {
+                    <span class="badge rounded-pill bg-warning text-dark">@Model.Category3</span>
+                }
             </div>
         </div>
         <div class="col-3">

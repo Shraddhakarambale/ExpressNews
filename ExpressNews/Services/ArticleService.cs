@@ -32,10 +32,9 @@ namespace ExpressNews.Services
         {
             
                 newArticle.DateStamp = DateTime.Now;
-                string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
-                string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
+                string userName = _httpContextAccessor.HttpContext.Session.GetString("UserName");
                 newArticle.Status = "Draft";
-                newArticle.UserName = userFirstName + " " + userLastName;
+                newArticle.UserName = userName;
                 
 
                 //newArticle.ImageLink = "https://dummyimage.com/600x400/000/fff";
@@ -73,7 +72,22 @@ namespace ExpressNews.Services
 
         public List<Article> GetArticles()
         {
-            return _db.Articles.OrderByDescending(a => a.DateStamp).ToList();
+
+            string role = _httpContextAccessor.HttpContext.Session.GetString("Role");
+            string userName = _httpContextAccessor.HttpContext.Session.GetString("UserName");
+
+            if (role == "Editor")
+            {
+                return _db.Articles.Where(a => a.Status == "Submitted").OrderByDescending(a => a.DateStamp).ToList();
+            }
+            else if (role == "Journalist")
+            {
+                return _db.Articles.Where(a => (a.Status == "Draft" || a.Status == "Rejected") && a.UserName == userName).OrderByDescending(a => a.DateStamp).ToList();
+            }
+            else
+            {
+                return _db.Articles.OrderByDescending(a => a.DateStamp).ToList();
+            }
 
         }
 
@@ -98,11 +112,9 @@ namespace ExpressNews.Services
         public void UpdateArticle(Article article)
         {
             article.DateStamp = DateTime.Now;
-            article.DateStamp = DateTime.Now;
-            string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
-            string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
+            string userName = _httpContextAccessor.HttpContext.Session.GetString("UserName");
             article.Status = "Draft";
-            article.UserName = userFirstName + " " + userLastName;
+            article.UserName = userName;
 
             article.ImageLink = article.ImageLink;
 
@@ -136,11 +148,11 @@ namespace ExpressNews.Services
         {
             article.DateStamp = DateTime.Now;
 
-            string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
-            string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
-            article.UserName = userFirstName + " " + userLastName;
+            //string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
+            //string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
+            //article.UserName = userFirstName + " " + userLastName;
 
-            //article.ImageLink = "https://dummyimage.com/600x400/000/fff";
+            ////article.ImageLink = "https://dummyimage.com/600x400/000/fff";
             _db.Update(article);
             _db.SaveChanges();
         }
@@ -149,11 +161,11 @@ namespace ExpressNews.Services
         {
             article.DateStamp = DateTime.Now;
 
-            string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
-            string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
-            article.UserName = userFirstName + " " + userLastName;
+            //string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
+            //string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
+            //article.UserName = userFirstName + " " + userLastName;
 
-            //article.ImageLink = "https://dummyimage.com/600x400/000/fff";
+            ////article.ImageLink = "https://dummyimage.com/600x400/000/fff";
             _db.Update(article);
             _db.SaveChanges();
         }
@@ -162,11 +174,11 @@ namespace ExpressNews.Services
         {
             article.DateStamp = DateTime.Now;
 
-            string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
-            string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
-            article.UserName = userFirstName + " " + userLastName;
+           // string userFirstName = _httpContextAccessor.HttpContext.Session.GetString("UserFirstName");
+           // string userLastName = _httpContextAccessor.HttpContext.Session.GetString("UserLastName");
+           // article.UserName = userFirstName + " " + userLastName;
 
-           // article.ImageLink = "https://dummyimage.com/600x400/000/fff";
+           //// article.ImageLink = "https://dummyimage.com/600x400/000/fff";
             _db.Update(article);
             _db.SaveChanges();
         }
