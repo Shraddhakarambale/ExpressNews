@@ -10,7 +10,7 @@
         @*  main page 9 column *@
         <div class="col-md-9">
             
-            @Html.Partial("_CommonLayout", Model.ArticleList)
+            @Html.Partial("_NewsDisplayPartial", Model.ArticleList)
         </div>
 
         @* side page 3colum *@
@@ -24,7 +24,7 @@
 
             <div class="row">
                 <div>
-                   @*  <vc:latest-article count="7"></vc:latest-article> *@
+                   <vc:latest-article count="7"></vc:latest-article>
                   
                 </div>
             </div> <br />
