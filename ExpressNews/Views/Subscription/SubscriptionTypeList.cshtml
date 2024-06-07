@@ -1,0 +1,87 @@
+﻿@using System.Text.RegularExpressions
+@model ExpressNews.Models.ViewModel.SubscriptionTypeVM
+@{
+    ViewData["Title"] = "Subscription";
+}
+
+@functions {
+    public static string StripHtmlTags(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            return string.Empty;
+        }
+        return Regex.Replace(input, "<.*?>", string.Empty);
+    }
+}
+
+
+<h3><a asp-action="Create" class="btn btn-outline-dark fw-bold fst-italic">Add New Subscription Type</a></h3>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container-fluid">
+
+    <div class="row mt-3">
+        <div class="col-md-12 text-center">
+            <h2>Manage Subscription Types</h2>
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Type Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.SubTypeList)
+                    {
+                        <tr>
+                            <td>@item.TypeName</td>
+
+                            <td>@StripHtmlTags(item.Description)</td>
+                            <td>@item.Price</td>
+                            <td>
+
+                                <a asp-action="EditSubscriptionType" asp-route-id="@item.Id" class="btn btn-warning col-10 mb-2">Edit</a>
+                                <form asp-action="DeleteSubscriptionType" method="post" style="display:inline;">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit" class="btn btn-danger col-10">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<style>
+    body {
+        background-color: lightgrey;
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+        ul li {
+            padding-bottom: 5px;
+        }
+</style>
+
+

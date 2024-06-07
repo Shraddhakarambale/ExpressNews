@@ -1,19 +1,38 @@
-@inject SignInManager<User> SignInManager
+﻿@inject SignInManager<User> SignInManager
+@using Microsoft.AspNetCore.Http
+@inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
+
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var session = HttpContextAccessor.HttpContext.Session;
+    // var roleSessionValue = Session.GetString("Role");
+
 }
 <ul class="sidebar " display="flex">
     <li class="nav-item li"><a class="fw-bolder  @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
-    <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Article" id="articles" asp-action="Index">Articles</a></li>
+    @if (session.GetString("Role") != "Member")
+    {
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Article" id="articles" asp-action="Index">Articles</a></li>
+    }
     <li class="nav-item li"><a class="fw-bolder   @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
     <li class="nav-item li"><a class="fw-bolder   @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
-    <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" id="subscription" asp-action="UserSubscription">Subscription</a></li>
-  
+
+    @if (session.GetString("Role") != "Journalist" && session.GetString("Role") != "Editor")
+    {
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" id="subscription" asp-action="UserSubscription">Subscription</a></li>
+    }
+
     @if (hasExternalLogins)
     {
-        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)
+            " asp-page="./ExternalLogins">External logins</a></li>
     }
-    @*  <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li> *@
+
+    @if (session.GetString("Role") == "Admin")
+    {
+        <li class="nav-item li"><a class="fw-bolder" asp-page="../Register" asp-route-emp="true" >Create Employee</a></li>
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="UserAssignRoles" asp-action="Index">User Management</a></li>
+    }
     <li class="nav-item li"><a class="fw-bolder  @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
 </ul>
 <style>

@@ -31,12 +31,15 @@ namespace ExpressNews.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +47,7 @@ namespace ExpressNews.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -113,6 +117,9 @@ namespace ExpressNews.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            //string isEmp = Request.Query["emp"].ToString();
+            var role  = _httpContextAccessor.HttpContext.Session.GetString("Role"); 
+
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
@@ -120,6 +127,17 @@ namespace ExpressNews.Areas.Identity.Pages.Account
                 var user = CreateUser();
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
+                if (role == "Admin")
+                {
+                    user.IsEmployee = true;
+                    user.Role = "Member";
+                }
+                else
+                {
+                    user.IsEmployee = false;
+                    user.Role = "Member";
+                }
+               // user.Role = role;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -146,7 +164,15 @@ namespace ExpressNews.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        if (role != "Admin")
+                        {
+                            HttpContext.Session.SetString("UserId", user.Id);
+                            HttpContext.Session.SetString("Role", user.Role);
+                            HttpContext.Session.SetString("UserName", user.Email);
+                            if (user.FirstName != null) HttpContext.Session.SetString("UserFirstName", user.FirstName);
+                            if (user.LastName != null) HttpContext.Session.SetString("UserLastName", user.LastName);
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                        }
                         return LocalRedirect(returnUrl);
                     }
                 }

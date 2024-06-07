@@ -12,8 +12,10 @@ namespace ExpressNews
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+         
+           // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
             var connectionString = builder.Configuration.GetConnectionString("LexiconConnection") ?? throw new InvalidOperationException("Connection string 'LexiconConnection' not found.");
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -27,11 +29,14 @@ namespace ExpressNews
 
 
             builder.Services.AddScoped<IArticleService, ArticleService>();
+
+            builder.Services.AddScoped<IUserInterface, UserService>();
+
             builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
             builder.Services.AddTransient<IArticleService, ArticleService>();
             builder.Services.AddSession ();
             //builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(60));
-
+            builder.Services.AddHttpContextAccessor();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

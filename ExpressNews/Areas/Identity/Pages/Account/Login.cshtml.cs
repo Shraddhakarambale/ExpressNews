@@ -115,14 +115,17 @@ namespace ExpressNews.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                
+
                 if (result.Succeeded)
                 {
                     var user = await _userManagement.FindByEmailAsync(Input.Email);
                     if (user != null)
                     {
                         HttpContext.Session.SetString("UserId", user.Id);
-                        if(user.FirstName != null) HttpContext.Session.SetString("UserFirstName", user.FirstName);
+                        HttpContext.Session.SetString("UserName", user.Email);
+                        if (user.Role != null)
+                            HttpContext.Session.SetString("Role", user.Role);
+                        if (user.FirstName != null) HttpContext.Session.SetString("UserFirstName", user.FirstName);
                         if (user.LastName != null) HttpContext.Session.SetString("UserLastName", user.LastName);
                         /// _logger.LogInformation("User logged in with ID: {UserId}", userId);
                         // You can now use the userId for further processing as needed

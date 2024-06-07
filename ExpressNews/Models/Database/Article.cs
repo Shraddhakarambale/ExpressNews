@@ -39,6 +39,8 @@ namespace ExpressNews.Models.Database
         public string? Category2 { get; set; }
         public string? Category3 { get; set; }
 
+        public string? ImageDiscription { get; set; }
+
         [Required]
         public string Status { get; set; }
 
@@ -55,6 +57,6 @@ namespace ExpressNews.Models.Database
         [NotMapped]
         public List<IFormFile> FormImages { get; set; } = new List<IFormFile>();
 
-
+        
     }
 }

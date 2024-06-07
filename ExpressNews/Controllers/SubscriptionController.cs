@@ -23,7 +23,7 @@ namespace ExpressNews.Controllers
         public IActionResult UserSubscription() 
         {
             
-            return View(_subscriptionService.GetSubscriptionByUserId(1));
+            return View(_subscriptionService.GetSubscriptionByUserId());
         }
 
 
@@ -38,9 +38,63 @@ namespace ExpressNews.Controllers
             if (ModelState.IsValid)
             {
                  _subscriptionService.AddSubscriptionType(subscriptionType);
-                return RedirectToAction(nameof(Index)); 
+                return RedirectToAction(nameof(SubscriptionTypeList)); 
             }
             return View(subscriptionType);
+        }
+
+
+
+        public IActionResult SubscriptionTypeList()
+        {
+            return View(_subscriptionService.GetSubscriptionType());
+        }
+
+        public IActionResult EditSubscriptionType(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(NotFound));
+            }
+
+            var subscriptionType = _subscriptionService.GetSubscriptionTypeById(id.Value);
+            if (subscriptionType == null)
+            {
+                return RedirectToAction(nameof(NotFound));
+            }
+            return View(subscriptionType);
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditSubscriptionType(int id, [Bind("Id,TypeName,Description,Price")] SubscriptionType subscriptionType)
+        {
+            if (id != subscriptionType.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _subscriptionService.UpdateSubscriptionType(subscriptionType);
+                return RedirectToAction(nameof(SubscriptionTypeList));
+            }
+            return View(subscriptionType);
+        }
+
+        public IActionResult NotFound()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteSubscriptionType(int id)
+        {
+            _subscriptionService.DeleteSubscriptionType(id);
+            return RedirectToAction(nameof(SubscriptionTypeList));
         }
 
     }
