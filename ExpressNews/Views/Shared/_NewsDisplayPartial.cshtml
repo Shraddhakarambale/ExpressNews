@@ -14,7 +14,7 @@
             {
                 @if (isNext == 1)
                 {
-                    randomColClass = "col-md-8 ";
+                    randomColClass = "col-md-8";
                     isNext = 2;
                 }
                 else if (isNext == 2)
@@ -22,7 +22,7 @@
                     randomColClass = "col-md-4";
                     isNext = 3;
                 }
-                 else if (isNext == 3)
+                else if (isNext == 3)
                 {
                     randomColClass = "col-md-4";
                     isNext = 4;
@@ -34,29 +34,29 @@
                 }
                 else if (isNext == 5)
                 {
-                    randomColClass = "col-md-4";
+                    randomColClass = "col-md-4 ";
                     isNext = 1;
                 }
 
-                <div class="@randomColClass mb-4">
-                    <div class="p-3 border bg-white">
+                <div class="@randomColClass mb-4 ">
+                    <div class="p-3 border bg-white h-100">
                         <a href="#" style="color:black; text-decoration:none!important">
-                            <h3 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id))">
+                            <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id))" class=" text-center p-2">
                                 @Html.DisplayFor(item => row.HeadLine)
-                            </h3>
+                            </h4>
                         </a>
                         <img src="@Html.DisplayFor(item => row.ImageLink)" alt="Article Image" class="img-fluid mb-3" />
                         <p>@Html.DisplayFor(item => row.ContentSummary)</p>
 
                         @if (row.IsSubsription)
                         {
-                            <button onclick="readMoreSubscription(@Html.DisplayFor(item => row.Id))" class="btn btn-warning text-black font-weight-bold">
+                            <button onclick="readMoreSubscription(@Html.DisplayFor(item => row.Id))" class="btn btn-warning text-black font-weight-bold float-end m-3 fw-bolder round3 p-2">
                                 <i class="fa-solid fa-plus"></i> Read More
                             </button>
                         }
                         else
                         {
-                            <button onclick="readMore(@Html.DisplayFor(item => row.Id))" class="btn btn-primary text-white font-weight-bold">
+                            <button onclick="readMore(@Html.DisplayFor(item => row.Id))" class="btn btn-primary text-white font-weight-bold float-end m-3 fw-bolder round3 p-2">
                                 Read More
                             </button>
                         }
