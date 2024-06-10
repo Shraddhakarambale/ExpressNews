@@ -2,6 +2,7 @@ using ExpressNews.Data;
 using ExpressNews.Models;
 using ExpressNews.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpressNews
@@ -27,6 +28,7 @@ namespace ExpressNews
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             builder.Services.AddScoped<IArticleService, ArticleService>();
 
