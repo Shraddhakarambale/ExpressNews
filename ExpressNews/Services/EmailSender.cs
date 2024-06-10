@@ -17,7 +17,8 @@ namespace ExpressNews.Services
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("expressnewscontact@gmail.com", "Express@2024!")//Express@2024!  expressnewscontact@gmail.com
+                Credentials = new NetworkCredential("expressnewscontact@gmail.com", "eydd dadk plbf uqcw")//Express@2024!  expressnewscontact@gmail.com 
+                //eydd dadk plbf uqcw
             };
 
             return client.SendMailAsync("expressnewscontact@gmail.com", email, subject, htmlMessage);
