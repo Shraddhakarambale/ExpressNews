@@ -17,5 +17,7 @@ namespace ExpressNews.Data
 
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionType> SubscriptionTypes { get; set; }
+
+        public DbSet<Tip> Tips { get; set; }
     }
 }
