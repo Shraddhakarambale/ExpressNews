@@ -8,12 +8,12 @@
     {
         <div class="w-100 p-3 border bg-white">
             <a href="#" style="color:black; text-decoration:none!important">
-                <h3 id="#"  onclick="readMore(@Html.DisplayFor(item => row.Id))">
+                <h1 class=" text-center" id="#"  onclick="readMore(@Html.DisplayFor(item => row.Id))">
                     @Html.DisplayFor(item => row.HeadLine)
-                </h3>
+                </h1>
                 
             </a>
-            <img src="@Html.DisplayFor(item => row.ImageLink)" alt="Article Image" width="70%" height="70%" /> <br /> <br />
+            <img class=" p-2" src="@Html.DisplayFor(item => row.ImageLink)" alt="Article Image" width="100%" height="100%" /> <br /> <br />
             <p>@Html.DisplayFor(item => row.ContentSummary)</p>
 
 
