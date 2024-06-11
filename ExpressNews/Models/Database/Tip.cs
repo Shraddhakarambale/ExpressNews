@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpressNews.Models.Database
 {
@@ -28,6 +29,11 @@ namespace ExpressNews.Models.Database
         public string ImageName { get; set; }
 
         public bool IsApproved { get; set;}
+
+        public bool IsDeleted { get; set; }
+
+        [NotMapped]
+        public List<IFormFile> FormImages { get; set; } = new List<IFormFile>();
 
     }
 }

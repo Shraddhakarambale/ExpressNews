@@ -15,9 +15,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Subject)
             </th>
-            <th>
+           @*  <th>
                 @Html.DisplayNameFor(model => model.Description)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Created)
             </th>
@@ -28,14 +28,15 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
+
                 @Html.DisplayNameFor(model => model.TelephoneNumber)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ImageName)
             </th>
-            <th>
+           @*  <th>
                 @Html.DisplayNameFor(model => model.IsApproved)
-            </th>
+            </th> *@
             <th></th>
         </tr>
     </thead>
@@ -45,9 +46,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Subject)
             </td>
-            <td>
+           @*  <td>
                 @Html.DisplayFor(modelItem => item.Description)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.Created)
             </td>
@@ -63,13 +64,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ImageName)
             </td>
-            <td>
+           @*  <td>
                 @Html.DisplayFor(modelItem => item.IsApproved)
-            </td>
+            </td> *@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning col-12 mb-2 edit-btn">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info col-12 mb-2 details-btn">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 delete-btn">Delete</a>
             </td>
         </tr>
 }

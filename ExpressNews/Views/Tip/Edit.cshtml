@@ -19,9 +19,22 @@
                 <span asp-validation-for="Subject" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+                <div class="form-group mb-3">
+                    <label asp-for="Description" class="control-label mb-2 fw-bold fst-italic"></label>
+                    <textarea asp-for="Description" id="editor" class="form-control" rows="10" placeholder="Enter full content"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <script>
+                    ClassicEditor
+                        .create(document.querySelector('#editor'))
+                        .then(editor => {
+                            console.log(editor);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                </script>
             </div>
             <div class="form-group">
                 <label asp-for="Created" class="control-label"></label>
@@ -43,10 +56,15 @@
                 <input asp-for="TelephoneNumber" class="form-control" />
                 <span asp-validation-for="TelephoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ImageName" class="control-label"></label>
-                <input asp-for="ImageName" class="form-control" />
-                <span asp-validation-for="ImageName" class="text-danger"></span>
+            <div class="form-group ">
+                <label class="control-label">Select Image File:</label>
+                <input asp-for="FormImages" class="form-control-file" type="file"  />
+                <span asp-validation-for="FormImages" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                </label>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

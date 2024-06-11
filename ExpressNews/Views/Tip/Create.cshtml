@@ -4,56 +4,66 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Create Tip</h1>
 
-<h4>Tip</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Subject" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Subject" class="control-label mb-2 fw-bold fst-italic"></label>
                 <input asp-for="Subject" class="form-control" />
                 <span asp-validation-for="Subject" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
+            </div> *@
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="control-label mb-2 fw-bold fst-italic"></label>
+                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter tip description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
+          @*   <div class="form-group">
                 <label asp-for="Created" class="control-label"></label>
                 <input asp-for="Created" class="form-control" />
                 <span asp-validation-for="Created" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+            </div> *@
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label mb-2 fw-bold fst-italic"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="control-label mb-2 fw-bold fst-italic"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="TelephoneNumber" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="TelephoneNumber" class="control-label mb-2 fw-bold fst-italic"></label>
                 <input asp-for="TelephoneNumber" class="form-control" />
                 <span asp-validation-for="TelephoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
+           @*  <div class="form-group">
                 <label asp-for="ImageName" class="control-label"></label>
                 <input asp-for="ImageName" class="form-control" />
                 <span asp-validation-for="ImageName" class="text-danger"></span>
+            </div> *@
+            <div class="form-group mb-3">
+                <label class="control-label mb-2 fw-bold fst-italic">Select Image File:</label>
+                <input asp-for="FormImages" class="form-control-file" type="file" multiple />
+                <span asp-validation-for="FormImages" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
+                <label class="form-check-label  mb-2 fw-bold fst-italic">
                     <input class="form-check-input" asp-for="IsApproved" /> @Html.DisplayNameFor(model => model.IsApproved)
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Send Tip" class="btn btn-primary" />
             </div>
         </form>
     </div>
