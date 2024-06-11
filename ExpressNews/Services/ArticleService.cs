@@ -103,6 +103,7 @@ namespace ExpressNews.Services
                     blobClient.Upload(stream);
                 }
                 article.ImageLink = blobClient.Uri.AbsoluteUri;
+                article.FileName = file.FileName;
             }
             return article;
 
