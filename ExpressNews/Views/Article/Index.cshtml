@@ -7,9 +7,18 @@
     var session = HttpContextAccessor.HttpContext.Session;
 }
 
-<p>
-    <a asp-action="ArticleAdd" class="btn btn-outline-warning fw-bold">Add New Article </a>
-</p>
+<div class=" row">
+    <div class="col-2">
+        <p>
+            <a asp-action="ArticleAdd" class="btn btn-outline-warning fw-bold">Add New Article </a>
+        </p>
+    </div>
+    <div class="col">
+        <p>
+            <a id="profile" href="/Identity/Account/Manage" class="btn btn-outline-primary fw-bold">Back to Profile </a>
+        </p>
+    </div>
+</div>
 
 <div class="table-responsive">
     <table class="table table-striped table-hover table-bordered">
