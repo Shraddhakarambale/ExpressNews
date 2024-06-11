@@ -46,6 +46,10 @@
                             {
                              <table>
                                <tr>
+                                        <td class="article-row">
+                                            <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning col-12 mb-2 edit-btn">Edit</a>
+                                        </td>
+                                        <td class="article-row"><a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info col-12 mb-2 details-btn">Details</a></td>
                                         <td><a asp-action="Approve" asp-route-id="@item.Id" class="btn btn-sm btn-success col-12 mb-2 ">Approve</a></td>
                                         <td><a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 ">Reject</a></td>
                                </tr>
