@@ -223,7 +223,12 @@ namespace ExpressNews.Controllers
             
 
         }
-       
+
+        public IActionResult Search(string query)
+        {
+            var results = _articleService.SearchArticles(query);
+            return View(results);
+        }
 
     }
 }
