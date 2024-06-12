@@ -1,6 +1,14 @@
 ﻿@using SQLitePCL
 @model IEnumerable<ExpressNews.Models.Database.Article>
 
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    var lgImageUrl = Configuration.GetValue<string>("LGImage");
+    var smImageUrl = Configuration.GetValue<string>("SMImage");
+}
+
 <div>
     
     <div class="round3 bg-white border radius:25px p-2 ">
@@ -12,6 +20,8 @@
 
             <ul >
                 <li >
+
+                    @* <img src="@lgImageUrl@article.FileName" alt="" width="40%" height="40%" /><br /> *@
                     <img src="@article.ImageLink" alt="" width="40%" height="40%" /><br />
                     <span style="color:#000; text-decoration:none; font-size:11px; float:left; ">@article.DateStamp </span><br />
                     <a class="text-black text-break fw-bolder" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a>

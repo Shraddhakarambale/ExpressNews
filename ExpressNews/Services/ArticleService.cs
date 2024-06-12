@@ -103,6 +103,7 @@ namespace ExpressNews.Services
                     blobClient.Upload(stream);
                 }
                 article.ImageLink = blobClient.Uri.AbsoluteUri;
+                article.FileName = file.FileName;
             }
             return article;
 
@@ -230,6 +231,22 @@ namespace ExpressNews.Services
 
             var article = _db.Articles.Where(a => a.Category1 == category || a.Category2 == category|| a.Category3 == category).OrderByDescending(a => a.DateStamp).ToList();
             return article;
+        }
+
+        public List<Article> SearchArticles(string query)
+        {
+            if (string.IsNullOrEmpty(query))
+            {
+                return new List<Article>();
+            }
+
+            return _db.Articles
+                           .Where(a => a.HeadLine.Contains(query)
+                                    || a.Content.Contains(query)
+                                    || a.Category1.Contains(query)
+                                    || a.Category2.Contains(query)
+                                    || a.Category3.Contains(query))
+                           .ToList();
         }
 
     }

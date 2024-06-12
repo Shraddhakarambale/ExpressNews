@@ -7,9 +7,18 @@
     var session = HttpContextAccessor.HttpContext.Session;
 }
 
-<p>
-    <a asp-action="ArticleAdd" class="btn btn-outline-warning fw-bold">Add New Article </a>
-</p>
+<div class=" row">
+    <div class="col-2">
+        <p>
+            <a asp-action="ArticleAdd" class="btn btn-outline-warning fw-bold">Add New Article </a>
+        </p>
+    </div>
+    <div class="col">
+        <p>
+            <a id="profile" href="/Identity/Account/Manage" class="btn btn-outline-primary fw-bold">Back to Profile </a>
+        </p>
+    </div>
+</div>
 
 <div class="table-responsive">
     <table class="table table-striped table-hover table-bordered">
@@ -46,6 +55,10 @@
                             {
                              <table>
                                <tr>
+                                        <td class="article-row">
+                                            <a asp-action="ArticleEdit" asp-route-id="@item.Id" class="btn btn-sm btn-warning col-12 mb-2 edit-btn">Edit</a>
+                                        </td>
+                                        <td class="article-row"><a asp-action="SingleArticle" asp-route-id="@item.Id" class="btn btn-sm btn-info col-12 mb-2 details-btn">Details</a></td>
                                         <td><a asp-action="Approve" asp-route-id="@item.Id" class="btn btn-sm btn-success col-12 mb-2 ">Approve</a></td>
                                         <td><a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 ">Reject</a></td>
                                </tr>
