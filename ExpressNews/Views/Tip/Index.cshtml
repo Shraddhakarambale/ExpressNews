@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ExpressNews.Models.Database.Tip>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    var lgImageUrl = Configuration.GetValue<string>("LGImage");
+    var smImageUrl = Configuration.GetValue<string>("SMImage");
+}
+
+
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p> *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+           @*  <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.TelephoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageName)
+            </th>
+           @*  <th>
+                @Html.DisplayNameFor(model => model.IsApproved)
+            </th> *@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+           @*  <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelephoneNumber)
+            </td>
+            <td>
+                    <img src="@smImageUrl@Html.DisplayFor(modelItem => item.ImageName)" width="20%" />
+            </td>
+           @*  <td>
+                @Html.DisplayFor(modelItem => item.IsApproved)
+            </td> *@
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning col-12 mb-2 edit-btn">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info col-12 mb-2 details-btn">Details</a>
+                  @*   <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger col-12 mb-2 delete-btn">Delete</a> *@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
