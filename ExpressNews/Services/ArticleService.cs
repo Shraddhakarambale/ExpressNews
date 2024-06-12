@@ -232,6 +232,22 @@ namespace ExpressNews.Services
             return article;
         }
 
+        public List<Article> SearchArticles(string query)
+        {
+            if (string.IsNullOrEmpty(query))
+            {
+                return new List<Article>();
+            }
+
+            return _db.Articles
+                           .Where(a => a.HeadLine.Contains(query)
+                                    || a.Content.Contains(query)
+                                    || a.Category1.Contains(query)
+                                    || a.Category2.Contains(query)
+                                    || a.Category3.Contains(query))
+                           .ToList();
+        }
+
     }
 
     
