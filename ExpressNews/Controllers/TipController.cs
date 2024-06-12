@@ -43,8 +43,10 @@ namespace ExpressNews.Controllers
         [HttpPost]
         public IActionResult Create(Tip tips) 
         {
-            if (ModelState.IsValid)
-            {
+            tips.IsApproved = false;
+            tips.IsDeleted = false;
+            //if (ModelState.IsValid)
+            //{
                 if (tips.FormImages.Count > 0)
                 {
                     _tipService.UploadFilesToContainer(tips);
@@ -52,7 +54,7 @@ namespace ExpressNews.Controllers
                 _tipService.AddTip(tips);
                
            
-            }
+            //}
             return RedirectToAction("Index");
 
         }

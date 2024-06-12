@@ -11,13 +11,14 @@ namespace ExpressNews.Services
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<User> _userManagement;
-        public TipService(ApplicationDbContext db)
+        public TipService(ApplicationDbContext db, IConfiguration configuration)
         {
             _db = db;
+            _configuration = configuration;
         }
         public List<Tip> GetTips()
         {
-            var tip =_db.Tips.Where(a => a.IsDeleted != true).ToList();
+            var tip =_db.Tips.Where(a => a.IsDeleted != true && a.IsApproved!=true).ToList();
             return tip;
         }
         public Tip GetTipById(int id)
@@ -68,6 +69,7 @@ namespace ExpressNews.Services
         {
             BlobContainerClient blobServiceClient = new BlobServiceClient(
                                    _configuration["AzureWebJobsStorage"]).GetBlobContainerClient("newscontainer");
+            
             foreach (var file in tip.FormImages)
             {
                 BlobClient blobClient = blobServiceClient.GetBlobClient(file.FileName);
