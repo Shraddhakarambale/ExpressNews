@@ -59,6 +59,8 @@ namespace ExpressNews.Models.Database
 
         public string? FileName { get; set; }
 
+
         public bool IsEditorChoice { get; set; } = false;
+
     }
 }
