@@ -226,6 +226,13 @@ namespace ExpressNews.Services
 
         }
 
+        public List<Article> GetPopularArticles(int count)
+        {
+            var popularArticles = _db.Articles.OrderByDescending(a => a.Views).Take(count).ToList();
+            return popularArticles;
+
+        }
+
         public List<Article> GetArticleByCategory(string category)
         {
 
