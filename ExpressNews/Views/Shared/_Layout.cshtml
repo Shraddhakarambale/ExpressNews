@@ -32,7 +32,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-light bg-black border-bottom box-shadow mb-2 menu-height">
             <div class="container">
-                <div class="col-md-3 text-left">
+                <div class="col-md-3 text-left pb-2">
                     <a class="nav-link" href="/">
                         <img src="~/image/l1.png" class="img-fluid" />
                     </a>
@@ -61,11 +61,11 @@
                             <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Tip" asp-action="Create">Tip</a>
                         </li>
                         <li class="nav-item">
-                            <div class="input-group">
+                            <div class="input-group p-2">
 
                                 <form asp-controller="Article" asp-action="Search" method="get">
                                     <input type="text" name="query" placeholder="Search news..." />
-                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                    <button type="submit" ><i class="fa fa-search"></i></button>
                                 </form>
 
                                 @* <input class="form-control border-end-0 border" type="search" value="search" id="example-search-input">

@@ -31,57 +31,60 @@
 
 </div>
 
-<form asp-action="Create" enctype="multipart/form-data">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<div class="row">
-    
-    
-    <div class="col-6">
-        <div class="form-group p-3">
-            <label asp-for="Subject" class="control-label mb-2 fw-bold fst-italic"></label>
-            <input asp-for="Subject" class="form-control" />
-            <span asp-validation-for="Subject" class="text-danger"></span>
-        </div>
-        <div class="form-group p-3 ">
-            <label asp-for="Description" class="control-label mb-2 fw-bold fst-italic"></label>
-            <textarea asp-for="Description" class="form-control" rows="6" placeholder="Enter tip description"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-        <div class="form-group p-3">
-            <label class="fileLabel" for="abTipsAttachmentsFiles">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3732 1.8169C9.65646 1.62929 8.89427 1.84302 8.37957 2.37593L8.37048 2.38533L2.76049 7.99455C2.76048 7.99456 2.7605 7.99454 2.76049 7.99455C1.4132 9.34186 1.41318 11.5263 2.76049 12.8736C4.10779 14.2209 6.29221 14.2209 7.63952 12.8736C7.63953 12.8736 7.63952 12.8736 7.63952 12.8736L14.4696 6.04289C14.7625 5.74998 15.2374 5.74996 15.5303 6.04284C15.8232 6.33572 15.8232 6.8106 15.5304 7.1035L8.70023 13.9342C6.76713 15.8673 3.63293 15.8674 1.69983 13.9343C-0.233276 12.0012 -0.233276 8.86699 1.69983 6.93389L7.30544 1.32889C8.19669 0.409688 9.51408 0.04149 10.753 0.365786C11.9942 0.690665 12.9635 1.65997 13.2884 2.90116C13.6127 4.14008 13.2445 5.45744 12.3254 6.34869L6.71117 11.966C5.86768 12.7809 4.52664 12.7694 3.69718 11.9402C2.86772 11.111 2.85586 9.77003 3.67052 8.92629L3.67957 8.91691L9.28959 3.30518C9.58244 3.01224 10.0573 3.01216 10.3503 3.305C10.6432 3.59785 10.6433 4.07272 10.3504 4.36566L4.74594 9.97201C4.50336 10.2273 4.50816 10.6299 4.75767 10.8794C5.00718 11.1288 5.40979 11.1335 5.66501 10.8908L11.2782 5.27454C11.8111 4.75983 12.0249 3.99772 11.8373 3.28098C11.6497 2.56425 11.0899 2.00451 10.3732 1.8169Z" fill="#dd2a30"></path> </svg> <span id="abTipAttachmentsCount"></span>
-            </label>
-            <label class="control-label mb-2 fw-bold fst-italic">Photo or Video</label>
-            <input asp-for="FormImages" class="form-control-file bg-light" type="file" multiple />
-            <span asp-validation-for="FormImages" class=" "></span>
-        </div>
+<div class="bg-light">
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
 
-    </div>
-    <div class="col-4">
-        <div class="form-group p-3">
-            <label asp-for="Name" class="control-label mb-2 fw-bold fst-italic"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="form-group p-3">
-            <label asp-for="Email" class="control-label mb-2 fw-bold fst-italic"></label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="form-group p-3">
-            <label asp-for="TelephoneNumber" class="control-label mb-2 fw-bold fst-italic"></label>
-            <input asp-for="TelephoneNumber" class="form-control" />
-            <span asp-validation-for="TelephoneNumber" class="text-danger"></span>
-        </div>
+            <div class="col-6">
+                <div class="form-group p-3">
+                    <label asp-for="Subject" class="control-label mb-2 fw-bold fst-italic"></label>
+                    <input asp-for="Subject" class="form-control" />
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+                <div class="form-group p-3 ">
+                    <label asp-for="Description" class="control-label mb-2 fw-bold fst-italic"></label>
+                    <textarea asp-for="Description" class="form-control" rows="6" placeholder="Enter tip description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group p-3">
+                    <label class="fileLabel" for="abTipsAttachmentsFiles">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3732 1.8169C9.65646 1.62929 8.89427 1.84302 8.37957 2.37593L8.37048 2.38533L2.76049 7.99455C2.76048 7.99456 2.7605 7.99454 2.76049 7.99455C1.4132 9.34186 1.41318 11.5263 2.76049 12.8736C4.10779 14.2209 6.29221 14.2209 7.63952 12.8736C7.63953 12.8736 7.63952 12.8736 7.63952 12.8736L14.4696 6.04289C14.7625 5.74998 15.2374 5.74996 15.5303 6.04284C15.8232 6.33572 15.8232 6.8106 15.5304 7.1035L8.70023 13.9342C6.76713 15.8673 3.63293 15.8674 1.69983 13.9343C-0.233276 12.0012 -0.233276 8.86699 1.69983 6.93389L7.30544 1.32889C8.19669 0.409688 9.51408 0.04149 10.753 0.365786C11.9942 0.690665 12.9635 1.65997 13.2884 2.90116C13.6127 4.14008 13.2445 5.45744 12.3254 6.34869L6.71117 11.966C5.86768 12.7809 4.52664 12.7694 3.69718 11.9402C2.86772 11.111 2.85586 9.77003 3.67052 8.92629L3.67957 8.91691L9.28959 3.30518C9.58244 3.01224 10.0573 3.01216 10.3503 3.305C10.6432 3.59785 10.6433 4.07272 10.3504 4.36566L4.74594 9.97201C4.50336 10.2273 4.50816 10.6299 4.75767 10.8794C5.00718 11.1288 5.40979 11.1335 5.66501 10.8908L11.2782 5.27454C11.8111 4.75983 12.0249 3.99772 11.8373 3.28098C11.6497 2.56425 11.0899 2.00451 10.3732 1.8169Z" fill="#dd2a30"></path> </svg> <span id="abTipAttachmentsCount"></span>
+                    </label>
+                    <label class="control-label mb-2 fw-bold fst-italic">Photo or Video</label>
+                    <input asp-for="FormImages" class="form-control-file bg-light" type="file" multiple />
+                    <span asp-validation-for="FormImages" class=" "></span>
+                </div>
 
-        <div class="form-group p-3">
-            <input type="submit" value="Send Tip" class="btn btn-primary" />
-        </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group p-3">
+                    <label asp-for="Name" class="control-label mb-2 fw-bold fst-italic"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group p-3">
+                    <label asp-for="Email" class="control-label mb-2 fw-bold fst-italic"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group p-3">
+                    <label asp-for="TelephoneNumber" class="control-label mb-2 fw-bold fst-italic"></label>
+                    <input asp-for="TelephoneNumber" class="form-control" />
+                    <span asp-validation-for="TelephoneNumber" class="text-danger"></span>
+                </div>
 
-    </div>
-   
+                <div class="form-group p-3">
+                    <input type="submit" value="Send Tip" class="btn btn-primary" />
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+
 </div>
-</form>
+
 
 <div class=" p-3">
     <h4 class="hyperion-css-ng0dgn" data-test-tag="paragraph-header">About Tips!</h4>
@@ -91,8 +94,22 @@
 </div>
 
 <div class="p-3">
-    <p><strong>What happens to my tip?</strong></p>
+    <h5> <strong>What happens to my tip?</strong></h5>
+    
     <p class="borderColor borderWidth margin padding mqDark hyperion-css-wlaotw">We read all the tips that are sent. If we judge your tip to be interesting, we will contact you via the contact channels you provided.</p>
+    <p>When you send your picture or movie to Express News, you also give your permission for publication.</p>
+
+    <h5>How is my information protected?</h5>
+    <p>
+        Express News guarantees all tips source protection, a constitutional right under the Freedom of Pressure Regulation. All tips are sent encrypted.
+
+        Your identity is protected with us, but the editors may contact you for further information about your tip.
+    </p>
+
+    <p>
+        If you want to remain anonymous also to the editorial staff, there are several other ways to contact us: you can call from a hidden number or email us from a temporary email address, such as hotmail or gmail.
+    </p>
+
 </div>
 
 @* <div>
