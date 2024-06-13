@@ -8,6 +8,8 @@ using ExpressNews.Models;
 using Microsoft.AspNetCore.Identity;
 using Azure.Storage.Blobs;
 using Microsoft.Extensions.Azure;
+using ExpressNews.ViewComponents;
+using System.Linq;
 
 namespace ExpressNews.Services
 {
@@ -247,6 +249,11 @@ namespace ExpressNews.Services
                                     || a.Category2.Contains(query)
                                     || a.Category3.Contains(query))
                            .ToList();
+        }
+        public List<Article> EditorsChoiceArticles()
+        {
+            var editorsChoice = _db.Articles.Where(a => a.IsEditorChoice == true).ToList();
+            return editorsChoice;
         }
 
     }

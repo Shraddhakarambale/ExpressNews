@@ -33,5 +33,6 @@ namespace ExpressNews.Services
 
         List<Article> SearchArticles(string query);
 
+        public List<Article> EditorsChoiceArticles();
     }
 }
