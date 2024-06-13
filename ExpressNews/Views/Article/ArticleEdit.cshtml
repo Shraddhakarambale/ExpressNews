@@ -91,7 +91,11 @@
 
             <div class="form-group mb-3">
                 <label class="control-label fw-bold fst-italic mb-2">Select Image File:</label>
-                <input asp-for="FormImages" class="form-control-file" type="file" multiple value="@Model.ImageLink" />
+                @if (!string.IsNullOrEmpty(Model.ImageLink))
+                {
+                    <img src="@Model.ImageLink" width="20%" alt="Current Image" />
+                }
+                <input asp-for="FormImages" class="form-control-file" type="file" multiple />
                 <span asp-validation-for="FormImages" class="text-danger"></span>
             </div>
 

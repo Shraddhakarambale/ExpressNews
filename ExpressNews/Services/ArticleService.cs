@@ -112,12 +112,17 @@ namespace ExpressNews.Services
 
         public void UpdateArticle(Article article)
         {
+            var oldArticle = _db.Articles.AsNoTracking().FirstOrDefault(a => a.Id == article.Id);
+
+            if(article.ImageLink == null)
+                article.ImageLink = oldArticle.ImageLink;
+
             article.DateStamp = DateTime.Now;
             string userName = _httpContextAccessor.HttpContext.Session.GetString("UserName");
             article.Status = "Draft";
             article.UserName = userName;
 
-            article.ImageLink = article.ImageLink;
+            
 
             _db.Update(article);
             _db.SaveChanges();
