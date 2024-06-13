@@ -31,6 +31,12 @@ namespace ExpressNews.Controllers
             {
                 _tipService.UploadFilesToContainer(tip);
             }
+            else
+            {
+                var olTip = _tipService.GetOldTipById(tip.Id);
+                tip.ImageName = olTip.ImageName;
+            }
+
             _tipService.UpdateTip(tip);
             return RedirectToAction("Index");
         }

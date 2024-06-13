@@ -1,0 +1,97 @@
+/* Styles for better presentation (optional) */
+.buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align items to the right */
+    gap: 10px; /* Space between elements */
+    padding: 10px; /* Add some padding around the container */
+    background-color: #f9f9f9; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.like-button, .dislike-button {
+    padding: 10px 15px; /* Add padding inside the buttons */
+    border: none; /* Remove default button border */
+    border-radius: 5px; /* Rounded corners for buttons */
+    cursor: pointer; /* Change cursor on hover */
+    font-size: 12px; /* Larger font size for buttons */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.like-button {
+    background-color: #4CAF50; /* Green background for like button */
+    color: white; /* White text color */
+}
+
+    .like-button:hover {
+        background-color: #45a049; /* Darker green on hover */
+    }
+
+.dislike-button {
+    background-color: #f44336; /* Red background for dislike button */
+    color: white; /* White text color */
+}
+
+    .dislike-button:hover {
+        background-color: #e53935; /* Darker red on hover */
+    }
+
+#views-count {
+    border-radius: 5px;
+    padding: 10px 15px;
+    background-color: black;
+    font-size: 12px; /* Font size for views count */
+    color: white; /* Dark grey text color */
+}
+
+.content {
+    font-size: 18px;
+    text-align: justify;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.date-column {
+    font-size: 9px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.author-info {
+    display: flex;
+    align-items: center;
+}
+
+    .author-info img {
+        margin-right: 10px;
+    }
+
+.img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+}
+
+    button:hover {
+        background-color: #e0e0e0;
+    }

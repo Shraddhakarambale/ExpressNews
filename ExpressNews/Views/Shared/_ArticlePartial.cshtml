@@ -1,5 +1,10 @@
 ﻿@model ExpressNews.Models.Database.Article
-<link href="~/css/siteribbon.css" rel="stylesheet" />
+
+<link href="~/css/articlepartial.css" rel="stylesheet" />
+
+
+
+
 @if (Model == null)
     return;
 @if (Model != null)
@@ -18,30 +23,17 @@
 
     </div>
 
-
-    <div>
-        <img src="https://images.aftonbladet-cdn.se/v2/images/author/602ef119-32a3-4a6a-b86e-0ebfdb56a147?fit=crop&format=auto&h=200&q=50&w=200&s=bf448d3ea14d0c2c6bab84ccd5df48bc6416913f" width="50" height="60" />
-        <br /><b>@Model.UserName</b><br />
-        <span><i class="font-size: small"> Published @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DateStamp))  </i></span>
-    </div>
-   
-
     <div class="row">
         <div class="col-9">
             <div>
-                <span class="badge rounded-pill bg-primary">@Model.Category1</span>
-                @if (@Model.Category2 != "N/A"){
-                    <span class="badge rounded-pill bg-danger">@Model.Category2</span>
-                }
-                @if (@Model.Category3 != "N/A")
-                {
-                    <span class="badge rounded-pill bg-warning text-dark">@Model.Category3</span>
-                }
+                <img src="https://images.aftonbladet-cdn.se/v2/images/author/602ef119-32a3-4a6a-b86e-0ebfdb56a147?fit=crop&format=auto&h=200&q=50&w=200&s=bf448d3ea14d0c2c6bab84ccd5df48bc6416913f" width="50" height="60" />
+                <br /><b>@Model.UserName</b><br />
+                <span><i class="font-size: small"> Published @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DateStamp))  </i></span>
             </div>
         </div>
-        <div class="col-3">
 
-
+        <div class="col-3 ">
+            <br />
             <button id="like-button" class="like-button fa fa-thumbs-up fa-lg">
                 <span id="like-count"> @Model.Likes</span>
             </button>
@@ -50,21 +42,28 @@
                 <span id="dislike-count"> @Model.DisLikes</span>
             </button>
 
-
             <button id="views-count" class="dislike-button fa fa-eye fa-lg">
                 <span >  @Model.Views</span>
             </button>
              
-
             <script src="https://use.fontawesome.com/fe459689b4.js"></script>
         </div>
     </div>
     <hr>
 
-            <Div id="idContent" class="content" >
-                
-            </Div>
-  
+    <div id="idContent" class="content" ></div>
+
+    <div class="float-end">
+        <span class="badge rounded-pill bg-primary">@Model.Category1</span>
+        @if (@Model.Category2 != "N/A")
+        {
+            <span class="badge rounded-pill bg-danger">@Model.Category2</span>
+        }
+        @if (@Model.Category3 != "N/A")
+        {
+            <span class="badge rounded-pill bg-warning text-dark">@Model.Category3</span>
+        }
+    </div>
 
 }
 @{
@@ -84,104 +83,7 @@
 </script>
 <script src="script.js"></script>
 <style>
-    /* Styles for better presentation (optional) */
-    .buttons-container {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end; /* Align items to the right */
-        gap: 10px; /* Space between elements */
-        padding: 10px; /* Add some padding around the container */
-        background-color: #f9f9f9; /* Light grey background */
-        border: 1px solid #ddd; /* Light border */
-        border-radius: 5px; /* Rounded corners */
-    }
-
-    .like-button, .dislike-button {
-        padding: 10px 15px; /* Add padding inside the buttons */
-        border: none; /* Remove default button border */
-        border-radius: 5px; /* Rounded corners for buttons */
-        cursor: pointer; /* Change cursor on hover */
-        font-size: 12px; /* Larger font size for buttons */
-        transition: background-color 0.3s; /* Smooth transition for hover effect */
-    }
-
-    .like-button {
-        background-color: #4CAF50; /* Green background for like button */
-        color: white; /* White text color */
-    }
-
-        .like-button:hover {
-            background-color: #45a049; /* Darker green on hover */
-        }
-
-    .dislike-button {
-        background-color: #f44336; /* Red background for dislike button */
-        color: white; /* White text color */
-    }
-
-        .dislike-button:hover {
-            background-color: #e53935; /* Darker red on hover */
-        }
-
-    #views-count {
-        border-radius: 5px;
-        padding: 10px 15px;
-        background-color: black;
-        font-size: 12px; /* Font size for views count */
-        color: white; /* Dark grey text color */
-    }
-
-    .content {
-        font-size: 18px;
-        text-align: justify;
-    }
-
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-    }
-
-    .date-column {
-        font-size: 9px;
-        color: #666;
-        margin-top: 5px;
-    }
-
-    .author-info {
-        display: flex;
-        align-items: center;
-    }
-
-        .author-info img {
-            margin-right: 10px;
-        }
-
-    .img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        border: solid;
-    }
-
-    .buttons-container {
-        display: flex;
-        gap: 10px;
-    }
-
-    button {
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f0f0f0;
-    }
-
-        button:hover {
-            background-color: #e0e0e0;
-        }
-
+   
 </style>
 <script>
     var myStorage = window.localStorage, pageCount;

@@ -26,6 +26,8 @@ namespace ExpressNews.Services
 
         List<Article> GetLatestArticles(int count);
 
+        List<Article> GetPopularArticles(int count);
+
         public List<Article> GetArticleByCategory(string category);
 
 

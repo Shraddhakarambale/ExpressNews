@@ -3,7 +3,13 @@
 @{
     ViewData["Title"] = "Details";
 }
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
 
+@{
+    var lgImageUrl = Configuration.GetValue<string>("LGImage");
+    var smImageUrl = Configuration.GetValue<string>("SMImage");
+}
 <h1>Details</h1>
 
 <div>
@@ -19,8 +25,8 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
+        <dd class="col-sm-10" id="idDescription">
+           @*  @Html.DisplayFor(model => model.Description) *@
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Created)
@@ -50,7 +56,7 @@
             @Html.DisplayNameFor(model => model.ImageName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageName)
+            <img src="@lgImageUrl@Html.DisplayFor(model => model.ImageName)" width="40%" />
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsApproved)
@@ -60,6 +66,21 @@
         </dd> *@
     </dl>
 </div>
+@{
+    string htmlText = Model.Description ?? "";
+
+}
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        var htmlText = `@Html.Raw(htmlText)`;
+        var element2 = document.getElementById("idDescription");
+        if (element2) {
+            element2.innerHTML = htmlText;
+        }
+
+    });
+</script>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
