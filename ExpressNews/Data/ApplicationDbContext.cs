@@ -19,5 +19,7 @@ namespace ExpressNews.Data
         public DbSet<SubscriptionType> SubscriptionTypes { get; set; }
 
         public DbSet<Tip> Tips { get; set; }
+
+        public DbSet<NewsLetter> NewsLetters { get; set; }
     }
 }
