@@ -28,6 +28,12 @@ namespace ExpressNews.Services
             return subscription;
         }
 
+        public List<Subscription> GetCurrentSubscriptionByUserId(string userName)
+        {
+            var subscription = _db.Subscriptions.Where(a => a.UserName == userName && a.Expires > DateTime.Now).ToList();
+            return subscription;
+        }
+
 
         public void AddSubscriptionType(SubscriptionType subscriptionType)
         {

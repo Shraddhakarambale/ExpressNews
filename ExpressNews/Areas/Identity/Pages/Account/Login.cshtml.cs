@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using ExpressNews.Services;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ExpressNews.Areas.Identity.Pages.Account
 {
@@ -23,12 +25,14 @@ namespace ExpressNews.Areas.Identity.Pages.Account
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManagement;
         private readonly ILogger<LoginModel> _logger;
+        private readonly ISubscriptionService _subscriptionService;
 
-        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger, UserManager<User> userManagement)
+        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger, UserManager<User> userManagement, ISubscriptionService subscriptionService)
         {
             _signInManager = signInManager;
             _logger = logger;
             _userManagement = userManagement;
+            _subscriptionService = subscriptionService;
         }
 
         /// <summary>
@@ -121,6 +125,17 @@ namespace ExpressNews.Areas.Identity.Pages.Account
                     var user = await _userManagement.FindByEmailAsync(Input.Email);
                     if (user != null)
                     {
+                        var subList = _subscriptionService.GetCurrentSubscriptionByUserId(user.Email);
+                        if (subList.Count>0)
+                        {
+                            HttpContext.Session.SetString("IsSubcribedUser", "Yes");
+                        }
+                        else
+                        {
+                            HttpContext.Session.SetString("IsSubcribedUser", "No");
+                        }
+                            
+                            
                         HttpContext.Session.SetString("UserId", user.Id);
                         HttpContext.Session.SetString("UserName", user.Email);
                         if (user.Role != null)
