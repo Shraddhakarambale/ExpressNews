@@ -114,8 +114,11 @@ namespace ExpressNews.Services
         {
             var oldArticle = _db.Articles.AsNoTracking().FirstOrDefault(a => a.Id == article.Id);
 
-            if(article.ImageLink == null)
+            if (article.ImageLink == null)
+            {
                 article.ImageLink = oldArticle.ImageLink;
+                article.FileName = oldArticle.FileName;
+            }
 
             article.DateStamp = DateTime.Now;
             string userName = _httpContextAccessor.HttpContext.Session.GetString("UserName");
