@@ -13,7 +13,7 @@
     
     <div class="round3 bg-white border radius:25px p-2 ">
 
-        <h3 class="m-3 text-danger fw-bolder">Latest News</h3>
+        <h3 class="m-3 text-black fw-bolder">Latest News</h3><strong><hr /></strong>
      
         @foreach (var article in Model)
         {
@@ -21,13 +21,11 @@
             <ul >
                 <li >
 
-                    @* <img src="@lgImageUrl@article.FileName" alt="" width="40%" height="40%" /><br /> *@
-                    <img src="@article.ImageLink" alt="" width="40%" height="40%" /><br />
-                    
-                    <span style="color:#000; text-decoration:none; font-size:11px; float:left; ">@article.DateStamp </span><br />
-                    <a class="text-black text-break fw-bolder" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a>
-                    
-                </li>
+                    <span style="color:red; text-decoration:none; font-size:14px; float:left;" class="text-break fw-bold">@article.Category1</span><br />
+                    <a style="text-decoration:none; font-size:16px; " class="text-black text-break fw-light" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a>
+                    <hr />
+
+                   </li>
 
             </ul>
             
