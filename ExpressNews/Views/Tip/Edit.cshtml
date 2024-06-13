@@ -3,6 +3,13 @@
 @{
     ViewData["Title"] = "Edit";
 }
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    var lgImageUrl = Configuration.GetValue<string>("LGImage");
+    var smImageUrl = Configuration.GetValue<string>("SMImage");
+}
 
 <h1>Edit</h1>
 
@@ -58,7 +65,11 @@
             </div>
             <div class="form-group ">
                 <label class="control-label">Select Image File:</label>
-                <input asp-for="FormImages" class="form-control-file" type="file"  />
+                @if (!string.IsNullOrEmpty(Model.ImageName))
+                {
+                    <img src="@lgImageUrl@Model.ImageName" width="20%" alt="Current Image" />
+                }
+                <input asp-for="FormImages" class="form-control-file" type="file" data-va value="@lgImageUrl@Model.ImageName" />
                 <span asp-validation-for="FormImages" class="text-danger"></span>
             </div>
             <div class="form-group form-check">

@@ -11,5 +11,6 @@ namespace ExpressNews.Services
         Tip GetTipDetails(int id);
         void DeleteTip(int id);
         Tip UploadFilesToContainer(Tip tip);
+        Tip GetOldTipById(int id);
     }
 }
