@@ -267,7 +267,7 @@ namespace ExpressNews.Services
         }
         public List<Article> EditorsChoiceArticles()
         {
-            var editorsChoice = _db.Articles.Where(a => a.IsEditorChoice == true).ToList();
+            var editorsChoice = _db.Articles.Where(a => a.IsEditorChoice == true).Take(1).ToList();
             return editorsChoice;
         }
 
