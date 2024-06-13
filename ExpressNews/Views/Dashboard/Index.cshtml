@@ -1,0 +1,43 @@
+﻿@* @model IEnumerable<ExpressNews.Models.ViewModel.UserVM> *@
+@{
+    ViewBag.Title = "Admin Dashboard";
+    
+}
+
+<h2>Admin Dashboard</h2>
+<div style="width:450px;height:300px;">
+<canvas id="userChart" width="400" height="300"></canvas>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script>
+    var ctx = document.getElementById('userChart').getContext('2d');
+    var userChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Members', 'Journalists', 'Editors'],
+            datasets: [{
+                label: '# of Users',
+                data: [@ViewBag.MemberCount,@ViewBag.JournalistCount,@ViewBag.EditorCount],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(75, 192, 192, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+

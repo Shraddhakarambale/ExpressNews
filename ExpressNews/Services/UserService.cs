@@ -63,6 +63,18 @@ namespace ExpressNews.Services
                 _db.SaveChanges();
             }
         }
+        public int GetMemberCount()
+        {
+            return _db.Users.Count(u => u.Role == "Member");
+        }
+        public int GetJournalistCount()
+        {
+            return _db.Users.Count(u => u.Role == "Journalist");
+        }
+        public int GetEditorCount()
+        {
+            return _db.Users.Count(u => u.Role == "Editor");
+        }
 
     }
 

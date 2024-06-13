@@ -8,5 +8,8 @@ namespace ExpressNews.Services
     {
         List<UserVM> GetUsers();
         public void SaveUserRole(UserVM user);
+        public int GetMemberCount();
+        public int GetJournalistCount();
+        public int GetEditorCount();
     }
 }
