@@ -1,7 +1,9 @@
 ﻿@model ExpressNews.Models.Database.Article
 
+@inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "ArticleEdit";
+    var session = HttpContextAccessor.HttpContext.Session;
 }
 
 <h1>Article Edit</h1>
@@ -108,7 +110,13 @@
                 <input class="form-check-input" asp-for="IsSubsription" />
                 <label class="form-check-label fw-bold fst-italic mb-2" asp-for="IsSubsription"></label>
             </div>
-
+             @if (session.GetString("Role") == "Editor")
+            {
+                <div class="form-group form-check mb-3">
+                    <input class="form-check-input" asp-for="IsEditorChoice" />
+                    <label class="form-check-label fw-bold fst-italic mb-2" asp-for="IsEditorChoice"></label>
+                </div>
+            }
             <div class="d-grid gap-2 mb-3">
                 <input type="submit" value="Save" class="btn btn-success align-content-md-center mx-2" />
             </div>
