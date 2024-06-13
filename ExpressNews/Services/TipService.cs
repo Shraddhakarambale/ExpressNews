@@ -3,6 +3,7 @@ using ExpressNews.Data;
 using ExpressNews.Models;
 using ExpressNews.Models.Database;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 namespace ExpressNews.Services
 {
     public class TipService:ITipService
@@ -25,6 +26,13 @@ namespace ExpressNews.Services
         {
 
             var tip = _db.Tips.FirstOrDefault(t => t.Id == id);
+            return tip;
+        }
+
+        public Tip GetOldTipById(int id)
+        {
+
+            var tip = _db.Tips.AsNoTracking().FirstOrDefault(t => t.Id == id);
             return tip;
         }
         public void AddTip(Tip tips)

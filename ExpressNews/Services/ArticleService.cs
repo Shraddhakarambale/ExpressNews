@@ -112,12 +112,20 @@ namespace ExpressNews.Services
 
         public void UpdateArticle(Article article)
         {
+            var oldArticle = _db.Articles.AsNoTracking().FirstOrDefault(a => a.Id == article.Id);
+
+            if (article.ImageLink == null)
+            {
+                article.ImageLink = oldArticle.ImageLink;
+                article.FileName = oldArticle.FileName;
+            }
+
             article.DateStamp = DateTime.Now;
             string userName = _httpContextAccessor.HttpContext.Session.GetString("UserName");
             article.Status = "Draft";
             article.UserName = userName;
 
-            article.ImageLink = article.ImageLink;
+            
 
             _db.Update(article);
             _db.SaveChanges();
@@ -223,6 +231,13 @@ namespace ExpressNews.Services
         {
             var LatestArticles = _db.Articles.OrderByDescending(a => a.DateStamp).Take(count).ToList();
             return LatestArticles;
+
+        }
+
+        public List<Article> GetPopularArticles(int count)
+        {
+            var popularArticles = _db.Articles.OrderByDescending(a => a.Views).Take(count).ToList();
+            return popularArticles;
 
         }
 

@@ -58,5 +58,7 @@ namespace ExpressNews.Models.Database
         public List<IFormFile> FormImages { get; set; } = new List<IFormFile>();
 
         public string? FileName { get; set; }
+
+        public bool IsEditorChoice { get; set; } = false;
     }
 }
