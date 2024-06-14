@@ -4,6 +4,7 @@ using ExpressNews.Models;
 using ExpressNews.Models.Database;
 using ExpressNews.Models.ViewModel;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace ExpressNews.Services
@@ -75,6 +76,7 @@ namespace ExpressNews.Services
         {
             return _db.Users.Count(u => u.Role == "Editor");
         }
+
 
     }
 

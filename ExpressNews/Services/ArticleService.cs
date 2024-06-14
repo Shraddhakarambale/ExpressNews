@@ -257,6 +257,15 @@ namespace ExpressNews.Services
                            .ToList();
         }
 
+        public int GetSubscribedMemberCount()
+        {
+            return _db.Articles.Count(a => a.IsSubsription);
+        }
+        public int GetNonSubscribedMemberCount()
+        {
+            return _db.Articles.Count(a => !a.IsSubsription);
+        }
+
     }
 
     
