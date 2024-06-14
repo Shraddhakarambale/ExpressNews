@@ -18,6 +18,8 @@ namespace ExpressNews.Controllers
         {
             return View(_tipService.GetTips());
         }
+
+
         public IActionResult Edit(int id) 
         {
             var tip = _tipService.GetTipById(id);
