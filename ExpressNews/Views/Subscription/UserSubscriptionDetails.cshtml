@@ -1,0 +1,93 @@
+﻿@using System.Text.RegularExpressions
+@model IEnumerable<ExpressNews.Models.Database.Subscription>
+
+@{
+    ViewData["Title"] = "UserSubscriptionDetails";
+}
+
+@functions {
+    public static string StripHtmlTags(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            return string.Empty;
+        }
+        return Regex.Replace(input, "<.*?>", string.Empty);
+    }
+}
+
+<h1>User Subscription Details</h1>
+
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p> *@
+<table class="table table-striped rounded">
+    <thead class="table-dark rounded-pill">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SubscriptionTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expires)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentComplete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubscriptionTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubsTypeDetails)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubscriptionTypeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Expires)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentComplete)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubscriptionTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>@StripHtmlTags(item.SubsTypeDetails)</td>
+               
+            </tr>
+        }
+    </tbody>
+
+
+    @* <td>
+    @Html.DisplayFor(modelItem => item.SubsTypeDetails)
+    </td> *@
+    @*  <td>
+    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td> *@
