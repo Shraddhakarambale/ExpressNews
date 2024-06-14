@@ -1,0 +1,36 @@
+﻿@using SQLitePCL
+@model IEnumerable<ExpressNews.Models.Database.Article>
+
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    var lgImageUrl = Configuration.GetValue<string>("LGImage");
+    var smImageUrl = Configuration.GetValue<string>("SMImage");
+}
+
+<div>
+
+    <div class="round3 bg-white border radius:25px p-2 ">
+
+        <h4 class="m-3 text-danger fw-bolder">Editor's Choice</h4><strong><hr /></strong>
+
+        @foreach (var article in Model)
+        {
+
+            <ul>
+                <li>
+
+                    <span style="color:red; text-decoration:none; font-size:14px; float:left;" class="text-break fw-bold">@article.Category1</span><br />
+                    <a style="text-decoration:none; font-size:16px; " class="text-black text-break fw-light" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a>
+                    <hr />
+
+                </li>
+
+            </ul>
+
+        }
+    </div>
+
+
+</div>
