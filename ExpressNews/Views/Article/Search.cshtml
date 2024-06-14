@@ -14,8 +14,8 @@
         @foreach (var article in Model)
         {
 
-            <li>
-                <a class="text-black text-break fw-bolder" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a>
+            <li class="m-2 p-3">
+                <a class="text-black text-break fw-bold" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a>
 
             </li>
             @* <li>
@@ -31,7 +31,7 @@ else if (Model != null)
     <h3>No results found</h3>
 }
 <div>
-    <a class="btn btn-outline-dark mx-2 col-md-8 offset-md-2 col-lg-6 offset-lg-3 fw-bold" asp-controller="Home" asp-action="Index">
+    <a class="btn btn-outline-dark mx-2 col-md-8 offset-md-2 col-lg-6 offset-lg-3 fw-bold " asp-controller="Home" asp-action="Index">
         Back To Home Page
     </a>
 </div>
