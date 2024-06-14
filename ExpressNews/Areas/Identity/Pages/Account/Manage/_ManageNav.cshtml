@@ -34,6 +34,7 @@
 
     @if (session.GetString("Role") == "Admin")
     {
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Dashboard"  asp-action="Index">Dashboard</a></li>
         <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Tip" id="articles" asp-action="Index">Tips</a></li>
         <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" asp-action="SubscriptionTypeList">Subscription</a></li>
         <li class="nav-item li"><a class="fw-bolder" asp-page="../Register" asp-route-emp="true" >Create Employee</a></li>
