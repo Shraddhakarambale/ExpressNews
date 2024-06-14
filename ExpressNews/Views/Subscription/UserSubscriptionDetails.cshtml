@@ -11,12 +11,19 @@
 <hr /><br />
 
 
-<table class="table table-striped">
+<table class="table table-striped rounded">
     <thead class="table-dark ">
         <tr>           
             <th>
                 @Html.DisplayNameFor(model => model.Price)
-            </th>                        
+            </th> 
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expires)
+            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.PaymentComplete)
             </th>
@@ -34,7 +41,13 @@
             <tr>               
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
-                </td> 
+                </td>
+                <td>
+                    @Html.Raw(item.Created.ToString("dd-MM-yyyy"))
+                </td>
+                <td>
+                    @Html.Raw(item.Expires.ToString("dd-MM-yyyy"))
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PaymentComplete)
                 </td>
