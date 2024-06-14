@@ -18,5 +18,7 @@ namespace ExpressNews.Services
 
         List<Subscription> GetCurrentSubscriptionByUserId(string userName);
 
+        List<Subscription> GetSubscriptionByUserId(int id);
+
     }
 }

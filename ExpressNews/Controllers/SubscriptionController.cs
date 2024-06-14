@@ -84,10 +84,10 @@ namespace ExpressNews.Controllers
             return View(subscriptionType);
         }
 
-        public IActionResult NotFound()
-        {
-            return View();
-        }
+        //public IActionResult NotFound()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -95,6 +95,15 @@ namespace ExpressNews.Controllers
         {
             _subscriptionService.DeleteSubscriptionType(id);
             return RedirectToAction(nameof(SubscriptionTypeList));
+        }
+
+        public ActionResult UserSubscriptionDetails(int id)
+        {
+            var subscription = _subscriptionService.GetSubscriptionByUserId(id);
+            if (subscription == null)
+                return NotFound();
+
+            return View(subscription);
         }
 
     }

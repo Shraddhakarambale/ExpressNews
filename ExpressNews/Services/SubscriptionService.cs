@@ -72,5 +72,11 @@ namespace ExpressNews.Services
             }
         }
 
+        public List<Subscription> GetSubscriptionByUserId(int id)
+        {
+            var subscription = _db.Subscriptions.OrderByDescending(a => a.Id == id).ToList();
+            return subscription;
+        }
+
     }
 }
