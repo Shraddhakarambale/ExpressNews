@@ -16,11 +16,15 @@ namespace ExpressNews.Models.Database
 
         public DateTime Expires { get; set; }
 
+
+        [Display(Name = "Payment Complete")]
         public bool PaymentComplete { get; set; }
 
         [Display (Name = "Subscription") ]
         public string SubscriptionTypeName { get; set; }
 
+
+        [Display(Name = "User Name")]
         public string UserName {  get; set; }
         public string SubsTypeDetails { get; set; }
 
