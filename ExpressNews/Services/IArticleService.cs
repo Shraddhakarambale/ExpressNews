@@ -34,6 +34,8 @@ namespace ExpressNews.Services
         Article UpdateArticleValues(Article article);
 
         List<Article> SearchArticles(string query);
+        int GetSubscribedMemberCount();
+        int GetNonSubscribedMemberCount();
 
         public List<Article> EditorsChoiceArticles();
     }
