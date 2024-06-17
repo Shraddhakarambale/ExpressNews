@@ -37,6 +37,6 @@ namespace ExpressNews.Services
         int GetSubscribedMemberCount();
         int GetNonSubscribedMemberCount();
 
-        public List<Article> EditorsChoiceArticles();
+        public List<Article> EditorsChoiceArticles(int count);
     }
 }

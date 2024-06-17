@@ -10,10 +10,12 @@ namespace ExpressNews.ViewComponents
         {
             _articleService = articleService;
         }
-        public IViewComponentResult Invoke()
+       
+        public IViewComponentResult Invoke(string count)
         {
-            var editorschoice = _articleService.EditorsChoiceArticles();
-            return View(editorschoice);
+            var intcount = int.Parse(count);
+            var result = _articleService.EditorsChoiceArticles(intcount);
+            return View(result);
         }
     }
 }
