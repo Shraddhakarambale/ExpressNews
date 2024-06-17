@@ -22,11 +22,18 @@
         .weatherwidget-io {
             margin-bottom: 0; /* Ensure no bottom margin on the widget */
         }
+
+        .searchBtn{
+            justify-items:center;
+             
+        }
         
     </style>
 </head>
 <body>
     
+    @* cookies consent page *@
+
 
     <header>
 
@@ -41,42 +48,42 @@
                     <span class="navbar-toggler-icon bg-light"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Start</a>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                        <li class="nav-item ">
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">START</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="Local">Local</a>
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="Local">LOCAL</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="World">World</a>
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="World">WORLD</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Sport" asp-action="Index">Sport</a>
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Sport" asp-action="Index">SPORT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="Culture">Culture</a>
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="Culture">CULTURE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Tip" asp-action="Create">Tip</a>
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Tip" asp-action="Create">TIP</a>
                         </li>
                         <li class="nav-item">
-                            <div class="input-group p-2">
+                            <div class="input-group  ">
 
-                                <form asp-controller="Article" asp-action="Search" method="get">
+                               <form asp-controller="Article" asp-action="Search" method="get" class="text-center">
                                     <input type="text" name="query" placeholder="Search news..." />
-                                    <button type="submit" ><i class="fa fa-search"></i></button>
-                                </form>
-
-                                @* <input class="form-control border-end-0 border" type="search" value="search" id="example-search-input">
+                                    
+                                        <button class="btn btn-outline-secondary bg-white" type="submit"><i class="text-danger fas fa-search searchBtn"></i></button>
+                                   
+                                </form> 
+                            @* 
+                                <input class="form-control border-end-0 border" type="search" value="search" id="example-search-input">
                                 <span class="input-group-append" style="margin-left:3px!important">
-                                    <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span> *@
+                                    <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n" type="button"><i class="fa fa-search"></i></button>
+                                </span>  *@
                             </div>
                         </li>
-                    </ul>
+                    </ul> 
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -164,7 +171,7 @@
         <!-- Copyright -->
         <div class="text-center p-1 " style="background-color: rgba(0, 0, 0, 0.2);">
             <a class="text-white" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us | </a>
-            <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Contact Us |</a>
+            <a class="text-white" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us |</a>
             <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> 
             © 2024 Copyright:
             <a class="text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">ExpressNews.com</a>
