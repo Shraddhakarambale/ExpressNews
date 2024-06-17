@@ -77,6 +77,29 @@ namespace ExpressNews.Services
             var subscription = _db.Subscriptions.OrderByDescending(a => a.Id == id).ToList();
             return subscription;
         }
+        public int GetBasicCount()
+        {
+            var basiccount = _db.Subscriptions.Count(s => s.SubscriptionTypeName == "BASIC");
+            return basiccount;
+        
+        }
+        public int GetPremiumCount()
+        {
+            var premiumount = _db.Subscriptions.Count(s => s.SubscriptionTypeName == "PREMIUM");
+            return premiumount;
+
+        }
+        public int GetTotalUserCount()
+        { 
+            return _db.Subscriptions.Select(s=>s.UserName).Distinct().Count();  
+        
+        
+        }
+        public int GetSubsribedCount()
+        {
+            return _db.Subscriptions.Select(s => s.UserName).Distinct().Count();
+        
+        }
 
     }
 }
