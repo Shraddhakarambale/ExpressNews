@@ -1,4 +1,84 @@
-﻿@using System.Text.RegularExpressions
+﻿ @model IEnumerable<ExpressNews.Models.Database.Subscription>
+
+@{
+    ViewData["Title"] = "User Subscription Details";
+}
+
+<h3>User Subscription Details</h3>
+<hr />
+
+<table class="table table-striped rounded">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expires)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentComplete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubscriptionTypeName)
+            </th>
+            @*  <th>
+            @Html.DisplayNameFor(Model => Model.User.FirstName)
+            </th> *@
+            <td class="fw-bold">
+                User Name
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subscription in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => subscription.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => subscription.Created.ToString("dd-MM-yyyy"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => subscription.Expires.ToString("dd-MM-yyyy"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => subscription.PaymentComplete)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => subscription.SubscriptionTypeName)
+                </td>
+                @* <td>
+            @Html.DisplayFor( @subscription.User.FirstName )
+            </td> *@
+
+                <td>
+                    @Html.DisplayFor(modelItem => subscription.User.FirstName)&nbsp
+                    @Html.DisplayFor(modelItem => subscription.User.LastName)
+
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => subscription.UserName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+@* @using System.Text.RegularExpressions
 @model IEnumerable<ExpressNews.Models.Database.Subscription>
 
 @{
@@ -61,7 +141,7 @@
         }
     </tbody>
 </table>
-
+ *@
 
     @* <td>
     @Html.DisplayFor(modelItem => item.SubsTypeDetails)
