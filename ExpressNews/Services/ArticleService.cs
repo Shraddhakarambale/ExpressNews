@@ -265,9 +265,9 @@ namespace ExpressNews.Services
                                     || a.Category3.Contains(query))
                            .ToList();
         }
-        public List<Article> EditorsChoiceArticles()
+        public List<Article> EditorsChoiceArticles(int count)
         {
-            var editorsChoice = _db.Articles.Where(a => a.IsEditorChoice == true).Take(1).ToList();
+            var editorsChoice = _db.Articles.Where(a => a.IsEditorChoice == true).Take(count).ToList();
             return editorsChoice;
         }
 

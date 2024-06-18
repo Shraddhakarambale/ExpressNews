@@ -14,20 +14,29 @@
     <div class="round3 bg-white border radius:25px p-2 ">
 @* 
         <h3 class="m-3 text-danger fw-bolder">Most Popular News</h3> *@
-        <h4 class="m-3 text-danger fw-bolder">Popular News</h4><strong><hr /></strong>
+        <h4 class="m-3 text-primary fw-bolder">Popular News</h4><strong><hr /></strong>
 
         @foreach (var article in Model)
         {
 
             <ul>
                 <li>
-
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="@article.ImageLink" alt="" width="100%" height="80%" /><br />
+                        </div>
+                        <div class="col-md-7">
+                            <a style="text-decoration:none; font-size:16px; " class="text-black text-break fw-light" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a>
+                            <br />
+                            <p style="text-decoration:none; font-size:16px; " class="badge rounded-pill bg-warning text-dark "><span class="fa fa-eye"></span> @article.Views </p><br />
+                        </div>
+                    </div>
                     @* <img src="@lgImageUrl@article.FileName" alt="" width="40%" height="40%" /><br /> *@
-                    <img src="@article.ImageLink" alt="" width="40%" height="40%" /><br />
-                    <span style="color:#000; text-decoration:none; font-size:11px; float:left; ">@article.DateStamp </span><br />
-                    <a style="text-decoration:none; font-size:16px; " class="text-black text-break fw-light" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a>
+                   
+                    @* <span style="color:#000; text-decoration:none; font-size:11px; float:left; ">@article.DateStamp </span><br /> *@
+                    
                    @*  <a class="text-black text-break fw-bolder" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a> *@
-
+                    
                 </li>
 
             </ul>

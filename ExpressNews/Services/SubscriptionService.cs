@@ -72,10 +72,32 @@ namespace ExpressNews.Services
             }
         }
 
-        public List<Subscription> GetSubscriptionByUserId(int id)
+        public List<SubscriptionVM> GetSubscriptionByUserDetails()
         {
-            var subscription = _db.Subscriptions.OrderByDescending(a => a.Id == id).ToList();
-            return subscription;
+            //var subscription = _db.Subscriptions.OrderByDescending(a => a.Id == id).ToList();
+            //return subscription;
+
+            var result = (from subscription in _db.Subscriptions
+                        join user in _db.Users
+                        on subscription.UserName equals user.UserName // UserName is a string, Id is a string in IdentityUser
+                        where subscription.Expires > DateTime.Now
+                        orderby subscription.Id descending
+                        select new SubscriptionVM
+                        {
+                            Id = subscription.Id,
+                            Price = subscription.Price,
+                            Created = subscription.Created,
+                            Expires = subscription.Expires,
+                            PaymentComplete = subscription.PaymentComplete,
+                            SubscriptionTypeName = subscription.SubscriptionTypeName,
+                            UserName = subscription.UserName,
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+
+                        }).ToList();
+
+            
+            return result;
         }
         public int GetBasicCount()
         {

@@ -29,6 +29,12 @@ namespace ExpressNews.Services
             _db.NewsLetters.Add(newsLetter);
             _db.SaveChanges();
         }
+        public NewsLetter GetNewsletterCategoryByUser(string userName)
+        {
+            var newsletter = _db.NewsLetters.Where(a => a.EmailAddress == userName).FirstOrDefault();
+
+            return newsletter;
+        }
 
     }
 }
