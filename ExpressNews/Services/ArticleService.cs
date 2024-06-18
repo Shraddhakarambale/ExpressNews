@@ -271,14 +271,42 @@ namespace ExpressNews.Services
             return editorsChoice;
         }
 
-        public int GetSubscribedMemberCount()
+        public Dictionary<string, int> GetArticleCategoryCounts()
         {
-            return _db.Articles.Count(a => a.IsSubsription);
+            var articles = _db.Articles.ToList();
+
+            var categoryCounts = new Dictionary<string, int>();
+
+            foreach (var article in articles)
+            {
+                if (!string.IsNullOrEmpty(article.Category1) && article.Category1 != "N/A")
+                {
+                    if (categoryCounts.ContainsKey(article.Category1))
+                        categoryCounts[article.Category1]++;
+                    else
+                        categoryCounts[article.Category1] = 1;
+                }
+
+                if (!string.IsNullOrEmpty(article.Category2) && article.Category2 != "N/A")
+                {
+                    if (categoryCounts.ContainsKey(article.Category2))
+                        categoryCounts[article.Category2]++;
+                    else
+                        categoryCounts[article.Category2] = 1;
+                }
+
+                if (!string.IsNullOrEmpty(article.Category3) && article.Category3 != "N/A")
+                {
+                    if (categoryCounts.ContainsKey(article.Category3))
+                        categoryCounts[article.Category3]++;
+                    else
+                        categoryCounts[article.Category3] = 1;
+                }
+            }
+
+            return categoryCounts;
         }
-        public int GetNonSubscribedMemberCount()
-        {
-            return _db.Articles.Count(a => !a.IsSubsription);
-        }
+
 
     }
 

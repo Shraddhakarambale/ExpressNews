@@ -79,26 +79,30 @@ namespace ExpressNews.Services
         }
         public int GetBasicCount()
         {
-            var basiccount = _db.Subscriptions.Count(s => s.SubscriptionTypeName == "BASIC");
+            var basiccount = _db.Subscriptions.Count(s => s.SubscriptionTypeName == "BASIC" && s.Expires > DateTime.Now);
             return basiccount;
         
         }
         public int GetPremiumCount()
         {
-            var premiumount = _db.Subscriptions.Count(s => s.SubscriptionTypeName == "PREMIUM");
+            var premiumount = _db.Subscriptions.Count(s => s.SubscriptionTypeName == "PREMIUM" && s.Expires > DateTime.Now);
             return premiumount;
 
         }
-        public int GetTotalUserCount()
-        { 
-            return _db.Subscriptions.Select(s=>s.UserName).Distinct().Count();  
-        
-        
-        }
+       
         public int GetSubsribedCount()
         {
-            return _db.Subscriptions.Select(s => s.UserName).Distinct().Count();
+            return _db.Subscriptions.Where(s => s.Expires > DateTime.Now).Count();
         
+        }
+        public int GetNonSubsribedCount()
+        {
+             int totUser = _db.Users.Where(s => s.Role == "Member").Count();
+            int subCount = _db.Subscriptions.Where(s => s.Expires > DateTime.Now).Count();
+
+
+            return totUser- subCount;
+
         }
 
     }

@@ -4,7 +4,7 @@
     
 }
 
-<h2>Admin Dashboard</h2>
+<h2>Dashboard</h2>
 <style>
     .chart-container {
         display: flex;
@@ -16,17 +16,45 @@
         width: 20%;
     }
 </style>
+
+
 <div class="chart-container">
     <div class="chart-box">
-        <canvas id="userChart" width="400" height="300"></canvas>
+        <canvas id="userChart" width="200" height="300"></canvas>
+    </div>
+    <div>
+      
+        <table class="table table-bordered">
+            <tr>
+                <th>Subscription Type</th>
+                <th>Count</th>
+            </tr>
+            <tr>
+                <td>Basic Subscriptions</td>
+                <td>@ViewBag.basicCount</td>
+            </tr>
+            <tr>
+                <td>Premium Subscriptions</td>
+                <td>@ViewBag.premiumCount</td>
+            </tr>
+            <tr>
+                <td>Non Subscribed</td>
+                <td>@ViewBag.NonSubscribedCount</td>
+            </tr>
+        </table>
     </div>
     <div class="chart-box">
         <canvas id="subscriptionChart" width="400" height="300"></canvas>
     </div>
+    <div class="chart-box">
+        <canvas id="articleCategoryChart" width="400" height="300"></canvas>
+    </div>
 </div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+@* <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> *@
 <script>
     //Count all user except admin
     var ctx = document.getElementById('userChart').getContext('2d');
@@ -72,8 +100,8 @@
                     'rgb(54, 162, 235)'
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 99, 132, 1)'
+                    'rgb(255,0,0)',
+                    'rgb(54, 162, 235)'
                 ],
                 borderWidth: 1
             }]
@@ -101,21 +129,68 @@
         },
         plugins: [ChartDataLabels]
     });
-        // options: {
-        //     responsive: true
-        // }
-  
+        
 </script>
-<div>
-    <p>
-        Basic Subscriptions:@ViewBag.bascicCount
-    </p>
-    <p>
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var categoryCounts = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.CategoryCounts));
 
-        Premium Subscriptions:@ViewBag.premiumCount
-    </p>
-    <p>
-        NonSubcribed:@ViewBag.NonSubscribedCount
-    </p>
-</div>
+        var ctx = document.getElementById('articleCategoryChart').getContext('2d');
+        var articleCategoryChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(categoryCounts),
+                datasets: [{
+                    label: 'Article Categories',
+                    data: Object.values(categoryCounts),
+                    backgroundColor: [
+                        'rgba(45, 62, 80, 0.8)',   // Dark Gray Blue
+                        'rgba(25, 42, 86, 0.8)',   // Dark Blue
+                        'rgba(44, 62, 80, 0.8)',   // Darker Gray Blue
+                        'rgba(39, 174, 96, 0.8)',  // Dark Green
+                        'rgba(192, 57, 43, 0.8)',  // Dark Red
+                        'rgba(142, 68, 173, 0.8)', // Dark Purple
+                        'rgba(243, 156, 18, 0.8)'  // Dark Orange
+                    ],
+                    borderColor: [
+                        'rgba(45, 62, 80, 0.8)',   // Dark Gray Blue
+                        'rgba(25, 42, 86, 0.8)',   // Dark Blue
+                        'rgba(44, 62, 80, 0.8)',   // Darker Gray Blue
+                        'rgba(39, 174, 96, 0.8)',  // Dark Green
+                        'rgba(192, 57, 43, 0.8)',  // Dark Red
+                        'rgba(142, 68, 173, 0.8)', // Dark Purple
+                        'rgba(243, 156, 18, 0.8)'  // Dark Orange
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                let total = tooltipItem.dataset.data.reduce((sum, value) => sum + value, 0);
+                                let percentage = ((tooltipItem.raw / total) * 100).toFixed(2);
+                                return tooltipItem.label + ': ' + tooltipItem.raw + ' articles (' + percentage + '%)';
+                            }
+                        }
+                    },
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let total = ctx.chart.data.datasets[0].data.reduce((sum, value) => sum + value, 0);
+                            let percentage = ((value / total) * 100).toFixed(2);
+                            return percentage + '%';
+                        },
+                        color: '#fff',
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    });
+</script> 
 

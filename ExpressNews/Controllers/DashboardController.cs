@@ -22,18 +22,18 @@ namespace ExpressNews.Controllers
         }
         public IActionResult Index()
 
-        
         {
             ViewBag.MemberCount = _userService.GetMemberCount();
             ViewBag.JournalistCount = _userService.GetJournalistCount();
             ViewBag.EditorCount = _userService.GetEditorCount();
-            ViewBag.SubscribedCount = _articleService.GetSubscribedMemberCount();
-            ViewBag.NonSubscribedCount = _articleService.GetNonSubscribedMemberCount();
-            ViewBag.bascicCount = _subscriptionService.GetBasicCount();
+            ViewBag.SubscribedCount = _subscriptionService.GetSubsribedCount();
+            ViewBag.NonSubscribedCount = _subscriptionService.GetNonSubsribedCount();
+            ViewBag.basicCount = _subscriptionService.GetBasicCount();
             ViewBag.premiumCount= _subscriptionService.GetPremiumCount();
-            var totaluserCount = _subscriptionService.GetTotalUserCount();
-            var subscribedCount = _subscriptionService.GetBasicCount();
-            //ViewBag.nonSubscribedCount = totaluserCount - subscribedCount;
+            var categoryCounts = _articleService.GetArticleCategoryCounts();
+            ViewBag.CategoryCounts = categoryCounts;
+
+
 
             return View();
 

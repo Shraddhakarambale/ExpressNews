@@ -22,8 +22,9 @@ namespace ExpressNews.Services
 
         int GetBasicCount();
         int GetPremiumCount();
-        int GetTotalUserCount();
+     
         int GetSubsribedCount();
+        int GetNonSubsribedCount();
 
     }
 }
