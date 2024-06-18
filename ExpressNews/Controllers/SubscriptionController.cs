@@ -97,9 +97,9 @@ namespace ExpressNews.Controllers
             return RedirectToAction(nameof(SubscriptionTypeList));
         }
 
-        public ActionResult UserSubscriptionDetails(int id)
+        public ActionResult UserSubscriptionDetails()
         {
-            var subscription = _subscriptionService.GetSubscriptionByUserId(id);
+            var subscription = _subscriptionService.GetSubscriptionByUserDetails();
             if (subscription == null)
                 return NotFound();
 

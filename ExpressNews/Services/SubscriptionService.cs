@@ -72,17 +72,17 @@ namespace ExpressNews.Services
             }
         }
 
-        public List<Subscription> GetSubscriptionByUserId(int id)
+        public List<SubscriptionVM> GetSubscriptionByUserDetails()
         {
             //var subscription = _db.Subscriptions.OrderByDescending(a => a.Id == id).ToList();
             //return subscription;
 
-            var query = from subscription in _db.Subscriptions
+            var result = (from subscription in _db.Subscriptions
                         join user in _db.Users
-                        on subscription.UserName equals user.Id // UserName is a string, Id is a string in IdentityUser
-                        where user.Id == id.ToString() && subscription.Expires > DateTime.Now
+                        on subscription.UserName equals user.UserName // UserName is a string, Id is a string in IdentityUser
+                        where subscription.Expires > DateTime.Now
                         orderby subscription.Id descending
-                        select new Subscription
+                        select new SubscriptionVM
                         {
                             Id = subscription.Id,
                             Price = subscription.Price,
@@ -91,17 +91,12 @@ namespace ExpressNews.Services
                             PaymentComplete = subscription.PaymentComplete,
                             SubscriptionTypeName = subscription.SubscriptionTypeName,
                             UserName = subscription.UserName,
-                            User = new User
-                            {
-                                FirstName = user.FirstName,
-                                LastName = user.LastName,
-                                //  UserName = user.UserName,
-                                //  Id = user.Id
-                            }
-                        };
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
 
-            var result = query.ToList();
+                        }).ToList();
 
+            
             return result;
         }
 
