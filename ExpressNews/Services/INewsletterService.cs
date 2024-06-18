@@ -6,5 +6,6 @@ namespace ExpressNews.Services
     {
         List<NewsLetter> GetNewsletter();
         void AddNewsletter(NewsLetter newsLetter);
+        NewsLetter GetNewsletterCategoryByUser(string userName);
     }
 }

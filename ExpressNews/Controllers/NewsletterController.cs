@@ -1,7 +1,9 @@
 ﻿using ExpressNews.Migrations;
+using ExpressNews.Models;
 using ExpressNews.Models.Database;
 using ExpressNews.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
 
 
 namespace ExpressNews.Controllers
@@ -22,11 +24,19 @@ namespace ExpressNews.Controllers
 
         public IActionResult Create()
         {
-            return View();
+           string emailAddress = HttpContext.Session.GetString("UserName").ToString();
+            
+            return View(_NewsletterServices.GetNewsletterCategoryByUser(emailAddress));
         }
         [HttpPost]
         public IActionResult Create(NewsLetter newsLetter)
         {
+            newsLetter.Created = DateTime.Now;
+            newsLetter.Status = "Active";
+            newsLetter.FirstName = HttpContext.Session.GetString("UserFirstName").ToString();
+            newsLetter.LastName = HttpContext.Session.GetString("UserLastName").ToString();
+            newsLetter.EmailAddress = HttpContext.Session.GetString("UserName").ToString();
+
             _NewsletterServices.AddNewsletter(newsLetter);
 
            
