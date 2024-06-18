@@ -28,7 +28,7 @@ namespace ExpressNews.Models.Database
         public string UserName {  get; set; }
         public string SubsTypeDetails { get; set; }
 
-        //public virtual User User { get; set; }
+        public virtual User User { get; set; }
         //public virtual SubscriptionType SubscriptionType { get; set; }
     }
  

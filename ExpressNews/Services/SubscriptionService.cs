@@ -74,8 +74,35 @@ namespace ExpressNews.Services
 
         public List<Subscription> GetSubscriptionByUserId(int id)
         {
-            var subscription = _db.Subscriptions.OrderByDescending(a => a.Id == id).ToList();
-            return subscription;
+            //var subscription = _db.Subscriptions.OrderByDescending(a => a.Id == id).ToList();
+            //return subscription;
+
+            var query = from subscription in _db.Subscriptions
+                        join user in _db.Users
+                        on subscription.UserName equals user.Id // UserName is a string, Id is a string in IdentityUser
+                        where user.Id == id.ToString() && subscription.Expires > DateTime.Now
+                        orderby subscription.Id descending
+                        select new Subscription
+                        {
+                            Id = subscription.Id,
+                            Price = subscription.Price,
+                            Created = subscription.Created,
+                            Expires = subscription.Expires,
+                            PaymentComplete = subscription.PaymentComplete,
+                            SubscriptionTypeName = subscription.SubscriptionTypeName,
+                            UserName = subscription.UserName,
+                            User = new User
+                            {
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
+                                //  UserName = user.UserName,
+                                //  Id = user.Id
+                            }
+                        };
+
+            var result = query.ToList();
+
+            return result;
         }
 
     }
