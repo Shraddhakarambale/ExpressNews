@@ -20,5 +20,11 @@ namespace ExpressNews.Services
 
         List<SubscriptionVM> GetSubscriptionByUserDetails();
 
+        int GetBasicCount();
+        int GetPremiumCount();
+     
+        int GetSubsribedCount();
+        int GetNonSubsribedCount();
+
     }
 }

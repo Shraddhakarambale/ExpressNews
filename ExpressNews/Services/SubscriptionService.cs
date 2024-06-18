@@ -99,6 +99,33 @@ namespace ExpressNews.Services
             
             return result;
         }
+        public int GetBasicCount()
+        {
+            var basiccount = _db.Subscriptions.Count(s => s.SubscriptionTypeName == "BASIC" && s.Expires > DateTime.Now);
+            return basiccount;
+        
+        }
+        public int GetPremiumCount()
+        {
+            var premiumount = _db.Subscriptions.Count(s => s.SubscriptionTypeName == "PREMIUM" && s.Expires > DateTime.Now);
+            return premiumount;
+
+        }
+       
+        public int GetSubsribedCount()
+        {
+            return _db.Subscriptions.Where(s => s.Expires > DateTime.Now).Count();
+        
+        }
+        public int GetNonSubsribedCount()
+        {
+             int totUser = _db.Users.Where(s => s.Role == "Member").Count();
+            int subCount = _db.Subscriptions.Where(s => s.Expires > DateTime.Now).Count();
+
+
+            return totUser- subCount;
+
+        }
 
     }
 }
