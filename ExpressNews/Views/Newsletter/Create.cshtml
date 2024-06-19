@@ -3,8 +3,9 @@
 @{
     ViewData["Title"] = "Create";
 }
-  
-    <div class="row p-3">
+
+    
+<div class="row p-3">
 
    
     <div class="col-md-3"></div>
@@ -15,13 +16,16 @@
         <hr />
             <div class="p-3">
             <h4>  Seclect your favorite catagories : </h4>
-            @Model.Category1
-            @if (@Model.Category2 != "N/A")
-                @Model.Category2
-            @if (@Model.Category3 != "N/A")
-               @Model.Category3
-            @if (@Model.Category3 != "N/A")
-              @Model.Category4
+            @if (@Model != null)
+            {
+                @Model.Category1
+                @if (@Model.Category2 != "N/A")
+                    @Model.Category2
+                @if (@Model.Category3 != "N/A")
+                   @Model.Category3
+                @if (@Model.Category4 != "N/A")
+                  @Model.Category4
+              }
             </div>
 
             <form asp-action="Create">
