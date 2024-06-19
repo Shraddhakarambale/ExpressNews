@@ -23,6 +23,7 @@
 
     @if (session.GetString("Role") == "Member")
     {
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Newsletter" id="" asp-action="Create">News Alert</a></li>
         <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" id="subscription" asp-action="UserSubscription">Subscription</a></li>
     }
 
@@ -37,6 +38,7 @@
         <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Dashboard"  asp-action="Index">Dashboard</a></li>
         <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Tip" id="articles" asp-action="Index">Tips</a></li>
 
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Newsletter" id="" asp-action="Index">News Alert</a></li>
         <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" asp-action="UserSubscriptionDetails">Subscription Users</a></li>
         <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" asp-action="SubscriptionTypeList">Subscription Type</a></li>
         <li class="nav-item li"><a class="fw-bolder" asp-page="../Register" asp-route-emp="true" >Create Employee</a></li>

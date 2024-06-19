@@ -5,45 +5,29 @@
 
 <div clalss="Container ">
     <div class=" row">
-        <div class="col-md-9">
+        <div class="col-md-7">
             @* <partial name="_ArticlePartial" /> *@
             @Html.Partial("_ArticlePartial", Model.ArticleObj)
         </div>
-        <div class="col-md-3">
+        <div class="col-md-5">
             <div class="row">
             </div><br />
-            <div class="row">
-             
-                <div  >
-                    <vc:latest-article count="5"></vc:latest-article>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+                    <button class="h6 nav-link text-black fw-bolder" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Latest News</button>
+                    <button class="h6 nav-link text-black fw-bolder" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Editor's Choice</button>
+                    <button class="h6 nav-link active text-black fw-bolder" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-popular" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Most Popular</button>
+
                 </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><vc:latest-article count="9"></vc:latest-article></div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"><vc:editors-choice count="9"></vc:editors-choice></div>
+                <div class="tab-pane fade show active" id="nav-popular" role="tabpanel" aria-labelledby="nav-profile-tab"><vc:most-popular-news count="7"></vc:most-popular-news></div>
+            </div>
 
-            </div><br />
-            <div class="row">
-                <div>
-                    <vc:most-popular-news count="7"></vc:most-popular-news>
-                </div>
-            </div> <br />
-
-            <div class="row">
-                <div>
-                    <vc:editors-choice></vc:editors-choice>
-                </div>
-            </div> <br />
-
-            <div class="row">
-                @*  <div>
-                <iframe src="https://free.timeanddate.com/clock/i9dhl929/n1377/tlse/fn6/ftb/pd3/tt0/tw1/tm1/th1/ts1/tb4" frameborder="0" width="125" height="36"></iframe>
-
-                </div> *@
-
-                <div id="oanda_ecc">
-                    <!-- Note: If you alter or remove the following code, the embedded currency widget will not work-->
-                    <span style="color:#000; text-decoration:none; font-size:9px; float:left;">Currency Converter <a id="oanda_cc_link" style="color:#000; font-size:9px;" href="https://www.oanda.com/currency/converter/">by OANDA</a></span>
-                    <script src="https://www.oanda.com/embedded/converter/get/b2FuZGFlY2N1c2VyLy9kZWZhdWx0/?lang=en"></script>
-                </div>
-
-            </div><br />
+            
            
         </div>
     </div>

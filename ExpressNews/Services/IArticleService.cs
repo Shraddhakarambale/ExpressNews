@@ -36,13 +36,13 @@ namespace ExpressNews.Services
         List<Article> SearchArticles(string query);
      
 
+
         public List<Article> EditorsChoiceArticles();
 
         Dictionary<string, int> GetArticleCategoryCounts();
-
+        public List<Article> EditorsChoiceArticles(int count);
         List<Article> MostViewedArticles();
         List<Article> MostLikedArticles();
         List<Article> MostDisLikedArticles();
-
     }
 }

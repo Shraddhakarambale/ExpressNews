@@ -1,300 +1,111 @@
 ﻿@model IEnumerable<ExpressNews.Models.Database.Article>
-
+@using Microsoft.AspNetCore.Http
+@inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
+    var session = HttpContextAccessor.HttpContext.Session;
+
+
+
+
     var singleNews = Model.Take(1);
+    var otherNews = Model.Skip(1);
 }
 
 @foreach (var data in singleNews)
 {
 
-    <div class="row">
-        <div class="col-md-8 ">
-            <div class="bg-light w-100">
-                <div class="w-100 p-3 border bg-white">
+        <div class="row bg-white border p-3 mt-3 mb-3">
+
+            <div class="col-5 bg-white p-3 gap-3">
+                    <h5 class="text-danger gap-2">@data.Category1</h5><br/>
 
                     <a href="#" style="color:black; text-decoration:none!important">
-                        <h1 id="#" onclick="readMore(@data.Id))">
+                        <h3 id="#" onclick="readMore(@data.Id))">
                             @data.LinkText
-                        </h1>
+                        </h3>
                     </a>
-                    <img src="@data.ImageLink" alt="Article Image" width="100%" height="100%" /> <br /> <br />
-                    <p>@data.ContentSummary)</p>
+                    
+                    <p class="gap-3">@data.ContentSummary)</p>
+                    <br />
+                   <strong>  @Convert.ToString(string.Format("{0:hh:mm}", @data.DateStamp))</strong>
+                   @*  <p>@data.DateStamp</p> *@
 
                     @if (data.IsSubsription)
                     {
-                        <button onclick="readMoreSubscription(@Html.DisplayFor(item => data.Id ))" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
+                        <button class="float-end"onclick="readMoreSubscription(@Html.DisplayFor(item => data.Id ))" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
                             <i class="fa-solid fa-plus"></i> Read More
                         </button>
 
                     }
                     else
                     {
-                        <button onclick="readMore(@Html.DisplayFor(item => data.Id))" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
+                        <button class="float-end" onclick="readMore(@Html.DisplayFor(item => data.Id))" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
                             Read More
                         </button>
                     }
-
-                </div>
+                
             </div>
+            <div class="col-7">
+                <img src="@data.ImageLink" alt="Article Image" width="100%" height="100%" /> <br /> <br />
+            </div>
+                
         </div>
 
-        @{
-            var otherNews = Model.Skip(2);
+       
+        
+    
+     
+    <div class="row">
+        @foreach (var row in Model.Skip(4) )
+        {
+            <div class="col-4 bg-white border p-3 gap-3 mt-2 mb-2">
+                <img src="@row.ImageLink" style="width:100%; height:100% alt="Sports Image 1">
+                <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id))" style="color:black;cursor:pointer">@row.HeadLine</h4>
+                <p>@row.ContentSummary</p>
+
+                @if (row.IsSubsription)
+                {
+                    @if (session.GetString("UserName") != null && session.GetString("IsSubcribedUser") == "Yes")
+                    {
+                        <button class="float-end" onclick="readMore(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
+                            <i class="fa-solid fa-plus"></i> Read More
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="float-end" onclick="readMoreSubscription(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
+                            <i class="fa-solid fa-plus"></i> Read More
+                        </button>
+                    }
+                }
+                else
+                {
+                    <button class="float-end" onclick="readMore(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
+                        Read More
+                    </button>
+                }
+
+
+            </div>
         }
-         
-        
-      
-        <div class="col-md-4">
-            <p>@data.HeadLine</p>
-        </div>
-        
     </div>
 
-
-
+   
 }
 
 
-@* @{
-    var otherNews = Model.Skip(2);
-}
-@foreach (var data in otherNews)
-{
-    <p>@data.HeadLine</p>
-}
+<script>
+    function readMore(id) {
 
+        var paramID = id;
+        window.location.href = '@Url.Action("SingleArticle", "Article", new { id = "__ID_PLACEHOLDER__" })'.replace("__ID_PLACEHOLDER__", paramID);
+    }
 
+    function readMoreSubscription(id) {
 
- *@
+        var paramID = id;
+        window.location.href = '@Url.Action("Index", "Subscription", new { id = "__ID_PLACEHOLDER__" })'.replace("__ID_PLACEHOLDER__", paramID);
 
-
-
-
-
-
- 
- 
-    <div class="Container">
-        
-                 
-        @foreach (var row in Model)
-            {
-                
-
-                    <div class="row">
-
-                        <div class="col-md-8 ">
-                                @*  1 article 100% *@
-                            
-                                <div class="bg-light w-100">
-                                    <div class="w-100 p-3 border bg-white">
-                                        <a href="#" style="color:black; text-decoration:none!important">
-                                            <h1 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id))">
-                                                @Html.DisplayFor(item => row.HeadLine)
-                                            </h1>
-
-                                        </a>
-                                        <img src="@Html.DisplayFor(item => row.ImageLink)" alt="Article Image" width="100%" height="100%" /> <br /> <br />
-                                        <p>@Html.DisplayFor(item => row.ContentSummary)</p>
-
-
-                                        @if (row.IsSubsription)
-                                        {
-                                            <button onclick="readMoreSubscription(@Html.DisplayFor(item => row.Id ))" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
-                                                <i class="fa-solid fa-plus"></i> Read More
-                                            </button>
-
-                                        }
-                                        else
-                                        {
-                                            <button onclick="readMore(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
-                                                Read More
-                                            </button>
-                                        }
-
-                                    </div>
-                                    <br />
-
-                                </div>
-                          
-                                @* 2 article *@
-                                <div class="bg-light w-100">
-                                    <div class="w-100 p-3 border bg-white">
-                                        <a href="#" style="color:black; text-decoration:none!important">
-                                            <h3 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id))">
-                                                @Html.DisplayFor(item => row.HeadLine)
-                                            </h3>
-                                        </a>
-                                        <div class=" row">
-                                            <div class=" col">
-                                                <img src="@Html.DisplayFor(item => row.ImageLink)" alt="Article Image" width="100%" height="100%" />
-                                            </div>
-                                            <div class=" col">
-                                                <p>@Html.DisplayFor(item => row.ContentSummary)</p>
-                                                @if (row.IsSubsription)
-                                                {
-                                                    <button onclick="readMoreSubscription(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
-                                                        <i class="fa-solid fa-plus"></i> Read More
-                                                    </button>
-
-                                                }
-                                                else
-                                                {
-                                                    <button onclick="readMore(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
-                                                        Read More
-                                                    </button>
-                                                }
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <br />
-                                </div>
-                          
-                                @* 3 article *@
-                                <div class="bg-light w-100">
-                                    <div class="w-100 p-3 border bg-white">
-                                        <a href="#" style="color:black; text-decoration:none!important">
-                                            <h3 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id))">
-                                                @Html.DisplayFor(item => row.HeadLine)
-                                            </h3>
-                                        </a>
-                                        <div class=" row">
-                                            <div class=" col">
-                                                <img src="@Html.DisplayFor(item => row.ImageLink)" alt="Article Image" width="100%" height="100%" />
-                                            </div>
-                                            <div class=" col">
-                                                <p>@Html.DisplayFor(item => row.ContentSummary)</p>
-                                                @if (row.IsSubsription)
-                                                {
-                                                    <button onclick="readMoreSubscription(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
-                                                        <i class="fa-solid fa-plus"></i> Read More
-                                                    </button>
-
-                                                }
-                                                else
-                                                {
-                                                    <button onclick="readMore(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
-                                                        Read More
-                                                    </button>
-                                                }
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <br />
-                                </div>
-                           
-                        </div>
-
-
-                        <div class="col-md-4">
-                            
-                                @* 4 article *@
-                                <div class="bg-light w-auto">
-                                    <div class="w-100 p-3 border bg-white">
-                                        <a href="#" style="color:black; text-decoration:none!important">
-                                            <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id))">
-                                                @Html.DisplayFor(item => row.HeadLine)
-                                            </h4>
-
-                                        </a>
-                                        <img src="@Html.DisplayFor(item => row.ImageLink)" alt="Article Image" width="100%" height="50%" /> <br /> <br />
-                                        <p>@Html.DisplayFor(item => row.ContentSummary)</p>
-
-
-                                        @if (row.IsSubsription)
-                                        {
-                                            <button onclick="readMoreSubscription(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
-                                                <i class="fa-solid fa-plus"></i> Read More
-                                            </button>
-
-                                        }
-                                        else
-                                        {
-                                            <button onclick="readMore(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
-                                                Read More
-                                            </button>
-                                        }
-
-                                    </div>
-                                    <br />
-                                </div>
-                           
-                                @* 5 article *@
-                                <div class="bg-light w-auto">
-                                    <div class="w-100 p-3 border bg-white">
-                                        <a href="#" style="color:black; text-decoration:none!important">
-                                            <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id))">
-                                                @Html.DisplayFor(item => row.HeadLine)
-                                            </h4>
-
-                                        </a>
-                                        <img src="@Html.DisplayFor(item => row.ImageLink)" alt="Article Image" width="100%" height="100%" /> <br /> <br />
-                                        <p>@Html.DisplayFor(item => row.ContentSummary)</p>
-
-
-                                        @if (row.IsSubsription)
-                                        {
-                                            <button onclick="readMoreSubscription(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
-                                                <i class="fa-solid fa-plus"></i> Read More
-                                            </button>
-
-                                        }
-                                        else
-                                        {
-                                            <button onclick="readMore(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
-                                                Read More
-                                            </button>
-                                        }
-
-                                    </div>
-                                    <br />
-                                </div>
-                            
-                                @* 6 article *@
-                                <div class="bg-light w-auto">
-                                    <div class="w-100 p-3 border bg-white">
-                                        <a href="#" style="color:black; text-decoration:none!important">
-                                            <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id))">
-                                                @Html.DisplayFor(item => row.HeadLine)
-                                            </h4>
-
-                                        </a>
-                                        <img src="@Html.DisplayFor(item => row.ImageLink)" alt="Article Image" width="100%" height="50%" /> <br /> <br />
-                                        <p>@Html.DisplayFor(item => row.ContentSummary)</p>
-
-
-                                        @if (row.IsSubsription)
-                                        {
-                                            <button onclick="readMoreSubscription(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
-                                                <i class="fa-solid fa-plus"></i> Read More
-                                            </button>
-
-                                        }
-                                        else
-                                        {
-                                            <button onclick="readMore(@Html.DisplayFor(item => row.Id))" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
-                                                Read More
-                                            </button>
-                                        }
-
-                                    </div>
-                                    <br />
-                                </div>
-                            
-                        </div>
-
-                    </div>
-
-                
-            }
-
-        
-    </div>
-
-}
-
+    }
+</script>
