@@ -37,12 +37,17 @@ namespace ExpressNews.Services
      
 
 
-        public List<Article> EditorsChoiceArticles();
+        public List<Article> EditorsChoiceArticles(int count);
 
         Dictionary<string, int> GetArticleCategoryCounts();
-        public List<Article> EditorsChoiceArticles(int count);
+
+  
         List<Article> MostViewedArticles();
         List<Article> MostLikedArticles();
         List<Article> MostDisLikedArticles();
+
+
+
+
     }
 }
