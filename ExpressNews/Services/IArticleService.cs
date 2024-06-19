@@ -41,7 +41,7 @@ namespace ExpressNews.Services
 
         Dictionary<string, int> GetArticleCategoryCounts();
 
-        
+
 
     }
 }
