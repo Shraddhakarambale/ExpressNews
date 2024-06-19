@@ -41,6 +41,12 @@ namespace ExpressNews.Services
 
         Dictionary<string, int> GetArticleCategoryCounts();
 
+  
+        List<Article> MostViewedArticles();
+        List<Article> MostLikedArticles();
+        List<Article> MostDisLikedArticles();
+
+
 
 
     }

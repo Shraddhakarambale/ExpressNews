@@ -1,14 +1,17 @@
-﻿@* @model IEnumerable<ExpressNews.Models.ViewModel.UserVM> *@
+﻿ @model ExpressNews.Models.ViewModel.DashboardVM
 @{
     ViewBag.Title = "Admin Dashboard";
-    
+
 }
+@if (Model == null)
+    return;
 
 <h2>Dashboard</h2>
 <style>
     .chart-container {
         display: flex;
         justify-content: space-between;
+
         align-items: center;
     }
 
@@ -22,10 +25,11 @@
     <div class="chart-box">
         <canvas id="userChart" width="200" height="300"></canvas>
     </div>
+
     <div>
       
         <table class="table table-bordered">
-            <tr>
+            <tr style="background-color: indianred;">
                 <th>Subscription Type</th>
                 <th>Count</th>
             </tr>
@@ -43,6 +47,7 @@
             </tr>
         </table>
     </div>
+  
     <div class="chart-box">
         <canvas id="subscriptionChart" width="400" height="300"></canvas>
     </div>
@@ -54,7 +59,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-@* <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> *@
+
 <script>
     //Count all user except admin
     var ctx = document.getElementById('userChart').getContext('2d');
@@ -192,5 +197,90 @@
             plugins: [ChartDataLabels]
         });
     });
-</script> 
+</script>
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <h4>Most Viewed Articles</h4>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Views</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var article in Model.articles_Views)
+                            {
+                                <tr>
+                                    <td>
+                                        <a style="text-decoration:none; font-size:16px; " class="text-black text-break fw-light" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id"> @Html.DisplayFor(modelItem => article.HeadLine)</a>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => article.Views)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h4>Most Likes Articles</h4>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Likes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var article in Model.articles_Likes)
+                            {
+                                <tr>
+                                    <td>
+                                        <a style="text-decoration:none; font-size:16px; " class="text-black text-break fw-light" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id"> @Html.DisplayFor(modelItem => article.HeadLine)</a>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => article.Likes)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h4>Most Dislike Articles</h4>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Dislikes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var article in Model.articles_DisLikes)
+                            {
+                                <tr>
+                                    <td>
+                                        <a style="text-decoration:none; font-size:16px; " class="text-black text-break fw-light" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id"> @Html.DisplayFor(modelItem => article.HeadLine)</a>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => article.DisLikes)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 
