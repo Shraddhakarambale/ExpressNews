@@ -307,6 +307,25 @@ namespace ExpressNews.Services
             return categoryCounts;
         }
 
+        public List<Article> MostViewedArticles()
+        {
+            var mostViewdeArticles = _db.Articles.OrderByDescending(a => a.Views).Take(5).ToList();
+            return mostViewdeArticles;
+
+        }
+        public List<Article> MostLikedArticles()
+        {
+            var mostLikedArticles = _db.Articles.OrderByDescending(a => a.Likes).Take(5).ToList();
+            return mostLikedArticles;
+
+        }
+        public List<Article> MostDisLikedArticles()
+        {
+            var mostDislikedArticles = _db.Articles.OrderByDescending(a => a.DisLikes).Take(5).ToList();
+            return mostDislikedArticles;
+
+        }
+
 
     }
 

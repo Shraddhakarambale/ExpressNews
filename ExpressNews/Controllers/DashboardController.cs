@@ -23,6 +23,7 @@ namespace ExpressNews.Controllers
         public IActionResult Index()
 
         {
+           DashboardVM dashboardVM = new DashboardVM();
             ViewBag.MemberCount = _userService.GetMemberCount();
             ViewBag.JournalistCount = _userService.GetJournalistCount();
             ViewBag.EditorCount = _userService.GetEditorCount();
@@ -32,10 +33,13 @@ namespace ExpressNews.Controllers
             ViewBag.premiumCount= _subscriptionService.GetPremiumCount();
             var categoryCounts = _articleService.GetArticleCategoryCounts();
             ViewBag.CategoryCounts = categoryCounts;
+            dashboardVM.articles_Views = _articleService.MostViewedArticles();
+            dashboardVM.articles_Likes = _articleService.MostLikedArticles();
+            dashboardVM.articles_DisLikes = _articleService.MostDisLikedArticles();
 
 
 
-            return View();
+            return View(dashboardVM);
 
         }
         public IActionResult SubsriptionChart()
