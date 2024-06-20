@@ -1,5 +1,17 @@
 ﻿@model ExpressNews.Models.ViewModel.ArticleVM;
+@using Microsoft.AspNetCore.Http
+@inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+        
+    @if (session.GetString("UserName") == null)
+        await SignInManager.SignOutAsync();
+        
+}
 
 @{
     ViewData["Title"] = "Home Page";
