@@ -13,7 +13,7 @@ namespace ExpressNews.Services
             SmtpClient client = new SmtpClient
             {
                 Port = 587,
-                Host = "smtp.gmail.com", //or another email sender provider
+                Host = "smtp.gmail.com", 
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
@@ -21,7 +21,18 @@ namespace ExpressNews.Services
                 //eydd dadk plbf uqcw
             };
 
-            return client.SendMailAsync("expressnewscontact@gmail.com", email, subject, htmlMessage);
+            MailMessage mailMessage = new MailMessage
+            {
+                From = new MailAddress("expressnewscontact@gmail.com"),
+                Subject = subject,
+                Body = htmlMessage,
+                IsBodyHtml = true // Set the body to HTML
+            };
+
+            // Ensure the recipient's email address is added correctly
+            mailMessage.To.Add(new MailAddress(email));
+
+            return client.SendMailAsync(mailMessage);//client.SendMailAsync("expressnewscontact@gmail.com", email, subject, htmlMessage);
         }
     }
 }
