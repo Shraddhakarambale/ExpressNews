@@ -16,7 +16,8 @@
                     <a id="admin" onclick="GetUNandPw(event, this)" href="javascript:void(0);" style="color:black" role="button">Admin |</a>
                     <a id="editor" onclick="GetUNandPw(event, this)" href="javascript:void(0);" style="color:black" role="button"> Editor |</a>
                     <a id="writer" onclick="GetUNandPw(event, this)" href="javascript:void(0);" style="color:black" role="button"> Journalist |</a>
-                    <a id="memsub" onclick="GetUNandPw(event, this)" href="javascript:void(0);" style="color:black" role="button"> Member With Sub |</a>
+                    <a id="memsub" onclick="GetUNandPw(event, this)" href="javascript:void(0);" style="color:black" role="button"> Member With Sub(PRIM) |</a>
+                    <a id="memsub_Basic" onclick="GetUNandPw(event, this)" href="javascript:void(0);" style="color:black" role="button"> Member With Sub(BASIC) |</a>
                     <a id="memnosub" onclick="GetUNandPw(event, this)" href="javascript:void(0);" style="color:black" role="button"> Member Without Sub</a>
                 </div>
                 
@@ -85,6 +86,10 @@
         }
         else if (element.id == "memnosub") {
             document.getElementById("idEmail").value = "asw@gmail.com";
+            document.getElementById("idPassword").value = "1qaz!QAZ";
+        }
+        else if (element.id == "memsub_Basic") {
+            document.getElementById("idEmail").value = "nadee@gmail.com";
             document.getElementById("idPassword").value = "1qaz!QAZ";
         }
     }

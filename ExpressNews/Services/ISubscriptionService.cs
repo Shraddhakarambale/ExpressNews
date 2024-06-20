@@ -16,7 +16,7 @@ namespace ExpressNews.Services
 
         void DeleteSubscriptionType(int id);
 
-        List<Subscription> GetCurrentSubscriptionByUserId(string userName);
+        Subscription GetCurrentSubscriptionByUserId(string userName);
 
         List<SubscriptionVM> GetSubscriptionByUserDetails();
 

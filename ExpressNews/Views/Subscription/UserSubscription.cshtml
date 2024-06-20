@@ -1,54 +1,46 @@
 ﻿
 @model IEnumerable<ExpressNews.Models.Database.Subscription>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
+    var session = HttpContextAccessor.HttpContext.Session;
     ViewData["Title"] = "UserSubscription";
-   
 }
 
-@if (Model == null){
+
+@* @if (Model == null){
     return;
-}
+} *@
 
 
 
 <body>
     <div class="row">
-        <div class="col-3 m-3 p-3">
-            @* <p>
-            <a asp-action="Create">Create New</a>
-            </p> *@
-
-            <article class="plan [ card ]">
-                @foreach (var item in Model)
+        <div class="col-4 m-3 p-3">
+            @if (session.GetString("IsSubcribedUser") == "No")
+            {
+                <a class="btn btn-success" role="button" asp-controller="Subscription" asp-action="Index">Get a Subscription</a>
+            }
+            @foreach (var item in Model)
+            {
+                @if (item.Expires > DateTime.Now)
                 {
-                    @if (item.Expires > DateTime.Now)
-                    {
-                        <div class="inner">
+                    <div class="inner">
+                        <div id="subDetails"></div>
 
-                            <span class="pricing">
-                                <span>
-                                    @Html.DisplayFor(modelItem => item.Price) <small>Kr</small>
-                                </span>
-                            </span>
-                            <br />
-                            <h1 class="title"> @Html.DisplayFor(modelItem => item.SubscriptionTypeName)</h1>
-                            <div  id="subDetails"></div>
-                            
-                            <button class="button">
-                                <strong>  @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Expires))</strong>
-                               
-                            </button>
-                        </div>
-                    }
+                        <span class="button">
+                            <strong class="bg-danger">Expire Date :  @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Expires))</strong>
 
+                        </span>
+                    </div>
                 }
 
-            </article>
+            }
 
         </div>
 
-        <div class="col-8 m-3">
+        <div class="col-7 m-3">
             <br />
             <h2>Your Subscription History</h2>
             @* History subscription *@
@@ -109,13 +101,14 @@
 
     </div>
     @{
-        string htmlText = Model.FirstOrDefault(row => row.Id == 1)?.SubsTypeDetails?? "";
+        string htmlText = Model.Where(a => a.Expires > DateTime.Now).FirstOrDefault()?.SubsTypeDetails ?? "";
        
     }
 
     <script>
         window.addEventListener('DOMContentLoaded', function () {
-            var htmlText = `@Html.Raw(htmlText)`;
+           
+           var htmlText = `@Html.Raw(htmlText)`;
             var element2 = document.getElementById("subDetails");
             if (element2) {
                 element2.innerHTML = htmlText;

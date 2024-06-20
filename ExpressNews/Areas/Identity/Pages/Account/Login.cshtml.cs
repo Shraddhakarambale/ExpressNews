@@ -126,9 +126,10 @@ namespace ExpressNews.Areas.Identity.Pages.Account
                     if (user != null)
                     {
                         var subList = _subscriptionService.GetCurrentSubscriptionByUserId(user.Email);
-                        if (subList.Count>0)
+                        if (subList!=null)
                         {
                             HttpContext.Session.SetString("IsSubcribedUser", "Yes");
+                            HttpContext.Session.SetString("SubType", subList.SubscriptionTypeName);
                         }
                         else
                         {

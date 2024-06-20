@@ -40,7 +40,7 @@ namespace ExpressNews.Controllers
             _NewsletterServices.AddNewsletter(newsLetter);
 
            
-            return RedirectToAction("Index");
+            return RedirectToAction("Create");
 
         }
 

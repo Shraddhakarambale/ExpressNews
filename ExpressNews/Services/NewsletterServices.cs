@@ -25,6 +25,10 @@ namespace ExpressNews.Services
 
         public void AddNewsletter(NewsLetter newsLetter)
         {
+            if (newsLetter.Category2 == null) newsLetter.Category2 = "N/A";
+            if (newsLetter.Category3 == null) newsLetter.Category3 = "N/A";
+            if (newsLetter.Category4 == null) newsLetter.Category4 = "N/A";
+
             var newsletter2 = _db.NewsLetters.Where(a => a.EmailAddress == newsLetter.EmailAddress).FirstOrDefault();
             if (newsletter2 != null)
             {
@@ -37,6 +41,7 @@ namespace ExpressNews.Services
                 _db.SaveChanges();
             }
             else {
+               
                 _db.NewsLetters.Add(newsLetter);
                 _db.SaveChanges();
             }

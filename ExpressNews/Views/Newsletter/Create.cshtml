@@ -1,10 +1,14 @@
 ﻿@model ExpressNews.Models.Database.NewsLetter
-
+@using Microsoft.AspNetCore.Http
+@inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
 @{
+    var session = HttpContextAccessor.HttpContext.Session;
+
+    
     ViewData["Title"] = "Create";
 }
 
-    
+
 <div class="row p-3">
 
    
@@ -12,24 +16,34 @@
         <div class="col-md-6 round3 bg-light">
 
         <h1 class="p-3 fw-bold text-center text-danger  ">Subscribe To Our Newsletter</h1>
-       
+        
         <hr />
             <div class="p-3">
-            <h4>  Seclect your favorite catagories : </h4>
             @if (@Model != null)
             {
-                @Model.Category1
-                @if (@Model.Category2 != "N/A")
-                    @Model.Category2
-                @if (@Model.Category3 != "N/A")
-                   @Model.Category3
-                @if (@Model.Category4 != "N/A")
-                  @Model.Category4
-              }
+                <div class="">
+                    <h4>  Your favorite catagories : </h4>
+                    <span class="badge rounded-pill bg-primary">@Model.Category1</span>
+                    @if (@Model.Category2 != "N/A")
+                    {
+                        <span class="badge rounded-pill bg-danger">@Model.Category2</span>
+                    }
+                    @if (@Model.Category3 != "N/A")
+                    {
+                        <span class="badge rounded-pill bg-warning ">@Model.Category3</span>
+                    }
+                    @if (@Model.Category4 != "N/A")
+                    {
+                        <span class="badge rounded-pill bg-dark">@Model.Category4</span>
+                    }
+                </div>
+            }
+            <br />
+            <h4>  Seclect your favorite catagories : </h4>
             </div>
 
             <form asp-action="Create">
-                
+           
             <div class="form-group p-3 fw-bold">
                     <label asp-for="Category1" class="control-label"></label>
                    
@@ -43,29 +57,31 @@
                 <span asp-validation-for="Category1" class="text-danger"></span>@* 
                     <span asp-validation-for="Category1" class="text-danger"></span> *@
                 </div>
-            <div class="form-group p-3 fw-bold">
+            @if (session.GetString("SubType") == "PREMIUM")
+            {
+                <div class="form-group p-3 fw-bold">
                     <label asp-for="Category2" class="control-label"></label>
-                <select asp-for="Category2" class="form-control">
-                    <option value="N/A">N/A</option>
-                    <option value="Local">Local</option>
-                    <option value="World">World</option>
-                    <option value="Sport">Sport</option>
-                    <option value="Culture">Culture</option>
-                </select>
+                    <select asp-for="Category2" class="form-control">
+                        <option value="N/A">N/A</option>
+                        <option value="Local">Local</option>
+                        <option value="World">World</option>
+                        <option value="Sport">Sport</option>
+                        <option value="Culture">Culture</option>
+                    </select>
                     <span asp-validation-for="Category2" class="text-danger"></span>
                 </div>
-            <div class="form-group p-3 fw-bold">
+                <div class="form-group p-3 fw-bold">
                     <label asp-for="Category3" class="control-label"></label>
-                <select asp-for="Category3" class="form-control">
-                    <option value="N/A">N/A</option>
-                    <option value="Local">Local</option>
-                    <option value="World">World</option>
-                    <option value="Sport">Sport</option>
-                    <option value="Culture">Culture</option>
-                </select>
+                    <select asp-for="Category3" class="form-control">
+                        <option value="N/A">N/A</option>
+                        <option value="Local">Local</option>
+                        <option value="World">World</option>
+                        <option value="Sport">Sport</option>
+                        <option value="Culture">Culture</option>
+                    </select>
                     <span asp-validation-for="Category3" class="text-danger"></span>
                 </div>
-            <div class="form-group p-3 fw-bold">
+                <div class="form-group p-3 fw-bold">
                     <label asp-for="Category4" class="control-label"></label>
                 <select asp-for="Category4" class="form-control">
                     <option value="N/A">N/A</option>
@@ -76,7 +92,7 @@
                 </select>
                     <span asp-validation-for="Category4" class="text-danger"></span>
                 </div>
-            
+            }
                 <div class="form-group p-3 form-check">
                     <label class="form-check-label p-3">
                         <input class="form-check-input" asp-for="IsTermsAndConditions" />  @Html.DisplayNameFor(model => model.IsTermsAndConditions) 
@@ -89,9 +105,7 @@
             </form>
         </div>
     </div>
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
+   
 
 
 

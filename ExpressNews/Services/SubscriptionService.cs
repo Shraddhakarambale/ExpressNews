@@ -28,9 +28,9 @@ namespace ExpressNews.Services
             return subscription;
         }
 
-        public List<Subscription> GetCurrentSubscriptionByUserId(string userName)
+        public Subscription GetCurrentSubscriptionByUserId(string userName)
         {
-            var subscription = _db.Subscriptions.Where(a => a.UserName == userName && a.Expires > DateTime.Now).ToList();
+            var subscription = _db.Subscriptions.Where(a => a.UserName == userName && a.Expires > DateTime.Now).FirstOrDefault();
             return subscription;
         }
 

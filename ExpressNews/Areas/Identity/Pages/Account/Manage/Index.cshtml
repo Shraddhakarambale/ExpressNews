@@ -1,11 +1,32 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.AspNetCore.Http
+@inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
+
 @{
+    var session = HttpContextAccessor.HttpContext.Session;
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
 <h3>@ViewData["Title"]</h3>
+<div class="">
+    <h4>
+        Membership :
+        @if (session.GetString("SubType") == "PREMIUM"){
+            <span class="badge rounded-pill bg-warning">PREMIUM</span>
+        }
+        else if (session.GetString("SubType") == "BASIC")
+        {
+            <span class="badge rounded-pill bg-warning">BASIC</span>
+        }
+        else
+        {
+            <a class="button-sub fw-bolder" role="button" asp-controller="Subscription" asp-action="Index">Be a Member</a>
+        }
+    </h4>
+    
+</div>
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
     <div class="col-md-6">
