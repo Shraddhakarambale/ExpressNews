@@ -10,6 +10,18 @@
 }
 <ul class="sidebar " display="flex">
     <li class="nav-item li"><a class="fw-bolder  @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
+    @if (session.GetString("Role") == "Admin")
+    {
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+
+
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Tip" id="articles" asp-action="Index">Tips</a></li>
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Newsletter" id="" asp-action="Index">Newsletter</a></li>
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" asp-action="UserSubscriptionDetails">Subscription Users</a></li>
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" asp-action="SubscriptionTypeList">Subscription Type</a></li>
+        <li class="nav-item li"><a class="fw-bolder" asp-page="../Register" asp-route-emp="true">Create Employee</a></li>
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="UserAssignRoles" asp-action="Index">User Management</a></li>
+    }
     @if (session.GetString("Role") != "Member")
     {
         <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Article" id="articles" asp-action="Index">Articles</a></li>
@@ -23,7 +35,7 @@
 
     @if (session.GetString("Role") == "Member")
     {
-        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Newsletter" id="" asp-action="Create">News Alert</a></li>
+        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Newsletter" id="" asp-action="Create">Newsletter</a></li>
         <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" id="subscription" asp-action="UserSubscription">Subscription</a></li>
     }
 
@@ -33,17 +45,7 @@
             " asp-page="./ExternalLogins">External logins</a></li>
     }
 
-    @if (session.GetString("Role") == "Admin")
-    {
-        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Dashboard"  asp-action="Index">Dashboard</a></li>
-        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Tip" id="articles" asp-action="Index">Tips</a></li>
-
-        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Newsletter" id="" asp-action="Index">News Alert</a></li>
-        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" asp-action="UserSubscriptionDetails">Subscription Users</a></li>
-        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" asp-action="SubscriptionTypeList">Subscription Type</a></li>
-        <li class="nav-item li"><a class="fw-bolder" asp-page="../Register" asp-route-emp="true" >Create Employee</a></li>
-        <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="UserAssignRoles" asp-action="Index">User Management</a></li>
-    }
+    
     <li class="nav-item li"><a class="fw-bolder  @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
 </ul>
 <style>
