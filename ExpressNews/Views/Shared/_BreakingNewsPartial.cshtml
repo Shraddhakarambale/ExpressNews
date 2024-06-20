@@ -1,21 +1,43 @@
 ﻿@model IEnumerable<ExpressNews.Models.Database.Article>
 
+@using Microsoft.AspNetCore.Http
+@inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
+
+
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+    var IsSubscribUser_Brk = false;
+
+    @if (session.GetString("UserName") != null && session.GetString("IsSubcribedUser") == "Yes")
+        IsSubscribUser_Brk = true;
+}
+
 
     @foreach (var row in Model)
     {
         @if (row.IsBreaking)
-
-            {
+        {
             <div class="row p-3 border bg-white ">
-                <a href="#">
-                    <h1 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id))" style="color:black">
+                <h1 id="#" onclick="readMore_Brk(@row.Id,'@IsSubscribUser_Brk', '@row.IsSubsription')" style="color:black; cursor:pointer ">
                         <strong style="color:red">JUST NOW: </strong>@Html.DisplayFor(item => row.HeadLine)
                     </h1>
-                </a>
             </div>
             <br />
-            }
-    
-  
-
+        }
     }
+<script>
+    function readMore_Brk(id, IsSubscribUser_Brk, IsSubsription) {
+        var paramID = id;
+
+
+        if (IsSubsription == 'False') {
+            window.location.href = '@Url.Action("SingleArticle", "Article", new { id = "__ID_PLACEHOLDER__" })'.replace("__ID_PLACEHOLDER__", paramID);
+        }
+        else {
+            if (IsSubscribUser_Brk == 'True')
+                window.location.href = '@Url.Action("SingleArticle", "Article", new { id = "__ID_PLACEHOLDER__" })'.replace("__ID_PLACEHOLDER__", paramID);
+            else
+                window.location.href = '@Url.Action("Index", "Subscription", new { id = "__ID_PLACEHOLDER__" })'.replace("__ID_PLACEHOLDER__", paramID);
+        }
+    }
+</script>
