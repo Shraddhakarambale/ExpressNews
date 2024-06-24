@@ -12,16 +12,14 @@
 }
 
 <h1>Edit</h1>
-
-<h4>Tip</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Subject" class="control-label"></label>
+                <label asp-for="Subject" class="control-label mb-2 fw-bold fst-italic"></label>
                 <input asp-for="Subject" class="form-control" />
                 <span asp-validation-for="Subject" class="text-danger"></span>
             </div>
@@ -44,27 +42,27 @@
                 </script>
             </div>
             <div class="form-group">
-                <label asp-for="Created" class="control-label"></label>
+                <label asp-for="Created" class="control-label mb-2 fw-bold fst-italic"></label>
                 <input asp-for="Created" class="form-control" />
                 <span asp-validation-for="Created" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label mb-2 fw-bold fst-italic"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+                <label asp-for="Email" class="control-label mb-2 fw-bold fst-italic"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TelephoneNumber" class="control-label"></label>
+                <label asp-for="TelephoneNumber" class="control-label mb-2 fw-bold fst-italic"></label>
                 <input asp-for="TelephoneNumber" class="form-control" />
                 <span asp-validation-for="TelephoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group ">
-                <label class="control-label">Select Image File:</label>
+            <div class="form-group mb-2 mt-2 ">
+                <label class="control-label mb-3 mt-3 fw-bold fst-italic">Select Image File:</label>
                 @if (!string.IsNullOrEmpty(Model.ImageName))
                 {
                     <img src="@lgImageUrl@Model.ImageName" width="20%" alt="Current Image" />
@@ -72,26 +70,33 @@
                 <input asp-for="FormImages" class="form-control-file" type="file" data-va value="@lgImageUrl@Model.ImageName" />
                 <span asp-validation-for="FormImages" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check mb-2 mt-2">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
                 </label>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check mb-2 mt-2">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsApproved" /> @Html.DisplayNameFor(model => model.IsApproved)
                 </label>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="row">
+                <div class="col form-group mb-2 mt-2">
+                    <input type="submit" value="Save" class="btn btn-outline-danger fw-bold w-75 " />
+                </div>
+                <div class="col form-group mb-2 mt-2">
+                    <a asp-action="Index" class="btn btn-outline-success fw-bold w-75">Back to List</a>
+                </div>
+                <div class="col form-group mb-2 mt-2">
+                    <a id="profile" href="/Identity/Account/Manage" class="btn btn-outline-primary fw-bold  ">Back to Profile </a>
+                </div>
             </div>
+            
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

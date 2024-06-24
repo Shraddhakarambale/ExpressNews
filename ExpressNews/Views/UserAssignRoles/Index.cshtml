@@ -20,27 +20,27 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Email Address</th>
-                        <th></th>
+                        <th scope="col" class=" col-4 text-center">Id</th>
+                        <th scope="col" class=" col-2 text-center">First Name</th>
+                        <th scope="col" class=" col-2 text-center">Last Name</th>
+                        <th scope="col" class=" col-2 text-center">Email Address</th>
+                        <th scope="col" class=" col-2 text-center">Role</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
                             <td id="@item.Id">@item.Id</td>
-                        <td>@item.FirstName</td>
-                        <td>@item.LastName</td>
-                        <td>@item.Email</td>
-                            <td>
-                                <select class="form-control" id="@item.Id" name="@item.Id" style="width:40%">
-                                <option value="">--Select the user role--</option>
+                            <td class="text-center">@item.FirstName</td>
+                            <td class="text-center">@item.LastName</td>
+                            <td>@item.Email</td>
+                            <td class=" ">
+                                <select class="form-control text-center" id="@item.Id" name="@item.Id" >
+                                    <option value="">--Select the user role--</option>
                                     @if (item.Role == "Admin")
                                     {
-                                        <option value="Admin"selected>Admin</option>
+                                        <option value="Admin" selected>Admin</option>
                                         <option value="Editor">Editor</option>
                                         <option value="Journalist">Journalist</option>
                                         <option value="Member">Member</option>
@@ -54,33 +54,35 @@
                                     }
                                     else if (item.Role == "Journalist")
                                     {
-                                        <option value="Admin" >Admin</option>
+                                        <option value="Admin">Admin</option>
                                         <option value="Editor">Editor</option>
                                         <option value="Journalist" selected>Journalist</option>
                                         <option value="Member">Member</option>
                                     }
                                     else
                                     {
-                                        <option value="Admin" >Admin</option>
+                                        <option value="Admin">Admin</option>
                                         <option value="Editor">Editor</option>
                                         <option value="Journalist">Journalist</option>
                                         <option value="Member">Member</option>
                                     }
 
-                                
-                            </select>
+
+                                </select>
                             </td>
-                    </tr>
-                }
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
 
         <div class="row m-3 p-3  ">
              <div class="col-3"></div>
+
             <div class="col-6">
-                <button type="submit" class="text-center align-items-center btn btn-warning fw-bold w-100 p-2">Assign Role</button>
+                <button type="submit" style="font-size:x-large;  " class="text-center btn btn-warning fw-bolder w-100">Assign Role</button>
             </div>
+
             <div class="col-3"></div>
             
                
