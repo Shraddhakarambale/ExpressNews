@@ -6,7 +6,18 @@
 @if (Model == null)
     return;
 
-<h2>Dashboard</h2>
+
+
+<br />
+<div class="row">
+    <div class="col-6">
+        <h2>Statistic </h2> 
+    </div>
+    <div class="col-6">
+        <h3><a id="profile" href="/Identity/Account/Manage" class="btn btn-outline-dark fw-bold  float-end">Back to Profile </a></h3>
+    </div>
+</div><hr />
+
 <style>
     .chart-container {
         display: flex;
@@ -23,36 +34,36 @@
 
 <div class="chart-container">
     <div class="chart-box">
-        <canvas id="userChart" width="200" height="300"></canvas>
+        <canvas id="userChart" width="100%" height="auto"></canvas>
     </div>
 
     <div>
       
         <table class="table table-bordered">
-            <tr style="background-color: indianred;">
+            <tr style="background-color:slateblue;" class="text-white">
                 <th>Subscription Type</th>
                 <th>Count</th>
             </tr>
             <tr>
-                <td>Basic Subscriptions</td>
-                <td>@ViewBag.basicCount</td>
+                <td class="p-3">Basic Subscriptions</td>
+                <td style="text-align:right">@ViewBag.basicCount</td>
             </tr>
-            <tr>
-                <td>Premium Subscriptions</td>
-                <td>@ViewBag.premiumCount</td>
+            <tr  >
+                <td class="p-3">Premium Subscriptions</td>
+                <td style="text-align:right">@ViewBag.premiumCount</td>
             </tr>
-            <tr>
-                <td>Non Subscribed</td>
-                <td>@ViewBag.NonSubscribedCount</td>
+            <tr class="">
+                <td class="p-3">Non Subscribed</td>
+                <td  class="p-3" style="text-align:right">@ViewBag.NonSubscribedCount</td>
             </tr>
         </table>
     </div>
   
     <div class="chart-box">
-        <canvas id="subscriptionChart" width="400" height="300"></canvas>
+        <canvas id="subscriptionChart" width="400" height="auto"></canvas>
     </div>
     <div class="chart-box">
-        <canvas id="articleCategoryChart" width="400" height="300"></canvas>
+        <canvas id="articleCategoryChart" width="400" height="auto"></canvas>
     </div>
 </div>
 
@@ -101,12 +112,12 @@
             datasets: [{
                 data: [@ViewBag.SubscribedCount, @ViewBag.NonSubscribedCount],
                 backgroundColor: [
-                    'rgb(255,0,0)',
-                    'rgb(54, 162, 235)'
+                    '#89ABE3FF', // Ultra Violet
+                    '#FC766AFF' // Royal purple blue #5B84B1FF
                 ],
                 borderColor: [
-                    'rgb(255,0,0)',
-                    'rgb(54, 162, 235)'
+                    '#fff',
+                    '#fff',
                 ],
                 borderWidth: 1
             }]
@@ -149,19 +160,20 @@
                     label: 'Article Categories',
                     data: Object.values(categoryCounts),
                     backgroundColor: [
-                        'rgba(45, 62, 80, 0.8)',   // Dark Gray Blue
-                        'rgba(25, 42, 86, 0.8)',   // Dark Blue
-                        'rgba(44, 62, 80, 0.8)',   // Darker Gray Blue
-                        'rgba(39, 174, 96, 0.8)',  // Dark Green
+                        
+                        '#EF6079FF',  // Dark PINK 20%
+                        '#F7B32BFF',   // Honey yellow
+                        '#A9E5BBFF',   // Green
+                        '#FCF6B1FF',   // Medium Champagne 5%
                         'rgba(192, 57, 43, 0.8)',  // Dark Red
                         'rgba(142, 68, 173, 0.8)', // Dark Purple
                         'rgba(243, 156, 18, 0.8)'  // Dark Orange
                     ],
                     borderColor: [
-                        'rgba(45, 62, 80, 0.8)',   // Dark Gray Blue
-                        'rgba(25, 42, 86, 0.8)',   // Dark Blue
-                        'rgba(44, 62, 80, 0.8)',   // Darker Gray Blue
-                        'rgba(39, 174, 96, 0.8)',  // Dark Green
+                        '#011936FF',   // Dark Gray Blue
+                        '#011936FF',   // Dark Blue
+                        '#011936FF',   // Darker Gray Blue
+                        '#011936FF',  // Dark Green
                         'rgba(192, 57, 43, 0.8)',  // Dark Red
                         'rgba(142, 68, 173, 0.8)', // Dark Purple
                         'rgba(243, 156, 18, 0.8)'  // Dark Orange
@@ -191,6 +203,13 @@
                             return percentage + '%';
                         },
                         color: '#fff',
+                        font: {
+                            weight:'bold',
+                            size: 12,
+                            border: '#011936FF',
+                             
+                        }
+                            
                     }
                 }
             },
@@ -199,13 +218,18 @@
     });
 </script>
 
+
+<br />
+
+@* 3 table rows *@
 @if (Model != null)
 {
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <h4>Most Viewed Articles</h4>
-                <div class="card-body">
+    <div class="row mt-3">
+
+        <div class="col-md-4 h-100 p-3">
+            <div class="card p-3 h-100">
+                <h4 class="text-center fw-bolder">Most Viewed Articles</h4>
+                <div style="background-color:palegreen; " class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
@@ -218,9 +242,9 @@
                             {
                                 <tr>
                                     <td>
-                                        <a style="text-decoration:none; font-size:16px; " class="text-black text-break fw-light" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id"> @Html.DisplayFor(modelItem => article.HeadLine)</a>
+                                        <a style="text-decoration:none; font-size:16px; " class="text-black text-break  " asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id"> @Html.DisplayFor(modelItem => article.HeadLine)</a>
                                     </td>
-                                    <td>@Html.DisplayFor(modelItem => article.Views)</td>
+                                    <td style="text-align:right">@Html.DisplayFor(modelItem => article.Views)</td>
                                 </tr>
                             }
                         </tbody>
@@ -228,10 +252,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
-                <h4>Most Likes Articles</h4>
-                <div class="card-body">
+
+        <div class="col-md-4 h-100 p-3">
+            <div class="card p-3 h-100">
+                <h4 class="text-center fw-bolder">Most Likes Articles</h4>
+                <div style ="background-color:lightskyblue; " class="card-body h-100">
                     <table class="table">
                         <thead>
                             <tr>
@@ -244,9 +269,9 @@
                             {
                                 <tr>
                                     <td>
-                                        <a style="text-decoration:none; font-size:16px; " class="text-black text-break fw-light" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id"> @Html.DisplayFor(modelItem => article.HeadLine)</a>
+                                        <a style="text-decoration:none; font-size:16px; " class="text-black text-break " asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id"> @Html.DisplayFor(modelItem => article.HeadLine)</a>
                                     </td>
-                                    <td>@Html.DisplayFor(modelItem => article.Likes)</td>
+                                    <td style="text-align:right" class="">@Html.DisplayFor(modelItem => article.Likes)</td>
                                 </tr>
                             }
                         </tbody>
@@ -254,15 +279,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
-                <h4>Most Dislike Articles</h4>
-                <div class="card-body">
+
+        <div class="col-md-4 h-100 p-3">
+            <div class="card p-3 h-100 ">
+                <h4 class="text-center fw-bolder">Most Dislike Articles</h4>
+                <div style="background-color:lightpink;" class="card-body h-100">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Dislikes</th>
+                                <th class="">Title</th>
+                                <th class="">Dislikes</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -270,9 +296,9 @@
                             {
                                 <tr>
                                     <td>
-                                        <a style="text-decoration:none; font-size:16px; " class="text-black text-break fw-light" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id"> @Html.DisplayFor(modelItem => article.HeadLine)</a>
+                                        <a style="text-decoration:none; font-size:16px; " class="text-black text-break fw-normal" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id"> @Html.DisplayFor(modelItem => article.HeadLine)</a>
                                     </td>
-                                    <td>@Html.DisplayFor(modelItem => article.DisLikes)</td>
+                                    <td style="text-align:right">@Html.DisplayFor(modelItem => article.DisLikes)</td>
                                 </tr>
                             }
                         </tbody>

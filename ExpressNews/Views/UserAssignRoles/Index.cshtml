@@ -1,10 +1,22 @@
 ﻿@model IEnumerable<ExpressNews.Models.ViewModel.UserVM>
 
 
+
+<br />
+<div class="row">
+    <div class="col-6">
+        <h2>Employee List with Role</h2>
+    </div>
+    <div class="col-6">
+        <h3><a id="profile" href="/Identity/Account/Manage" class="btn btn-outline-dark fw-bold  float-end">Back to Profile </a></h3>
+    </div>
+</div>
+<hr />
+
 <div class="container">
     <form method="post" action="/UserAssignRoles/Index" id="userRoleForm">
        <div class="container table-container">
-            <h5>Employee List with Role</h5>
+            <h5></h5>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -64,19 +76,16 @@
             </table>
         </div>
 
-        <div class=" row">
-            <div class="col-2">
-                <p>
-                    <button type="submit" class="btn btn-outline-warning fw-bold">Assign Role</button>
-                </p>
+        <div class="row m-3 p-3  ">
+             <div class="col-3"></div>
+            <div class="col-6">
+                <button type="submit" class="text-center align-items-center btn btn-warning fw-bold w-100 p-2">Assign Role</button>
             </div>
-            <div class="col">
-                <p>
-                    <a id="profile" href="/Identity/Account/Manage" class="btn btn-outline-primary fw-bold">Back to Profile </a>
-                </p>
-            </div>
+            <div class="col-3"></div>
+            
+               
         </div>
-        <button type="submit" class="btn btn-primary">Assign Role</button>
+       @*  <button type="submit" class="btn btn-primary">Assign Role</button> *@
     </form>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
