@@ -27,7 +27,7 @@
                         {
                             <div class="carousel-item active" data-interval="60">
 
-                                <img src="@row.ImageLink" class="d-block w-100" style="height:500px" alt="...">
+                                <img src="@row.ImageLink" class="d-block w-100" style="width:80%; height:auto" alt="...">
                                 <div class="carousel-caption bg-black bg-opacity-75 d-md-block">
                                     <h4 id="#" class="text-white fw-bolder" onclick="readMore(@Html.DisplayFor(item => row.Id),'@IsSubscribUser', '@row.IsSubsription')" style="cursor:pointer">@row.HeadLine</h4>
                                     @* <p>@row.ContentSummary</p> *@
@@ -39,7 +39,7 @@
                         {
                             <div class="carousel-item" data-interval="60">
 
-                                <img src="@row.ImageLink" class="d-block w-100" style="height:500px" alt="...">
+                                <img src="@row.ImageLink" class="d-block w-100" style="width:80%; height:auto" alt="...">
                                 <div class="carousel-caption bg-black bg-opacity-75 d-md-block">
                                     <h4 id="#" class="text-white fw-bolder" onclick="readMore(@Html.DisplayFor(item => row.Id),'@IsSubscribUser', '@row.IsSubsription')" style="cursor:pointer">@row.HeadLine</h4>
                                     @* <p>@row.ContentSummary</p> *@
@@ -49,7 +49,7 @@
                         }else if(i==3){
                             <div class="carousel-item" data-interval="60">
 
-                                <img src="@row.ImageLink" class="d-block w-100" style="height:500px" alt="...">
+                                <img src="@row.ImageLink" class="d-block w-100" style="width:80%; height:auto" alt="...">
                                 <div class="carousel-caption bg-black bg-opacity-75 d-md-block">
                                     <h4 id="#" class="text-white fw-bolder" onclick="readMore(@Html.DisplayFor(item => row.Id),'@IsSubscribUser', '@row.IsSubsription')" style="cursor:pointer">@row.HeadLine</h4>
                                     @* <p>@row.ContentSummary</p> *@
@@ -78,8 +78,8 @@
                 <div class="column" style="border-block-color" class="p-3">
                         <img src="@row.ImageLink" style="width:100%; height:100% alt="Sports Image 3">
 
-                    <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id),'@IsSubscribUser', '@row.IsSubsription')" style="color:black;cursor:pointer">@row.HeadLine</h4>
-                        <p>@row.ContentSummary</p>
+                    <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id),'@IsSubscribUser', '@row.IsSubsription')" style="color:black;cursor:pointer" class="mb-2 mt-2">@row.HeadLine</h4>
+                    <p class="mb-2 mt-2">@row.ContentSummary</p>
                 </div>
 
                 @if (row.IsSubsription)
@@ -116,8 +116,8 @@
             @foreach (var row in Model.Skip(4).Take(1))
             {
                 <img src="@row.ImageLink" style="width:100%; height:100%" alt="Sports Image 1">
-                <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id),'@IsSubscribUser', '@row.IsSubsription')" style="color:black;cursor:pointer">@row.HeadLine</h4>
-                <p>@row.ContentSummary</p>
+                <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id),'@IsSubscribUser', '@row.IsSubsription')" style="color:black;cursor:pointer" class="mb-2 mt-2">@row.HeadLine</h4>
+                <p class="mb-2 mt-2">@row.ContentSummary</p>
 
                 @if (row.IsSubsription)
                 {
@@ -167,8 +167,8 @@
             @foreach (var row in Model.Skip(5).Take(1))
             {
                 <img src="@row.ImageLink" style="width:100%; height:100%" alt="Sports Image 1">
-                <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id),'@IsSubscribUser', '@row.IsSubsription')" style="color:black;cursor:pointer">@row.HeadLine</h4>
-                <p>@row.ContentSummary</p>
+                <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id),'@IsSubscribUser', '@row.IsSubsription')" style="color:black;cursor:pointer" class="mb-2 mt-2">@row.HeadLine</h4>
+                <p class="mb-2 mt-2">@row.ContentSummary</p>
                 @if (row.IsSubsription)
                 {
                     @if (session.GetString("UserName") != null && session.GetString("IsSubcribedUser") == "Yes")
@@ -198,10 +198,10 @@
     <div class="row">
         @foreach (var row in Model.Skip(6))
         {
-            <div class="col-3 round3 bg-white border radius:20px p-3 g-3 gap-3">
-                <img src="@row.ImageLink" style="width:100% " alt="Sports Image 1">
-                <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id),'@IsSubscribUser', '@row.IsSubsription')" style="color:black;cursor:pointer">@row.HeadLine</h4>
-                <p>@row.ContentSummary</p>
+            <div class="col-md-3 round3 bg-white border radius:20px p-3 g-3 gap-3">
+                <img src="@row.ImageLink" style="width:100% " alt="Sports Image 1" >
+                <h4 id="#" onclick="readMore(@Html.DisplayFor(item => row.Id),'@IsSubscribUser', '@row.IsSubsription')" style="color:black;cursor:pointer" class="mb-2 mt-2">@row.HeadLine</h4>
+                <p class="mb-2 mt-2">@row.ContentSummary</p>
 
                 @if (row.IsSubsription)
                 {
@@ -256,5 +256,4 @@
 
     }
 </script>
-
 
