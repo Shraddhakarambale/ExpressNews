@@ -11,24 +11,25 @@
         </div>
         <div class="col-md-5">
             <div class="row">
-            </div><br />
-            <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist" > 
 
-                    <button class="h6 nav-link text-black fw-bolder" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Latest News</button>
-                    <button class="h6 nav-link text-black fw-bolder" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Editor's Choice</button>
-                    <button class="h6 nav-link active text-black fw-bolder" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-popular" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Most Popular</button>
+                        <button class="h6 nav-link text-black fw-bolder" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Latest News</button>
+                        <button class="h6 nav-link text-black fw-bolder" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Editor's Choice</button>
+                        <button class="h6 nav-link active text-black fw-bolder" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-popular" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Most Popular</button>
 
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><vc:latest-article count="9"></vc:latest-article></div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"><vc:editors-choice count="9"></vc:editors-choice></div>
+                    <div class="tab-pane fade show active" id="nav-popular" role="tabpanel" aria-labelledby="nav-profile-tab"><vc:most-popular-news count="7"></vc:most-popular-news></div>
                 </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><vc:latest-article count="9"></vc:latest-article></div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"><vc:editors-choice count="9"></vc:editors-choice></div>
-                <div class="tab-pane fade show active" id="nav-popular" role="tabpanel" aria-labelledby="nav-profile-tab"><vc:most-popular-news count="7"></vc:most-popular-news></div>
-            </div>
 
-            
+            </div><br />
            
+
+
         </div>
     </div>
 </div>
