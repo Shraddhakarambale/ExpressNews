@@ -14,7 +14,7 @@
 {
     <div class="">
         <h4>
-            Membership :
+            Your Subscription :
             @if (session.GetString("SubType") == "PREMIUM"){
                 <span class="badge rounded-pill bg-warning">PREMIUM</span>
             }
@@ -24,7 +24,7 @@
             }
             else
             {
-                <a class="button-sub fw-bolder" role="button" asp-controller="Subscription" asp-action="Index">Be a Member</a>
+                <a class="button-sub fw-bolder" role="button" asp-controller="Subscription" asp-action="Index">Buy a Subscription</a>
             }
         </h4>
     

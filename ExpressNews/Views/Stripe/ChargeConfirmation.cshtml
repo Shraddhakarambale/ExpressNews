@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Payment Confirmation";
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        redirectToHome();
+    });
+    // This function will redirect to index.html after 60000 milliseconds (1 minute)
+    function redirectToHome() {
+        setTimeout(function () {
+            window.location.href = '@Url.Action("Index", "Home")';
+        }, 15000); // 60000 milliseconds = 60 seconds
+    }
+</script>
+<div class="confirmation-container">
+    <h2>Payment Successful</h2>
+    <p>Thank you for your payment! Your transaction has been completed successfully.</p>
+</div>
+
+<style>
+    .confirmation-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        text-align: center;
+    }
+</style>

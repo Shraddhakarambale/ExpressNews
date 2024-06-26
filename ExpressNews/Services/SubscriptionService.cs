@@ -126,6 +126,27 @@ namespace ExpressNews.Services
             return totUser- subCount;
 
         }
+        public void UpadateSubscription(SubscriptionVM model)
+        {
+            var modelObj = new Subscription
+            {
+                SubscriptionTypeId = model.SubscriptionTypeId,
+                Price = model.Price,
+                Created = model.Created,
+                Expires = model.Expires,
+                PaymentComplete = model.PaymentComplete,
+                SubscriptionTypeName = model.SubscriptionTypeName,
+                UserName = model.UserName,
+                SubsTypeDetails = model.SubsTypeDetails
+               
+            };
+            _db.Subscriptions.Add(modelObj);
+            _db.SaveChanges();
 
+        }
+        public SubscriptionType GetSubscriptionTypeByName(string typeName)
+        {
+            return _db.SubscriptionTypes.FirstOrDefault(st => st.TypeName == typeName && !st.IsDeleted);
+        }
     }
 }
