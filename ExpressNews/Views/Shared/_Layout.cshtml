@@ -41,9 +41,12 @@
 
     <header>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-black border-bottom box-shadow mb-2 menu-height">
+        
+
+
+        <nav class="d-none d-sm-block navbar navbar-expand-lg navbar-light bg-black  box-shadow ">
             <div class="container">
-                <div class="col-md-3 text-left pb-2">
+                <div class="col-md-3 text-left">
                     <a class="nav-link" href="/">
                         <img src="~/image/l1.png" class="img-fluid" width="100%" height="auto" />
                     </a>
@@ -52,7 +55,7 @@
                     <span class="navbar-toggler-icon bg-light"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto" style="margin-bottom: -0.5rem !important;font-size:smaller">
+                    <ul class="navbar-nav me-auto" style="margin-bottom: -0.5rem !important;font-size:large">
                         <li class="nav-item">
                             <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">START</a>
                         </li>
@@ -76,8 +79,8 @@
 
                                <form asp-controller="Article" asp-action="Search" method="get" class="text-center">
                                     <input type="text" name="query" placeholder="Search news..." />
-                                    
-                                        <button class="btn btn-outline-secondary bg-white" type="submit"><i class="text-danger fas fa-search searchBtn"></i></button>
+
+                                    <button class="bg-transparent" type="submit"><i class="text-white fa fa-search searchBtn"></i></button>
                                    
                                 </form> 
                             @* 
@@ -88,10 +91,74 @@
                             </div>
                         </li>
                     </ul> 
+                   
+                </div>
+                <partial name="_LoginPartial" />
+            </div>
+        </nav>
+
+
+
+
+
+
+        <nav class="d-block d-sm-none navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow mb-3">
+            <div class="container ">
+
+                <a class="navbar-brand text-warning fw-bold text-center" asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/image/l1.png" class=" img-fluid " /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon bg-white"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+                    
+
+                    <div class="d-flex justify-content-center h-100">
+
+                        <form asp-controller="Article" asp-action="Search" method="get" class="text-center">
+                            <input type="text" name="query" placeholder="Search news..." />
+
+                            <button class="bg-transparent " type="submit"><i class="text-warning fa fa-search"></i></button>
+
+                        </form>
+                    </div>
+
+
+
                     <partial name="_LoginPartial" />
+
+                    <ul class="navbar-nav  p-3">
+
+                        <li class="nav-item ">
+                            <a class="nav-link text-white fw-bold " asp-area="" asp-controller="Home" asp-action="Index">START</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="Local">LOCAL</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="World">WORLD</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Sport" asp-action="Index">SPORT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="Culture">CULTURE</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Tip" asp-action="Create">TIP</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
+
+
+
+
+
+
     </header>
 
     <div class="container" style="margin-bottom:250px ">
