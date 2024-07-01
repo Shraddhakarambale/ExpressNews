@@ -26,5 +26,7 @@ namespace ExpressNews.Services
         int GetSubsribedCount();
         int GetNonSubsribedCount();
 
+        void UpadateSubscription(SubscriptionVM model);
+        SubscriptionType GetSubscriptionTypeByName(string typeName);
     }
 }

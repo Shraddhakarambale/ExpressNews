@@ -1,0 +1,78 @@
+﻿@model ExpressNews.Models.ViewModel.PaymentVM
+
+@if (@Model == null)
+{
+    return;    
+}
+@{
+    ViewData["Title"] = "Payment Details";
+}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Payment Details</h2>
+    <form>
+        <div class="row">
+            <!-- Cardholder Name -->
+            <div class="col-md-6 mb-3">
+                <label for="cardName">Name</label>
+                <input type="text" class="form-control" id="memberName" placeholder="Enter cardholder name" required disabled value="@Model.Name">
+            </div>
+
+            <!-- Card Number -->
+            <div class="col-md-6 mb-3">
+                <label for="cardNumber">Subcription Type</label>
+                <input type="text" class="form-control" id="subType" placeholder="Enter card number" required disabled value="@Model.SubType">
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Expiration Date -->
+            <div class="col-md-3 mb-3">
+                <label for="cardExpiry">Expiration Date</label>
+                <input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY" required disabled value="@Model.ExpirationDate">
+            </div>
+
+            <!-- CVV -->
+            <div class="col-md-3 mb-3">
+                <label for="cardCVV">Amount</label>
+                <input type="text" class="form-control" id="Amount" placeholder="Amount" required disabled value="@Model.Amount">
+            </div>
+
+            <!-- ZIP Code -->
+            <div class="col-md-6 mb-3">
+                <label for="billingZip">Billing ZIP Code</label>
+                <input type="text" class="form-control" id="billingZip" placeholder="ZIP Code" required autofocus>
+            </div>
+        </div>
+
+        <!-- Billing Address -->
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label for="billingAddress">Billing Address</label>
+                <input type="text" class="form-control" id="billingAddress" placeholder="Enter billing address" required>
+            </div>
+        </div>
+
+        <!-- City, State, Country -->
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="billingCity">City</label>
+                <input type="text" class="form-control" id="billingCity" placeholder="City" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="billingState">State</label>
+                <input type="text" class="form-control" id="billingState" placeholder="State" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="billingCountry">Country</label>
+                <input type="text" class="form-control" id="billingCountry" placeholder="Country" required value="Sweden" disabled >
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a type="submit" class="btn btn-primary" asp-area="" asp-controller="Stripe" asp-action="Charge" asp-route-name="@Model.Name" asp-route-email="@Model.Email" asp-route-expirationDate="@Model.ExpirationDate" asp-route-amount="@Model.Amount" asp-route-subType="@Model.SubType">Submit Payment</a>
+            </div>
+        </div>
+    </form>
+</div>
