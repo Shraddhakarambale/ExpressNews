@@ -155,8 +155,23 @@ namespace ExpressNews.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                         $"Please confirm your account by <a href='{callbackUrl}'>clicking here</a>.");
+                    var html = "<html><body><div class='container'><div class='header'>";
+                        html += "<h1 style = 'color:black; align-items: center' > Email Confirmation Page! </h1></div>";
+                        html += "<div class='content'><h2>Hi there,</h2>";
+                        html += "<img src ='https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2013/05/email-logo.jpg' class='sw-100' width='20%' height='auto' alt='...'>";
+                        html += "<p> Thanks for Signing up to Expressnews. </p>";
+                        html += "<p>Please confirm your email below. </p><div>";
+                        html += $"<a href='{callbackUrl}' type ='button' class='btn btn-primary btn-lg'>Verfy Email</a>";
+                        html += "</div>";
+                        html += "<p> you have received this email because you requested a expressnews.com account with this email address. <a href='mailto:expressnewscontact@gmail.com'> contact us</a></a>.</p>";
+                        html += "<a href ='https://expressnews.azurewebsites.net/' class='button'>Visit our website</a>";
+                        html += "</div>";
+                        html += "<div class='footer'><p>&copy; 2024 Express News.All rights reserved.</p> </div> </div> </body> </html>";
+
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", html);
+
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //     $"Please confirm your account by <a href='{callbackUrl}'>clicking here</a>.");
                     //$"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
