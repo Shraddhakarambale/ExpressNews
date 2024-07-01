@@ -32,13 +32,12 @@
 </style>
 
 
-<div class="chart-container">
-    <div class="chart-box">
+<div class=" row chart-container">
+    <div class="col-md-3">
         <canvas id="userChart" width="100%" height="auto"></canvas>
     </div>
 
-    <div>
-      
+    <div class="col-md-3">
         <table class="table table-bordered">
             <tr style="background-color:slateblue;" class="text-white">
                 <th>Subscription Type</th>
@@ -46,11 +45,11 @@
             </tr>
             <tr>
                 <td class="p-3">Basic Subscriptions</td>
-                <td style="text-align:right">@ViewBag.basicCount</td>
+                <td class="p-3" style="text-align:right">@ViewBag.basicCount</td>
             </tr>
             <tr  >
                 <td class="p-3">Premium Subscriptions</td>
-                <td style="text-align:right">@ViewBag.premiumCount</td>
+                <td class="p-3" style="text-align:right">@ViewBag.premiumCount</td>
             </tr>
             <tr class="">
                 <td class="p-3">Non Subscribed</td>
@@ -59,11 +58,11 @@
         </table>
     </div>
   
-    <div class="chart-box">
-        <canvas id="subscriptionChart" width="400" height="auto"></canvas>
+    <div class="col-md-3 ">
+        <canvas id="subscriptionChart"  ></canvas>
     </div>
-    <div class="chart-box">
-        <canvas id="articleCategoryChart" width="400" height="auto"></canvas>
+    <div class="col-md-3 ">
+        <canvas id="articleCategoryChart"  ></canvas>
     </div>
 </div>
 

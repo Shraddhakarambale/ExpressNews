@@ -2,51 +2,62 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{ 
-        var user = await UserManager.GetUserAsync(User);
-        var username = user.Email;
-        var firstname = user.FirstName;
 
-        <div class="login-icon" id"loginIcon">
-        <li class="nav-item">
-            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="My Page">
-                <i class='fas fa-user-edit' style='font-size:24px;color:red'></i>&nbsp;&nbsp;@firstname
-                @* <span class="email-tooltip">@username </span> *@
+@if (SignInManager.IsSignedIn(User))
+{
+    
+
+
+     
+    var user = await UserManager.GetUserAsync(User);
+    var username = user.Email;
+    var firstname = user.FirstName;
+    <div class=" row p-3 ">
+        <div class="col login-icon d-flex" id="loginIcon">
+
+            <a class="nav-link text-light d-flex" asp-area="Identity" asp-page="/Account/Manage/Index" title="My Page">
+                <i class='fa fa-user-edit' style='font-size:24px;color:red'></i>
+                <i class=" fw-bold">&nbsp;&nbsp;@firstname </i>
+                @*<span class="email-tooltip">@username </span> *@
             </a>
 
-        </li>
-        
+
         </div>
-    
-     <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+
+        <div class="col d-sm-flex ">
+            <form class="form-inline float-end" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link text-dark" style="padding:4px; background-color:red">
-                    <i class="fa fa-sign-out"></i> 
+                    <i class="fa fa-sign-out"></i>
                 </button>
-        </form>
-    </li>  
-       
- 
- }
+            </form>
+
+        </div>
+    </div>
+    
+
+
+
+}
 else
 {
-    <li class="nav-item" >
-            <a class="button-sub fw-bolder" role="button" asp-controller="Subscription" asp-action="Index">Subscription</a>
-    </li>
-        <li class="nav-item">
-            <a class="button-log" role="button" asp-area="Identity" asp-page="/Account/Login">
-                <i class="fas fa-user"></i>
-            </a>
-        </li>
+    <div class="p-3">
+        <a class="button-sub fw-bolder" role="button" asp-controller="Subscription" asp-action="Index">Subscription</a>
+
+
+        <a class="button-log" role="button" asp-area="Identity" asp-page="/Account/Login">
+            <i class="fas fa-user"></i>
+        </a>
+
+    </div>
+    
+
 }
-</ul>
+
 
 <style>
     /* Custom button styles */
     .button-sub {
-        background-color:yellow;
+        background-color: yellow;
         color: black;
         border: none;
         padding: 0.5rem 1rem;
@@ -54,12 +65,12 @@ else
         text-decoration: none;
         display: inline-block;
         font-size: 1rem;
-        margin: 0.2rem;
+        margin: auto;
         border-radius: 0.25rem;
     }
 
         .button-sub:hover {
-            background-color:white;
+            background-color: white;
         }
 
     .button-log {
@@ -77,32 +88,32 @@ else
 
         .button-log:hover {
             background-color: white;
-            color : black;
+            color: black;
         }
 
     .login-icon {
-        width:120px;
+        width: 120px;
         height: 30px;
         cursor: pointer;
     }
 
     /* .email-tooltip {
-        visibility: hidden;
-        width: 200px;
-        background-color: black;
-        color: white;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px;
-        position: absolute bottom:125%;
-        left: 50%;
-        margin-left: -60px;
-        opacity: 0;
-        transition: opacity 0.3s;
-    } */
+            visibility: hidden;
+            width: 200px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute bottom:125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        } */
 
-   /*  .login-icon:hover .email-tooltip {
-        visibility: visible;
-        opacity: 1;
-    } */
+    /*  .login-icon:hover .email-tooltip {
+            visibility: visible;
+            opacity: 1;
+        } */
 </style>

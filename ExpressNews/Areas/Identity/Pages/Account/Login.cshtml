@@ -5,13 +5,13 @@
     ViewData["Title"] = "Log in";
 }
 
-<body class="bg bg-ligh align-content-center">
+<body >
 
     
-    <div class="row">
-        <div class="col-md-4 bg-warning p-2">
+   
+        <div style="" class="col-md-4 p-2 alice m-auto">
             <section>
-                <h1 class=" p-2">@ViewData["Title"]</h1>
+                <h1 class="text-center p-3 fw-bolder" style="color:black">L O G I N</h1> 
                 <div>
                     <a id="admin" onclick="GetUNandPw(event, this)" href="javascript:void(0);" style="color:black" role="button">Admin |</a>
                     <a id="editor" onclick="GetUNandPw(event, this)" href="javascript:void(0);" style="color:black" role="button"> Editor |</a>
@@ -41,14 +41,14 @@
                         </label>
                     </div>
                     <div class="text-center p-2">
-                        <button id="login-submit" type="submit" class="w-75 btn btn-lg btn-primary p-2">Log in</button>
+                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary p-2 fw-bold">Log in</button>
                     </div>
                     <div class="text-center p-2">
                         <p >
                             <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                         </p>
                         <p>
-                            <a class="w-75 btn btn-lg btn-primary p-2" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                            <a class="w-100 btn btn-lg btn-primary p-2 fw-bold" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                         </p>
 
                     </div>
@@ -56,14 +56,10 @@
             </section>
             
         </div>
-        <div class="col-md-8 col-md-offset-2">
-            <div>
-                <img src="~/image/en news.png" width="100%" />
-            </div>
-           
-        </div>
-    </div>
+        
+   
 </body>
+
 <script>
     function GetUNandPw(event, element) {
         event.preventDefault();
