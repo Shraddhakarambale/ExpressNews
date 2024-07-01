@@ -88,7 +88,7 @@ namespace ExpressNews.Services
             }
             else
             {
-                return _db.Articles.OrderByDescending(a => a.DateStamp).ToList();
+                return _db.Articles.Where(a => a.Status != "Archive").OrderByDescending(a => a.DateStamp).ToList();
             }
 
         }
@@ -143,13 +143,13 @@ namespace ExpressNews.Services
         public Article GetBreakingNews()
         {
             Article article = new Article();
-            article = _db.Articles.FirstOrDefault(a => a.IsBreaking == true);
+            article = _db.Articles.Where(a => a.Status != "Archive").FirstOrDefault(a => a.IsBreaking == true);
             return article;
         }
         public Article GetArticleForFrontPage()
         {
             Article article = new Article();
-            article = _db.Articles.FirstOrDefault(a => a.IsBreaking == false);
+            article = _db.Articles.Where(a => a.Status != "Archive").FirstOrDefault(a => a.IsBreaking == false);
             return article;
         }
 
@@ -231,14 +231,14 @@ namespace ExpressNews.Services
 
         public List<Article> GetLatestArticles(int count)
         {
-            var LatestArticles = _db.Articles.OrderByDescending(a => a.DateStamp).Take(count).ToList();
+            var LatestArticles = _db.Articles.Where(a => a.Status != "Archive").OrderByDescending(a => a.DateStamp).Take(count).ToList();
             return LatestArticles;
 
         }
 
         public List<Article> GetPopularArticles(int count)
         {
-            var popularArticles = _db.Articles.OrderByDescending(a => a.Views).Take(count).ToList();
+            var popularArticles = _db.Articles.Where(a => a.Status != "Archive").OrderByDescending(a => a.Views).Take(count).ToList();
             return popularArticles;
 
         }
@@ -246,7 +246,7 @@ namespace ExpressNews.Services
         public List<Article> GetArticleByCategory(string category)
         {
 
-            var article = _db.Articles.Where(a => a.Category1 == category || a.Category2 == category|| a.Category3 == category).OrderByDescending(a => a.DateStamp).ToList();
+            var article = _db.Articles.Where(a => ( a.Category1 == category || a.Category2 == category|| a.Category3 == category) && a.Status != "Archive").OrderByDescending(a => a.DateStamp).ToList();
             return article;
         }
 
