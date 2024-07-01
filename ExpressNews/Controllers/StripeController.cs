@@ -1,6 +1,7 @@
 ﻿using ExpressNews.Models.Database;
 using ExpressNews.Models.ViewModel;
 using ExpressNews.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Options;
@@ -14,10 +15,12 @@ namespace ExpressNews.Controllers
     {
         private readonly StripeSettings _stripeSettings;
         private readonly ISubscriptionService _subscriptionService;
-        public StripeController(IOptions<StripeSettings> stripeSettings, ISubscriptionService subscriptionService)
+        private readonly IEmailSender _emailSender;
+        public StripeController(IOptions<StripeSettings> stripeSettings, ISubscriptionService subscriptionService, IEmailSender emailSender)
         {
             _stripeSettings = stripeSettings.Value;
             _subscriptionService = subscriptionService;
+            _emailSender = emailSender;
         }
 
         public IActionResult Index()
@@ -77,6 +80,9 @@ namespace ExpressNews.Controllers
             };
 
             _subscriptionService.UpadateSubscription(modelObj);
+
+            _emailSender.SendEmailAsync(model.Email, "Confirm your payment",
+                        $"Thank you for your payment! Your transaction has been completed successfully. <a href='https://expressnews.azurewebsites.net/'>Express News</a>.");
 
             return View("ChargeConfirmation");
         }
