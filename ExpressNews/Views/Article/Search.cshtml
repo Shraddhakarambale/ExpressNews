@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<ExpressNews.Models.Database.Article>
 
+@using Microsoft.AspNetCore.Http
+@inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
 
-
-
-@* <form asp-action="Search" method="get">
-    <input type="text" name="query" placeholder="Search news..." />
-    <button type="submit">Search</button>
-</form> *@
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+ 
+}
 
 @if (Model != null && Model.Any())
 {
@@ -15,8 +15,23 @@
         {
 
             <li class="m-2 p-3">
-                <a class="text-black text-break fw-bold" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a>
+                @if (article.IsSubsription) { 
+                    @if (session.GetString("UserName") != null && session.GetString("IsSubcribedUser") == "Yes")
+                    {
+                        <a class="text-black text-break fw-bold" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a><br />
+                    }else
+                    {
+                        <a class="text-black text-break fw-bold" asp-action="Index" asp-controller="Subscription">@article.LinkText</a><br />
+                    }
+                }
+                else
+                {
+                    <a class="text-black text-break fw-bold" asp-action="SingleArticle" asp-controller="Article" asp-route-id="@article.Id">@article.LinkText</a>
 
+                    <br />
+                }
+                <img src="@article.ImageLink" alt="" width="20%" /><br />
+                <p class="gap-2">@article.ContentSummary</p><br />
             </li>
             @* <li>
     <h3><a asp-action="Detail" asp-route-id="@article.Id">@article.LinkText</a></h3>
