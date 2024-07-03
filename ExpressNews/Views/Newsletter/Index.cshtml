@@ -18,81 +18,114 @@
     @* <a asp-action="Create">Create New</a> *@
 </p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category4)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            @* <th>
+
+@* <div class="row gy-4 m-3">
+     
+    @foreach (var item in Model)
+    {
+         
+
+            <div style="font-size:medium" class="col-md-5 card h-100 p-3 m-3">
+
+                <p class="m-1"><strong> @Html.DisplayNameFor(model => model.FirstName) &nbsp;  </strong>:  @Html.DisplayFor(modelItem => item.FirstName)  &nbsp;  <br /></p>
+                <p class="m-1"><strong> @Html.DisplayNameFor(model => model.LastName) &nbsp; </strong>: @Html.DisplayFor(modelItem => item.LastName)<br /> </p>
+                <p class="m-1"><strong> @Html.DisplayNameFor(model => model.EmailAddress)  &nbsp; </strong>: @Html.DisplayFor(modelItem => item.EmailAddress)<br /> </p>
+                <p class="m-1"><strong> @Html.DisplayNameFor(model => model.Category1) &nbsp; </strong>: @Html.DisplayFor(modelItem => item.Category1)<br /> </p>
+                <p class="m-1"><strong> @Html.DisplayNameFor(model => model.Category2) &nbsp;</strong> : @Html.DisplayFor(modelItem => item.Category2)<br /></p>
+                <p class="m-1"><strong> @Html.DisplayNameFor(model => model.Category3) &nbsp; </strong>: @Html.DisplayFor(modelItem => item.Category3)<br /> </p>
+                <p class="m-1"><strong> @Html.DisplayNameFor(model => model.Category4) &nbsp;</strong> : @Html.DisplayFor(modelItem => item.Category4)<br /></p>
+                <p class="m-1 btn btn-sm btn-warning col-12 mb-2 "><strong> @Html.DisplayNameFor(model => model.Status) &nbsp; </strong>: @Html.DisplayFor(modelItem => item.Status)<br /> </p>
+                <p class="m-1 btn btn-sm btn-info col-12 mb-2"><strong> @Html.DisplayNameFor(model => model.Created) &nbsp;</strong> : @Html.DisplayFor(modelItem => item.Created)<br /></p>
+
+             
+            </div>
+
+    }
+</div>
+ *@
+
+
+<div  style="overflow-x:auto;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category3)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category4)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                @* <th>
                 @Html.DisplayNameFor(model => model.IsTermsAndConditions)
-            </th> *@
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category4)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            @* <td>
+                </th> *@
+                <th>
+                    @Html.DisplayNameFor(model => model.Created)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category3)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category4)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    @* <td>
                 @Html.DisplayFor(modelItem => item.IsTermsAndConditions)
-            </td> *@
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-          @*   <td>
+                </td> *@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Created)
+                    </td>
+                    @*   <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td> *@
-        </tr>
-}
-    </tbody>
-</table>
+                </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+</div>

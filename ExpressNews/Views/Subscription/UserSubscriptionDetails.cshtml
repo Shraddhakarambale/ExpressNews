@@ -15,64 +15,66 @@
     </div>
 </div>
 <hr />
-<table class="table table-striped rounded">
-    <thead class="table-dark">
-        <tr>
-            <th class="fw-bold">
-                Subscription Type Name
-            </th>
-            <th class="fw-bold">
-                Created
-            </th>
-            <th class="fw-bold">
-                Expires
-            </th>
-            <th class="fw-bold">
-                Price
-            </th>
-            <th class="fw-bold">
-                Is Payment Complete
-            </th>
-           <th class="fw-bold">
-                User Name
-            </th>
-            <th class="fw-bold">
-                Email
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var subscription in Model)
-        {
+
+<div style="overflow-x:auto;">
+    <table class="table table-striped rounded">
+        <thead class="table-dark">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => subscription.SubscriptionTypeName)
-                </td>
-               <td>
-                    @Html.DisplayFor(modelItem => subscription.Created)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => subscription.Expires)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => subscription.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => subscription.PaymentComplete)
-                </td>
-               <td>
-                    @Html.DisplayFor(modelItem => subscription.FirstName)&nbsp @Html.DisplayFor(modelItem => subscription.LastName)
-                </td> 
-
-                <td>
-                    @Html.DisplayFor(modelItem => subscription.UserName)
-                </td>
+                <th class="fw-bold">
+                    Subscription Type Name
+                </th>
+                <th class="fw-bold">
+                    Created
+                </th>
+                <th class="fw-bold">
+                    Expires
+                </th>
+                <th class="fw-bold">
+                    Price
+                </th>
+                <th class="fw-bold">
+                    Is Payment Complete
+                </th>
+                <th class="fw-bold">
+                    User Name
+                </th>
+                <th class="fw-bold">
+                    Email
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var subscription in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => subscription.SubscriptionTypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => subscription.Created)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => subscription.Expires)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => subscription.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => subscription.PaymentComplete)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => subscription.FirstName)&nbsp @Html.DisplayFor(modelItem => subscription.LastName)
+                    </td>
 
+                    <td>
+                        @Html.DisplayFor(modelItem => subscription.UserName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
+</div>
 
 
 

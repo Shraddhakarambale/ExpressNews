@@ -13,34 +13,20 @@
     return;
 } *@
 
-
+<div class="row">
+    <div class="col-6">
+        <h2></h2>
+    </div>
+    <div class="col-6">
+        <h3><a id="profile" href="/Identity/Account/Manage" class="btn btn-outline-dark fw-bold  float-end">Back to Profile </a></h3>
+    </div>
+</div>
+<hr />
 
 <body>
     <div class="row">
-        <div class="col-4 m-3 p-3">
-            @if (session.GetString("IsSubcribedUser") == "No")
-            {
-                <a class="btn btn-success" role="button" asp-controller="Subscription" asp-action="Index">Get a Subscription</a>
-            }
-            @foreach (var item in Model)
-            {
-                @if (item.Expires > DateTime.Now)
-                {
-                    <div class="inner">
-                        <div id="subDetails"></div>
 
-                        <span class="button">
-                            <strong class="bg-danger">Expire Date :  @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Expires))</strong>
-
-                        </span>
-                    </div>
-                }
-
-            }
-
-        </div>
-
-        <div class="col-7 m-3">
+        <div class="container-fluid">
             <br />
             <h2>Your Subscription History</h2>
             @* History subscription *@
@@ -97,6 +83,28 @@
                     }
                 </tbody>
             </table>
+                <div class="container-fluid">
+                    @if (session.GetString("IsSubcribedUser") == "No")
+                    {
+                        <a class="btn btn-success" role="button" asp-controller="Subscription" asp-action="Index">Get a new Subscription</a>
+                    }
+                    @foreach (var item in Model)
+                    {
+                        @if (item.Expires > DateTime.Now)
+                        {
+                            <div class="inner">
+                                <div id="subDetails"></div>
+
+                                <span class="button">
+                                    <strong class="bg-danger">Expire Date :  @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Expires))</strong>
+
+                                </span>
+                            </div>
+                        }
+
+                    }
+
+                </div>
         </div>
 
     </div>
