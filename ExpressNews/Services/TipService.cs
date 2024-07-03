@@ -43,6 +43,32 @@ namespace ExpressNews.Services
         }
         public void UpdateTip(Tip tips)
         {
+            Article article = new Article();
+
+            article.Category1 = "N/A";
+            article.Category2 = "N/A";
+            article.Category3 = "N/A";
+            article.LinkText = tips.Subject;
+            article.DisLikes =0;
+            article.Status = "Submitted";
+            article.IsEditorChoice = false;
+            article.Content = tips.Description;
+            article.ContentSummary = tips.Subject;
+            article.DateStamp = DateTime.Now;
+            article.FileName = tips.ImageName;
+           // article.FormImages = "";
+            article.HeadLine = tips.Subject;
+            article.ImageDiscription = "";
+            article.ImageLink = "https://expressnews.blob.core.windows.net/newscontainer/" + tips.ImageName;
+            article.IsBreaking = false;
+            article.IsSubsription = false;
+            article.Likes = 0;
+            article.Views = 0;
+            article.UserName = tips.Email;
+
+            _db.Articles.Add(article);
+
+
             tips.Created = DateTime.Now;
             _db.Tips.Update(tips);
             _db.SaveChanges();

@@ -67,8 +67,8 @@
                 {
                     <img src="@lgImageUrl@Model.ImageName" width="20%" alt="Current Image" />
                 }
-                <input asp-for="FormImages" class="form-control-file" type="file" data-va value="@lgImageUrl@Model.ImageName" />
-                <span asp-validation-for="FormImages" class="text-danger"></span>
+                <input asp-for="FormImages" class="form-control-file" type="file" multiple data-val="false" />
+                 <span asp-validation-for="FormImages" class="text-danger"></span> 
             </div>
             <div class="form-group form-check mb-2 mt-2">
                 <label class="form-check-label">
