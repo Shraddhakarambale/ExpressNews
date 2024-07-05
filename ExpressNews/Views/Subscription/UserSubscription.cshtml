@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<ExpressNews.Models.Database.Subscription>
+﻿@model IEnumerable<ExpressNews.Models.Database.Subscription>
 @using Microsoft.AspNetCore.Http
 @inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
 
@@ -21,12 +20,53 @@
         <h3><a id="profile" href="/Identity/Account/Manage" class="btn btn-outline-dark fw-bold  float-end">Back to Profile </a></h3>
     </div>
 </div>
-<hr />
+
 
 <body>
     <div class="row">
+        <div class="col-md-5 m-3 p-3">
+            @* <p>
+            <a asp-action="Create">Create New</a>
+            </p> *@
 
-        <div class="container-fluid">
+            <div class="container-fluid">
+                @if (session.GetString("IsSubcribedUser") == "No")
+                {
+                    <a class="btn btn-success" role="button" asp-controller="Subscription" asp-action="Index">Get a new Subscription</a>
+                }
+
+                <article class="plan [ card ]">
+                    @foreach (var item in Model)
+                    {
+                        @if (item.Expires > DateTime.Now)
+                        {
+                            <div class="inner">
+
+                                <span class="pricing">
+                                    <span>
+                                        @Html.DisplayFor(modelItem => item.Price) <small>Kr</small>
+                                    </span>
+                                </span>
+                                <br />
+                                @*  <h1 class="title"> @Html.DisplayFor(modelItem => item.SubscriptionTypeName)</h1> *@
+                                <div id="subDetails"></div>
+
+                                <button class="button">
+                                    <strong>  @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Expires))</strong>
+
+                                </button>
+                            </div>
+                        }
+
+                    }
+
+                </article>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 m-3">
             <br />
             <h2>Your Subscription History</h2>
             @* History subscription *@
@@ -46,7 +86,7 @@
                             @Html.DisplayNameFor(model => model.Expires)
                         </th>
                         @* <th>
-                            @Html.DisplayNameFor(model => model.PaymentComplete)
+                        @Html.DisplayNameFor(model => model.PaymentComplete)
                         </th> *@
                         <th></th>
                     </tr>
@@ -69,9 +109,9 @@
                                 <td>
                                     @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Expires))
                                 </td>
-                               @*  <td>
-                                    @Html.DisplayFor(modelItem => item.PaymentComplete)
-                                </td> *@
+                                @*  <td>
+                        @Html.DisplayFor(modelItem => item.PaymentComplete)
+                        </td> *@
                                 @* <td>
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
@@ -83,40 +123,18 @@
                     }
                 </tbody>
             </table>
-                <div class="container-fluid">
-                    @if (session.GetString("IsSubcribedUser") == "No")
-                    {
-                        <a class="btn btn-success" role="button" asp-controller="Subscription" asp-action="Index">Get a new Subscription</a>
-                    }
-                    @foreach (var item in Model)
-                    {
-                        @if (item.Expires > DateTime.Now)
-                        {
-                            <div class="inner">
-                                <div id="subDetails"></div>
-
-                                <span class="button">
-                                    <strong class="bg-danger">Expire Date :  @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Expires))</strong>
-
-                                </span>
-                            </div>
-                        }
-
-                    }
-
-                </div>
         </div>
 
     </div>
     @{
         string htmlText = Model.Where(a => a.Expires > DateTime.Now).FirstOrDefault()?.SubsTypeDetails ?? "";
-       
+
     }
 
     <script>
         window.addEventListener('DOMContentLoaded', function () {
-           
-           var htmlText = `@Html.Raw(htmlText)`;
+
+            var htmlText = `@Html.Raw(htmlText)`;
             var element2 = document.getElementById("subDetails");
             if (element2) {
                 element2.innerHTML = htmlText;
@@ -124,6 +142,7 @@
 
         });
     </script>
+
 </body>
 
 <style>
@@ -142,14 +161,13 @@
         flex-wrap: wrap;
         justify-content: center;
         gap: 2.5rem;
-        width: 90%;
+        width: 100%;
         max-width: 1000px;
         margin: 10vh auto;
     }
 
     .card {
-        border-radius: 16px;
-        
+        border-radius: 12px;
         box-shadow: 0 30px 30px -25px rgba(aqua, .25);
         max-width: 300px;
     }
@@ -264,7 +282,7 @@
     .inner {
         padding: 20px;
         padding-top: 40px;
-        background-color:aliceblue;
+        background-color: aliceblue;
         border-radius: 12px;
         position: relative;
         overflow: hidden;
@@ -295,8 +313,8 @@
     .title {
         font-weight: 600;
         font-size: 1.25rem;
-        color:blue;
-        & + * ;
+        color: blue;
+        & + *;
 
     {
         margin-top: .75rem;
