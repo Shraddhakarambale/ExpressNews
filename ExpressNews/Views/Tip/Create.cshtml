@@ -36,7 +36,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row alice">
 
-            <div class="col-md-4 d-block">
+            <div class="col-md-4 d-block d-sm-none">
                 <div class="form-group p-3">
                     <label asp-for="Name" class="control-label mb-2 fw-bold fst-italic"></label>
                     <input asp-for="Name" class="form-control" />
@@ -80,7 +80,29 @@
                 </div>
 
             </div>
-         </div>
+            <div class="col-md-4 d-none d-sm-block">
+                <div class="form-group p-3">
+                    <label asp-for="Name" class="control-label mb-2 fw-bold fst-italic"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group p-3">
+                    <label asp-for="Email" class="control-label mb-2 fw-bold fst-italic"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group p-3">
+                    <label asp-for="TelephoneNumber" class="control-label mb-2 fw-bold fst-italic"></label>
+                    <input asp-for="TelephoneNumber" class="form-control" />
+                    <span asp-validation-for="TelephoneNumber" class="text-danger"></span>
+                </div>
+
+                @* <div class="form-group p-3">
+                <input type="submit" value="Send Tip" class="btn btn-primary fw-bold w-auto" />
+                </div> *@
+            </div>
+
+        </div>
     </form>
 
 </div>
@@ -95,7 +117,7 @@
 
 <div class="p-3">
     <h5> <strong>What happens to my tip?</strong></h5>
-    
+
     <p class="borderColor borderWidth margin padding mqDark hyperion-css-wlaotw">We read all the tips that are sent. If we judge your tip to be interesting, we will contact you via the contact channels you provided.</p>
     <p>When you send your picture or movie to Express News, you also give your permission for publication.</p>
 
@@ -117,7 +139,9 @@
 </div> *@
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
 
 
