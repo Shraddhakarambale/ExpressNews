@@ -1,0 +1,71 @@
+﻿@using Newtonsoft.Json
+@model IEnumerable<ExpressNews.Models.ViewModel.ElectricityVM>
+
+@{
+    var dateTime = Model.Select(m => m.dateTime).ToList();
+    var prices = Model.Select(m => m.Prices).ToList();
+}
+<!DOCTYPE html>
+<html>
+<head>
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+</head>
+<body>
+    <div class="row" style="display:none">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Select Date: </label><br />
+                    <input type="date" id="dtDate" name="dtDate">
+                </div>
+                <div class="col-md-6">
+                    <label>Select Area: </label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>------------</option>
+                        <option value="SE1">SE1</option>
+                        <option value="SE3">SE2</option>
+                        <option value="SE3">SE3</option>
+                        <option value="SE4">SE4</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <br />
+   
+    <h3>Today(@ViewBag.Date) Electricity Price </h3>
+    
+    <canvas id="myChart" style="width:100%;"></canvas>
+
+    <script>
+        const xValues = @Html.Raw(JsonConvert.SerializeObject(dateTime));
+        //const xValues = [35417, 35417, 35417, 35417, 35417, 35417, 354.17];
+        
+         const yValues = @Html.Raw(JsonConvert.SerializeObject(prices));
+
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                scales: {
+                    yAxes: [{ ticks: { min: 0, max: 500 } }],
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

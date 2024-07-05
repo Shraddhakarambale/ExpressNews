@@ -45,12 +45,14 @@ namespace ExpressNews
             builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
             builder.Services.AddTransient<IArticleService, ArticleService>();
             builder.Services.AddScoped<ITipService, TipService>();
+            builder.Services.AddScoped<IElectricityDataService,ElectricityDataService>();
             builder.Services.AddSession ();
 
             StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["SecretKey"];
 
             //builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(60));
             builder.Services.AddHttpContextAccessor();
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
