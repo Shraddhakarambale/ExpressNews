@@ -7,7 +7,7 @@ namespace ExpressNews.Models.Database
     {
         public string RowKey { get; set; }
         public string PartitionKey { get; set; }
-        public decimal Price { get; set; }
+        public string Price { get; set; }
 
         // Required properties by ITableEntity
         public DateTimeOffset? Timestamp { get; set; }  // Adjusting the type to DateTimeOffset?
