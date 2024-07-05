@@ -1,4 +1,5 @@
 ﻿using ExpressNews.Models.Database;
+using ExpressNews.Models.ViewModel;
 
 namespace ExpressNews.Services
 {

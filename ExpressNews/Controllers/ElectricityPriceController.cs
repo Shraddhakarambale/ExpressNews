@@ -39,8 +39,8 @@ namespace ExpressNews.Controllers
             {
                 var viewModel = new ElectricityVM
                 {
-                    dateTime = item.RowKey.Substring(8),
-                    Prices = Convert.ToString(item.Price/100),
+                    Timestamp = item.RowKey.Substring(8),
+                    Price = (item.Price/ 100),
                     PartitionKey = item.PartitionKey
                 };
                 electricityVMList.Add(viewModel);

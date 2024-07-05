@@ -2,8 +2,8 @@
 @model IEnumerable<ExpressNews.Models.ViewModel.ElectricityVM>
 
 @{
-    var dateTime = Model.Select(m => m.dateTime).ToList();
-    var prices = Model.Select(m => m.Prices).ToList();
+    var dateTime = Model.Select(m => m.Timestamp).ToList();
+    var prices = Model.Select(m => m.Price).ToList();
 }
 <!DOCTYPE html>
 <html>
