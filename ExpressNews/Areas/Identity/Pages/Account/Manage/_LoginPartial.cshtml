@@ -7,14 +7,39 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
+        var user = await UserManager.GetUserAsync(User);
+        var username = user.Email;
+        var firstname = user.FirstName;
+        <div class=" row p-3 ">
+            <div class="col login-icon d-flex" id="loginIcon">
+
+                <a class="nav-link text-light d-flex" asp-area="Identity" asp-page="/Account/Manage/Index" title="My Page">
+                    <i class='fa fa-user-edit' style='font-size:24px;color:red'></i>
+                    <i class=" fw-bold">&nbsp;&nbsp;@firstname </i>
+                    @*<span class="email-tooltip">@username </span> *@
+                </a>
+
+
+            </div>
+            &nbsp;&nbsp;
+            <div class="col d-sm-flex ">
+                <form class="form-inline float-end" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link text-dark" style="padding:4px; background-color:red">
+                        <i class="fa fa-sign-out"></i>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+        @*  <li class="nav-item">
         <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
     </li>
     <li class="nav-item">
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
         </form>
-    </li>
+    </li> *@
 }
 else
 {
@@ -26,3 +51,66 @@ else
     </li>
 }
 </ul>
+<style>
+    /* Custom button styles */
+    .button-sub {
+        background-color: yellow;
+        color: black;
+        border: none;
+        padding: 0.5rem 1rem;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1rem;
+        margin: auto;
+        border-radius: 0.25rem;
+    }
+
+        .button-sub:hover {
+            background-color: white;
+        }
+
+    .button-log {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1rem;
+        margin: 0.2rem;
+        border-radius: 0.25rem;
+    }
+
+        .button-log:hover {
+            background-color: white;
+            color: black;
+        }
+
+    .login-icon {
+        width: 120px;
+        height: 30px;
+        cursor: pointer;
+    }
+
+    /* .email-tooltip {
+                visibility: hidden;
+                width: 200px;
+                background-color: black;
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px;
+                position: absolute bottom:125%;
+                left: 50%;
+                margin-left: -60px;
+                opacity: 0;
+                transition: opacity 0.3s;
+            } */
+
+    /*  .login-icon:hover .email-tooltip {
+                visibility: visible;
+                opacity: 1;
+            } */
+</style>
