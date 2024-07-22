@@ -1,16 +1,18 @@
-﻿@using Newtonsoft.Json
+﻿ @using Newtonsoft.Json
 @model IEnumerable<ExpressNews.Models.ViewModel.ElectricityVM>
 
 @{
     var dateTime = Model.Select(m => m.Timestamp).ToList();
     var prices = Model.Select(m => m.Prices).ToList();
+
+    // Preprocess dateTime to convert HHmm to HH:mm format
+    var formattedTime = dateTime.Select(time => DateTime.ParseExact(time, "HHmm", null).ToString("HH:mm")).ToList();
+}
 }
 <!DOCTYPE html>
 <html>
 <head>
- 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
     <div class="row" style="display:none">
@@ -33,18 +35,16 @@
             </div>
         </div>
     </div>
-    
+
     <br />
-   
+
     <h3>Today(@ViewBag.Date) Electricity Price </h3>
-    
+
     <canvas id="myChart" style="width:100%;"></canvas>
 
     <script>
-        const xValues = @Html.Raw(JsonConvert.SerializeObject(dateTime));
-        //const xValues = [35417, 35417, 35417, 35417, 35417, 35417, 354.17];
-        
-         const yValues = @Html.Raw(JsonConvert.SerializeObject(prices));
+        const xValues = @Html.Raw(JsonConvert.SerializeObject(formattedTime));
+        const yValues = @Html.Raw(JsonConvert.SerializeObject(prices));
 
         new Chart("myChart", {
             type: "line",
@@ -61,7 +61,28 @@
             options: {
                 legend: { display: false },
                 scales: {
-                    yAxes: [{ ticks: { min: 0, max: 500 } }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Time(24H)',  // Label for x-axis
+                            fontStyle: 'bold',
+                            fontSize: 18
+                        },
+                        ticks: {
+                            fontSize: 14  // Increase font size for x-axis ticks
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: { min: 0.0, max: 5,
+                            fontSize: 14
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Price(SEK)',  // Label for y-axis
+                            fontStyle: 'bold',
+                            fontSize: 18 //// Increase font size for y-axis ticks
+                        }
+                    }]
                 }
             }
         });
@@ -69,3 +90,4 @@
 
 </body>
 </html>
+ 

@@ -40,7 +40,7 @@ namespace ExpressNews.Controllers
                 var viewModel = new ElectricityVM
                 {
                     Timestamp = item.RowKey.Substring(8),
-                    Prices = Convert.ToDecimal(item.Price)/ 100,
+                    Prices = Convert.ToDecimal(item.Price) / 10000,
                     PartitionKey = item.PartitionKey
                 };
                 electricityVMList.Add(viewModel);
