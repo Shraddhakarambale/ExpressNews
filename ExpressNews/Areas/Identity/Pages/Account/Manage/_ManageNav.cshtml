@@ -8,16 +8,18 @@
     // var roleSessionValue = Session.GetString("Role");
 
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+@* <button class="p-2 navbar-toggler d-block d-sm-none" type="button" style="width:20%; border:none" data-bs-toggle="collapse" data-bs-target="#navbarNav2" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <img src="~/image/down-arrow.svg" style="width:20%" />
+</button> *@
 
-<button class="p-2 navbar-toggler d-block d-sm-none  " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="p-2 btn-danger fa fa-arrow-down" style=" "> </span>
+<button class="p-2 navbar-toggler d-block d-sm-none" type="button" style="width:20%; border:none" data-bs-toggle="collapse" data-bs-target="#navbarNav2" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="navbarToggle">
+    <img src="~/image/down-arrow.svg" style="width:20%" id="toggleArrow" />
 </button>
 
 
-
-
-<div class=" p-3 collapse navbar-collapse " id="navbarNav">  
+<div class="p-3 collapse navbar-collapse" id="navbarNav2">
     <ul class=" sidebar navbar-collapse " display="flex">
     <li class="nav-item li"><a class="fw-bolder  @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
     @if (session.GetString("Role") == "Admin")
@@ -65,7 +67,7 @@
 
 
 
-<ul class="d-none d-sm-block sidebar navbar-collapse " display="flex">
+<ul class="d-none d-sm-block sidebar navbar-collapse" display="flex">
     <li class="nav-item li"><a class="fw-bolder  @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
     @if (session.GetString("Role") == "Admin")
     {
@@ -109,7 +111,26 @@
 
 
     <li class="nav-item li"><a class="fw-bolder  @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
-</ul>
+</ul> 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbarToggle = document.getElementById('navbarToggle');
+        var toggleArrow = document.getElementById('toggleArrow');
+
+        navbarToggle.addEventListener('click', function() {
+            var isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
+            if (isExpanded) {
+                toggleArrow.src = '/image/up-arrow.svg';
+            } else {
+                toggleArrow.src = '/image/down-arrow.svg';
+            }
+        });
+
+        // Optional: If you want to reset the arrow when the page loads based on the initial state
+        var initialExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
+        toggleArrow.src = initialExpanded ? '/image/down-arrow.svg' : '/image/up-arrow.svg';
+    });
+</script>
 <style>
     .sidebar {
         list-style-type: none;

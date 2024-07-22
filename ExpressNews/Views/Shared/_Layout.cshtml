@@ -10,25 +10,28 @@
     <link rel="stylesheet" href="~/ExpressNews.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- for the search icon -->
     <style>
-        .bg-black {
-            padding-top: 0.5rem; /* Adjust as necessary */
-            padding-bottom: 0.5rem; /* Adjust as necessary */
+        .navbar {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
         }
 
-        .nav-link img {
-            margin-bottom: 0; /* Ensure no bottom margin on the image */
+        .navbar-nav .nav-link {
+            font-size: medium;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
         }
 
-        .weatherwidget-io {
-            margin-bottom: 0; /* Ensure no bottom margin on the widget */
-        }
+            .navbar-nav .nav-link:hover {
+                color: #ddd;
+            }
 
-        .searchBtn{
-            justify-items:center;
-             
+        .searchBtn {
+            border: none;
+            background: none;
         }
-        
     </style>
 
 </head> 
@@ -42,59 +45,50 @@
     <div class="elfsight-app-49075492-238d-4ced-a606-f374893ef3d8" data-elfsight-app-lazy></div>
 
 
-    <header>
+    
 
 
-        <nav class="d-none d-sm-block navbar navbar-expand-md navbar-light bg-black  box-shadow ">
+        <nav class="navbar navbar-expand-md navbar-light bg-black box-shadow">
             <div class="container">
-                <div class="col-md-3 text-left">
-                    <a class="nav-link" href="/">
-                        <img src="~/image/l1.png" class="img-fluid" width="100%" height="auto" />
-                    </a>
-                </div>
+                <a class="navbar-brand col-md-3 text-left" href="/">
+                <img src="~/image/newlogo2.png" class="img-fluid" alt="Logo" width="200px" height="60px" />
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon bg-light"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto" style="margin-bottom: -0.5rem !important;font-size:medium">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">START</a>
+                            <a class="nav-link text-white fw-bold" href="/">START</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="Local">LOCAL</a>
+                            <a class="nav-link text-white fw-bold" href="/Home/ArticleByCategory?category=Local">LOCAL</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="World">WORLD</a>
+                            <a class="nav-link text-white fw-bold" href="/Home/ArticleByCategory?category=World">WORLD</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Sport" asp-action="Index">SPORT</a>
+                            <a class="nav-link text-white fw-bold" href="/Sport">SPORT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Home" asp-action="ArticleByCategory" asp-route-category="Culture">CULTURE</a>
+                            <a class="nav-link text-white fw-bold" href="/Home/ArticleByCategory?category=Culture">CULTURE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Tip" asp-action="Create">TIP</a>
+                            <a class="nav-link text-white fw-bold" href="/Tip/Create">TIP</a>
                         </li>
                         <li class="nav-item">
-                            <div class="input-group  ">
-
-                               <form asp-controller="Article" asp-action="Search" method="get" class="text-center">
-                                    <input type="text" name="query" placeholder="Search news..." />
-
-                                    <button class="bg-transparent" type="submit"><i class="text-white fa fa-search searchBtn"></i></button>
-                                   
-                                </form> 
-                            @* 
-                                <input class="form-control border-end-0 border" type="search" value="search" id="example-search-input">
-                                <span class="input-group-append" style="margin-left:3px!important">
-                                    <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n" type="button"><i class="fa fa-search"></i></button>
-                                </span>  *@
-                            </div>
+                            <form class="d-flex" action="/Article/Search" method="get">
+                                <input class="form-control" type="search" name="query" placeholder="Search news..." aria-label="Search">
+                                <button class="btn searchBtn" type="submit">
+                                    <i class="text-white fa fa-search"></i>
+                                </button>
+                            </form>
                         </li>
-                    </ul> 
-                   
+                    </ul>
+                    <div>
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
-                <partial name="_LoginPartial" />
             </div>
         </nav>
 
@@ -103,7 +97,7 @@
 
 
 
-        <nav class="d-block d-sm-none navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow mb-3">
+       @*  <nav class="d-block d-sm-none navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow mb-3">
             <div class="container ">
 
                 <a class="navbar-brand text-warning fw-bold text-center" asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/image/l1.png" class=" img-fluid " /></a>
@@ -153,14 +147,14 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> *@
 
 
 
 
 
 
-    </header>
+  
 
     <div class="container" style="margin-bottom:250px ">
         <main role="main" class="pb-3 m-2">
@@ -260,7 +254,10 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
