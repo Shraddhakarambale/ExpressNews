@@ -36,7 +36,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row alice">
 
-            <div class="col-md-4 d-block d-sm-none">
+            @* <div class="col-md-4 d-block d-sm-none">
                 <div class="form-group p-3">
                     <label asp-for="Name" class="control-label mb-2 fw-bold fst-italic"></label>
                     <input asp-for="Name" class="form-control" />
@@ -53,7 +53,7 @@
                     <span asp-validation-for="TelephoneNumber" class="text-danger"></span>
                 </div>
 
-            </div>
+            </div> *@
 
             <div class="col-md-6">
                 <div class="form-group p-3">
@@ -80,7 +80,7 @@
                 </div>
 
             </div>
-            <div class="col-md-4 d-none d-sm-block">
+          <div class="col-md-4">
                 <div class="form-group p-3">
                     <label asp-for="Name" class="control-label mb-2 fw-bold fst-italic"></label>
                     <input asp-for="Name" class="form-control" />
@@ -97,10 +97,8 @@
                     <span asp-validation-for="TelephoneNumber" class="text-danger"></span>
                 </div>
 
-                @* <div class="form-group p-3">
-                <input type="submit" value="Send Tip" class="btn btn-primary fw-bold w-auto" />
-                </div> *@
-            </div>
+               
+            </div> 
 
         </div>
     </form>

@@ -60,10 +60,10 @@ namespace ExpressNews.Controllers
                     _tipService.UploadFilesToContainer(tips);
                 }
                 _tipService.AddTip(tips);
-               
-           
+
+
             //}
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
 
         }
         public IActionResult Details(int id)
