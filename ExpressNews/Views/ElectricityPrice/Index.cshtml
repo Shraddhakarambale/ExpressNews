@@ -1,13 +1,15 @@
-﻿ @using Newtonsoft.Json
-@model IEnumerable<ExpressNews.Models.ViewModel.ElectricityVM>
+﻿@using Newtonsoft.Json
+@model ExpressNews.Models.ViewModel.ElectricityVM
 
 @{
-    var dateTime = Model.Select(m => m.Timestamp).ToList();
-    var prices = Model.Select(m => m.Prices).ToList();
+    var dateTime = Model.Timestamp;
+    var se1Prices = Model.SE1Prices;
+    var se2Prices = Model.SE2Prices;
+    var se3Prices = Model.SE3Prices;
+    var se4Prices = Model.SE4Prices;
 
     // Preprocess dateTime to convert HHmm to HH:mm format
     var formattedTime = dateTime.Select(time => DateTime.ParseExact(time, "HHmm", null).ToString("HH:mm")).ToList();
-}
 }
 <!DOCTYPE html>
 <html>
@@ -24,11 +26,11 @@
                 </div>
                 <div class="col-md-6">
                     <label>Select Area: </label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" id="areaSelect" aria-label="Default select example">
                         <option selected>------------</option>
                         <option value="SE1">SE1</option>
-                        <option value="SE3">SE2</option>
-                        <option value="SE3">SE3</option>
+                        <option value="SE2">SE2</option>
+                        <option value="SE3" selected>SE3</option> <!-- Default selection -->
                         <option value="SE4">SE4</option>
                     </select>
                 </div>
@@ -38,33 +40,63 @@
 
     <br />
 
-    <h3>Today(@ViewBag.Date) Electricity Price </h3>
+    <h3>Today(@ViewBag.Date) Electricity Price</h3>
 
     <canvas id="myChart" style="width:100%;"></canvas>
 
     <script>
         const xValues = @Html.Raw(JsonConvert.SerializeObject(formattedTime));
-        const yValues = @Html.Raw(JsonConvert.SerializeObject(prices));
+        const se1Prices = @Html.Raw(JsonConvert.SerializeObject(se1Prices));
+        const se2Prices = @Html.Raw(JsonConvert.SerializeObject(se2Prices));
+        const se3Prices = @Html.Raw(JsonConvert.SerializeObject(se3Prices));
+        const se4Prices = @Html.Raw(JsonConvert.SerializeObject(se4Prices));
 
         new Chart("myChart", {
             type: "line",
             data: {
                 labels: xValues,
-                datasets: [{
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: "rgba(0,0,255,1.0)",
-                    borderColor: "rgba(0,0,255,0.1)",
-                    data: yValues
-                }]
+                datasets: [
+                    {
+                        label: "SE3",
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(0,0,255,0.5)",
+                        borderColor: "rgba(0,0,255,1.0)",
+                        data: se3Prices
+                    },
+                    {
+                        label: "SE1",
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(255,0,0,0.5)",
+                        borderColor: "rgba(255,0,0,1.0)",
+                        data: se1Prices
+                    },
+                    {
+                        label: "SE2",
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(0,255,0,0.5)",
+                        borderColor: "rgba(0,255,0,1.0)",
+                        data: se2Prices
+                    },
+                    {
+                        label: "SE4",
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(255,165,0,0.5)",
+                        borderColor: "rgba(255,165,0,1.0)",
+                        data: se4Prices
+                    }
+                ]
             },
             options: {
-                legend: { display: false },
+                legend: { display: true },
                 scales: {
                     xAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Time(24H)',  // Label for x-axis
+                            labelString: 'Time (24H)',  // Label for x-axis
                             fontStyle: 'bold',
                             fontSize: 18
                         },
@@ -73,21 +105,56 @@
                         }
                     }],
                     yAxes: [{
-                        ticks: { min: 0.0, max: 5,
+                        ticks: {
+                            // min: 0.0, max: 5,
                             fontSize: 14
                         },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Price(SEK)',  // Label for y-axis
+                            labelString: 'Price (SEK)',  // Label for y-axis
                             fontStyle: 'bold',
-                            fontSize: 18 //// Increase font size for y-axis ticks
+                            fontSize: 18
                         }
                     }]
                 }
             }
         });
+        document.getElementById('areaSelect').addEventListener('change', function () {
+            const selectedRegion = this.value;
+            let updatedData;
+            let updatedLabel;
+
+            switch (selectedRegion) {
+                case 'SE3':
+                    updatedData = se3Prices;
+                    updatedLabel = 'SE3';
+                    break;
+                case 'SE1':
+                    updatedData = se1Prices;
+                    updatedLabel = 'SE1';
+                    break;
+                case 'SE2':
+                    updatedData = se2Prices;
+                    updatedLabel = 'SE2';
+                    break;
+               case 'SE4':
+                    updatedData = se4Prices;
+                    updatedLabel = 'SE4';
+                    break;
+                default:
+                    updatedData = se3Prices;
+                    updatedLabel = 'SE3';
+                    break;
+            }
+
+            myChart.data.datasets[0].data = updatedData;
+            myChart.data.datasets[0].label = updatedLabel;
+            myChart.update();
+        });
     </script>
 
 </body>
 </html>
+
+
  
