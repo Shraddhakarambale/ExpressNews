@@ -50,6 +50,8 @@
         @if (session.GetString("IsSubcribedUser") == "Yes")
         {
             <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Newsletter" id="" asp-action="Create">Newsletter</a></li>
+            <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Article" id="" asp-action="ArchiveNews">Archive News</a></li>
+
         }
         <li class="nav-item li"><a class="fw-bolder" asp-area="" asp-controller="Subscription" id="subscription" asp-action="UserSubscription">Subscription</a></li>
     }

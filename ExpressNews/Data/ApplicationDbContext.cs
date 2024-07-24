@@ -21,5 +21,6 @@ namespace ExpressNews.Data
         public DbSet<Tip> Tips { get; set; }
 
         public DbSet<NewsLetter> NewsLetters { get; set; }
+        public DbSet<ExpressNews.Models.OldArticle> OldArticle { get; set; } = default!;
     }
 }

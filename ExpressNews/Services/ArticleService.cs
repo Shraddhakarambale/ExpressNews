@@ -10,6 +10,7 @@ using Azure.Storage.Blobs;
 using Microsoft.Extensions.Azure;
 using ExpressNews.ViewComponents;
 using System.Linq;
+using ExpressNews.Models;
 
 namespace ExpressNews.Services
 {
@@ -331,6 +332,17 @@ namespace ExpressNews.Services
         }
 
 
+        public List<OldArticle> ArchiveArticles()
+        {
+            var archiveArticle = _db.Articles
+                .Where(a => a.Status == "Archive")
+                .OrderByDescending(a => a.DateStamp)
+                .Take(5)
+                .Select(a => new OldArticle { Id = a.Id, HeadLine = a.HeadLine, ContentSummary = a.ContentSummary, ImageLink = a.ImageLink, DateStamp = a.DateStamp })
+                .ToList();
+
+            return archiveArticle;
+        }
     }
 
     
