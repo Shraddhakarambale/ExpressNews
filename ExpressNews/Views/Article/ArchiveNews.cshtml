@@ -22,24 +22,16 @@
         </tr>
     </thead> *@
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                    <a href="/Article/SingleArticle/@item.Id">@item.HeadLine</a><br />
-                    @Html.DisplayFor(modelItem => item.DateStamp)<br />
-                    @Html.DisplayFor(modelItem => item.ImageLink)<br />
-                    @Html.DisplayFor(modelItem => item.ContentSummary)
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                        <a href="/Article/SingleArticle/@item.Id">@item.HeadLine</a><br />
+                        @Html.DisplayFor(modelItem => item.DateStamp)<br />
+                        <img src="@item.ImageLink" alt="" width="20%" /><br />
+                        <p class="gap-2">@item.ContentSummary</p><br />
                     
-            </td>
-            @* <td>
-                @Html.DisplayFor(modelItem => item.ContentSummary)
-            </td> *@
-            @* <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td> *@
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
