@@ -4,6 +4,7 @@ using ExpressNews.Models.ViewModel;
 using ExpressNews.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ExpressNews.Models;
 
 namespace ExpressNews.Controllers
 {
@@ -228,6 +229,12 @@ namespace ExpressNews.Controllers
         {
             var results = _articleService.SearchArticles(query);
             return View(results);
+        }
+
+        public IActionResult ArchiveNews()
+        {
+            var archivenews = _articleService.ArchiveArticles();
+            return View(archivenews);
         }
 
     }

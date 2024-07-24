@@ -1,4 +1,5 @@
-﻿using ExpressNews.Models.Database;
+﻿using ExpressNews.Models;
+using ExpressNews.Models.Database;
 
 namespace ExpressNews.Services
 {
@@ -46,7 +47,7 @@ namespace ExpressNews.Services
         List<Article> MostLikedArticles();
         List<Article> MostDisLikedArticles();
 
-
+        List<OldArticle> ArchiveArticles();
 
 
     }
