@@ -27,7 +27,7 @@
                 <h5 class="text-danger gap-2">@data.Category1</h5>
 
                 <a href="#" style="color:black; text-decoration:none!important">
-                    <h3 id="#" >
+                    <h3 id="#">
                         @data.LinkText
                     </h3>
                 </a>
@@ -42,39 +42,40 @@
                     @if (session.GetString("UserName") != null && session.GetString("IsSubcribedUser") == "Yes")
                     {
                         <button class="float-end position-absolute" onclick="readMore_Com('@data.Id','@IsSubscribUser_Com', '@data.IsSubsription')" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
-                            <i class="fa-solid fa-plus"></i> Read More 
+                            <i class="fa-solid fa-plus"></i> Read More
                         </button>
                     }
                     else
                     {
                         <button class="float-end flex-column" onclick="readMoreSubscription_Com(@Html.DisplayFor(item => data.Id),'@IsSubscribUser_Com', '@data.IsSubsription')" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px;">
-                            <i class="fa-solid fa-plus"></i> Read More 
+                            <i class="fa-solid fa-plus"></i> Read More
                         </button>
                     }
                 }
                 else
                 {
                     <button class="float-end flex-column" onclick="readMore_Com(@Html.DisplayFor(item => data.Id),'@IsSubscribUser_Com', '@data.IsSubsription')" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; ">
-                        Read More 
+                        Read More
                     </button>
                 }
 
             </div>
-            <div class="col-7 p-2">
-                <img src="@data.ImageLink" alt="Article Image" width="100%" height="auto"/>
+            <div class="col-md-7 p-2">
+                <img src="@data.ImageLink" alt="Article Image" width="100%" height="auto" />
             </div>
 
         </div>
 
-       
+
 
         @* Row 3 news *@
         <div class="row">
             @foreach (var row in Model.Skip(1))
             {
-                <div class="col-md-4 bg-white border p-3 gap-3 mt-2 mb-2">
+                <div class="col-md-4 bg-white border p-3 gap-3 mt-2 mb-2 ">
                     <img src="@row.ImageLink" style="width:100%; height:100% alt="Sports Image 1">
                     <h4 id="#" style="color:black;cursor:pointer" class="mb-2 mt-2">@row.HeadLine</h4>@* onclick="readMore_Com(@Html.DisplayFor(item => row.Id))" *@
+
                     <p class="mb-2 mt-2">@row.ContentSummary</p>
 
                     @if (row.IsSubsription)
@@ -82,13 +83,13 @@
                         @if (session.GetString("UserName") != null && session.GetString("IsSubcribedUser") == "Yes")
                         {
                             <button class="float-end btn-" onclick="readMore_Com(@Html.DisplayFor(item => row.Id),'@IsSubscribUser_Com', '@row.IsSubsription')" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; align-content:end">
-                                <i class="fa-solid fa-plus"></i> Read More 
+                                <i class="fa-solid fa-plus"></i> Read More
                             </button>
                         }
                         else
                         {
                             <button class="float-end" onclick="readMoreSubscription_Com(@Html.DisplayFor(item => row.Id),'@IsSubscribUser_Com', '@row.IsSubsription')" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; align-items:end">
-                                <i class="fa-solid fa-plus"></i> Read More 
+                                <i class="fa-solid fa-plus"></i> Read More
                             </button>
                         }
                     }
@@ -109,7 +110,7 @@
 <script>
     function readMore_Com(id, IsSubscribUser_Com, IsSubsription) {
         var paramID = id;
-        
+
 
         if (IsSubsription == 'False') {
             window.location.href = '@Url.Action("SingleArticle", "Article", new { id = "__ID_PLACEHOLDER__" })'.replace("__ID_PLACEHOLDER__", paramID);
