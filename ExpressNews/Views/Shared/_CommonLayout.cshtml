@@ -12,7 +12,7 @@
         IsSubscribUser_Com = true;
 
 
-    var singleNews = Model.Take(2);
+    var singleNews = Model.Take(1);
     var otherNews = Model.Skip(1);
 }
 
@@ -70,7 +70,7 @@
 
         @* Row 3 news *@
         <div class="row">
-            @foreach (var row in Model.Skip(2))
+            @foreach (var row in Model.Skip(1))
             {
                 <div class="col-md-4 bg-white border p-3 gap-3 mt-2 mb-2">
                     <img src="@row.ImageLink" style="width:100%; height:100% alt="Sports Image 1">
