@@ -337,7 +337,7 @@ namespace ExpressNews.Services
             var archiveArticle = _db.Articles
                 .Where(a => a.Status == "Archive")
                 .OrderByDescending(a => a.DateStamp)
-                .Take(5)
+                //.Take(5)
                 .Select(a => new OldArticle { Id = a.Id, HeadLine = a.HeadLine, ContentSummary = a.ContentSummary, ImageLink = a.ImageLink, DateStamp = a.DateStamp })
                 .ToList();
 

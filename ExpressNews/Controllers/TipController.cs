@@ -63,7 +63,7 @@ namespace ExpressNews.Controllers
 
 
             //}
-            TempData["SuccessMessage"] = "Tip send sucessfully!";
+            TempData["SuccessMessage"] = "Tips send sucessfully!";
             return RedirectToAction("SubmitSuccess","Tip");
            
 
