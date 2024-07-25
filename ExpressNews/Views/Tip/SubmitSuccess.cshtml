@@ -5,7 +5,7 @@
 <style>
     .successMessage
     {
-        font-size:40px;
+        font-size:20px;
         font-weight:bold;
         color:green;
         text-align:center;
@@ -13,11 +13,40 @@
     }
 </style>
 
+
 @if (ViewBag.SuccessMessage != null)
 {
-    <div class="successMessage">
-        @ViewBag.SuccessMessage
+
+    <div class="modal" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               
+                <div class="modal-body">
+                    <h2 class="successMessage"> @ViewBag.SuccessMessage</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnMessageClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-    
+      
 
 }
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // JavaScript to show modal on page load
+    $(document).ready(function () {
+        $('#myModal').modal('show');
+    });
+
+    $("#btnMessageClose").click(function () {
+        $('#myModal').modal('hide');
+        window.location.href = '@Url.Action("Index", "Home")';
+    });
+
+
+</script>
