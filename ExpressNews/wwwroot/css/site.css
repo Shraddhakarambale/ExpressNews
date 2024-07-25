@@ -29,6 +29,9 @@ html {
 body {
   margin-bottom: 100px;
 }
+ul>li{
+    list-style-type:none;
+}
 
 
 
