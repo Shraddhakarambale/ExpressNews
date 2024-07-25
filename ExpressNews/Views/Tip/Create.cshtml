@@ -3,7 +3,16 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+@* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var successMessage = '@ViewBag.SuccessMessage';
+        if (successMessage) {
+            alert(successMessage);
+        }
+    }
+  });
+</script> *@
 <div class="row p-3">
     <div class="col-2">
         <h1 style="background-color:red;color:white">TIPS!</h1>
@@ -54,7 +63,8 @@
                 </div>
 
             </div> *@
-
+           
+          
             <div class="col-md-6">
                 <div class="form-group p-3">
                     <label asp-for="Subject" class="control-label mb-2 fw-bold fst-italic"></label>

@@ -63,8 +63,16 @@ namespace ExpressNews.Controllers
 
 
             //}
-            return RedirectToAction("Index", "Home");
+            TempData["SuccessMessage"] = "Tip send sucessfully!";
+            return RedirectToAction("SubmitSuccess","Tip");
+           
 
+        }
+        public IActionResult SubmitSuccess()
+        {
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
+            return View();
+        
         }
         public IActionResult Details(int id)
         {

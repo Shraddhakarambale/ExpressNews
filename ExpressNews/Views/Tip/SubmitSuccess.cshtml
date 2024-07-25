@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "SubmitSuccess";
+}
+<style>
+    .successMessage
+    {
+        font-size:24px;
+        font-weight:bold;
+        color:green;
+        text-align:center;
+
+    }
+</style>
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="successMessage">
+        @ViewBag.SuccessMessage
+    </div>
+    
+
+}
