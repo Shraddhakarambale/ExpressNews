@@ -9,6 +9,8 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+
  *@<table class="table">
     @* <thead>
         <tr>
@@ -21,15 +23,34 @@
             <th></th>
         </tr>
     </thead> *@
+
+
+    <div class="row">
+        <div class="col-6">
+            <h2></h2>
+        </div>
+        <div class="col-6">
+            <h3><a id="profile" href="/Identity/Account/Manage" class="btn btn-outline-dark fw-bold  float-end">Back to Profile </a></h3>
+        </div>
+    </div>
+
     <tbody>
         @foreach (var item in Model) {
             <tr>
                 <td>
-                        <a href="/Article/SingleArticle/@item.Id">@item.HeadLine</a><br />
-                        @Html.DisplayFor(modelItem => item.DateStamp)<br />
-                        <img src="@item.ImageLink" alt="" width="20%" /><br />
-                        <p class="gap-2">@item.ContentSummary</p><br />
-                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="@item.ImageLink" alt="" width="85%" style="margin:5px; padding:5px"/><br />
+                        </div>
+                        <div class="col-md-9 float-md-end">
+                            <a href="/Article/SingleArticle/@item.Id">@item.HeadLine</a><br />
+                            @Html.DisplayFor(modelItem => item.DateStamp)<br />
+                            <br />
+                            <p class="gap-2">@item.ContentSummary</p><br />
+                        </div>
+
+                    </div>
+                   
                 </td>
             </tr>
         }
