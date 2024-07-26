@@ -2,7 +2,13 @@
 @using Microsoft.AspNetCore.Http
 @inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
 
-
+<style>
+    .img1 {
+        height: 200px;
+        width: 328px;
+        object-fit: cover;
+    }
+</style>
 
 @{
     var session = HttpContextAccessor.HttpContext.Session;
@@ -15,6 +21,7 @@
     var singleNews = Model.Take(1);
     var otherNews = Model.Skip(1);
 }
+
 
 @foreach (var data in singleNews)
 {
@@ -69,33 +76,37 @@
 
 
         @* Row 3 news *@
-        <div class="row">
-            @foreach (var row in Model.Skip(1))
-            {
-                <div class="col-md-4 bg-white border p-3 gap-3 mt-2 mb-2 ">
-                    <img src="@row.ImageLink" style="width:100%; height:100% alt="Sports Image 1">
-                    <h4 id="#" style="color:black;cursor:pointer" class="mb-2 mt-2">@row.HeadLine</h4>@* onclick="readMore_Com(@Html.DisplayFor(item => row.Id))" *@
 
-                    <p class="mb-2 mt-2">@row.ContentSummary</p>
+        <div class="row" style="display:flex; gap:auto;" >
+            @foreach (var row in Model.Skip(1))
+
+            {
+                <div class="col-md-4 bg-white border p-3 gap-3 mt-2 mb-2" style="display:flex; flex-direction:column; justify-content:space-between;  ">
+
+                    <img class="img1"  src="@row.ImageLink" style="width:100%; " alt=" " />
+                   
+                    <h4 id="#" style="color:black; cursor:pointer; margin:0.5rem 0; " class="mb-2 mt-2">@row.HeadLine</h4>@* onclick="readMore_Com(@Html.DisplayFor(item => row.Id))" *@
+
+                    <p class="mb-2 mt-2" style="margin:0.5rem 0; flex-grow:1 ">@row.ContentSummary</p>
 
                     @if (row.IsSubsription)
                     {
                         @if (session.GetString("UserName") != null && session.GetString("IsSubcribedUser") == "Yes")
                         {
-                            <button class="float-end btn-" onclick="readMore_Com(@Html.DisplayFor(item => row.Id),'@IsSubscribUser_Com', '@row.IsSubsription')" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; align-content:end">
+                            <button class="float-end btn-" onclick="readMore_Com(@Html.DisplayFor(item => row.Id),'@IsSubscribUser_Com', '@row.IsSubsription')" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; align-self:flex-end">
                                 <i class="fa-solid fa-plus"></i> Read More
                             </button>
                         }
                         else
                         {
-                            <button class="float-end" onclick="readMoreSubscription_Com(@Html.DisplayFor(item => row.Id),'@IsSubscribUser_Com', '@row.IsSubsription')" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; align-items:end">
+                            <button class="float-end" onclick="readMoreSubscription_Com(@Html.DisplayFor(item => row.Id),'@IsSubscribUser_Com', '@row.IsSubsription')" style="font-weight:600; color: black; background-color: yellow; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; align-self:flex-end">
                                 <i class="fa-solid fa-plus"></i> Read More
                             </button>
                         }
                     }
                     else
                     {
-                        <button class="float-end" onclick="readMore_Com(@Html.DisplayFor(item => row.Id),'@IsSubscribUser_Com', '@row.IsSubsription')" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; align-content:flex-end">
+                        <button class="float-end" onclick="readMore_Com(@Html.DisplayFor(item => row.Id),'@IsSubscribUser_Com', '@row.IsSubsription')" style="font-weight:600; color: white; background-color: #5656ed; border: 1px solid black; padding: 2px 5px; display: inline-block; cursor: pointer;border-radius: 5px; align-self:flex-end">
                             Read More
                         </button>
                     }
