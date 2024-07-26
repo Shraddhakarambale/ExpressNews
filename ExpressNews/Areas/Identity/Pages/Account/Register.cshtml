@@ -3,16 +3,25 @@
 @{
     ViewData["Title"] = "Register";
 }
+@using Microsoft.AspNetCore.Http
+@inject Microsoft​.AspNetCore​.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+}
 <body>
-    <div class="row">
-        <div class="col-6">
-            <h2></h2>
+    @if (session.GetString("Role") == "Admin")
+    {
+        <div class="row">
+            <div class="col-6">
+                <h2></h2>
+            </div>
+            <div class="col-6">
+                <h3><a id="profile" href="/Identity/Account/Manage" class="btn btn-outline-dark fw-bold  float-end">Back to Profile </a></h3>
+            </div>
         </div>
-        <div class="col-6">
-            <h3><a id="profile" href="/Identity/Account/Manage" class="btn btn-outline-dark fw-bold  float-end">Back to Profile </a></h3>
-        </div>
-    </div>
-    <hr />
+        <hr />
+    }
         <div class="col-md-4 p-2 yl m-auto">
         <h1 class="text-center p-3 fw-bolder" style="color:black">REGISTRATION</h1>
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">

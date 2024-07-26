@@ -29,7 +29,7 @@ namespace ExpressNews.Services
             }
             else
             {
-                expiryDate = DateTime.Now.AddMonths(12);
+                expiryDate = DateTime.Now.AddMonths(6);
             }
             paymentVM.Email = username;
             paymentVM.ExpirationDate = expiryDate;
