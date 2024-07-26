@@ -41,11 +41,23 @@
     
     @* cookies consent page *@
 
-    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-    <div class="elfsight-app-49075492-238d-4ced-a606-f374893ef3d8" data-elfsight-app-lazy></div>
+   @*  <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <div class="elfsight-app-9e986e9c-7c0a-45fc-8d8e-3d20542bb4b8" data-elfsight-app-lazy></div> *@
 
+    <!-- Cookie Consent by TermsFeed https://www.TermsFeed.com -->
+    <script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.1.0/cookie-consent.js" charset="UTF-8"></script>
+    <script type="text/javascript" charset="UTF-8">
+        document.addEventListener('DOMContentLoaded', function () {
+            cookieconsent.run({ "notice_banner_type": "simple", "consent_type": "express", "palette": "dark", "language": "en", "page_load_consent_levels": ["strictly-necessary"], "notice_banner_reject_button_hide": false, "preferences_center_close_button_hide": false, "page_refresh_confirmation_buttons": false, "website_name": "https://expressnews.azurewebsites.net/", "website_privacy_policy_url": "https://expressnews.azurewebsites.net/Home/Privacy" });
+        });
+    </script>
 
-    
+    <noscript>Free cookie consent management tool by <a href="https://www.termsfeed.com/">TermsFeed</a></noscript>
+    <!-- End Cookie Consent by TermsFeed https://www.TermsFeed.com -->
+    <!-- Below is the link that users can use to open Preferences Center to change their preferences. Do not modify the ID parameter. Place it where appropriate, style it as needed. -->
+
+  @*   <a href="#" id="open_preferences_center">Update cookies preferences</a> *@
+
 
 
         <nav class="navbar navbar-expand-md navbar-light bg-black box-shadow">
